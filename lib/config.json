@@ -1,0 +1,44 @@
+{
+    "name": "自定义饼图",
+    "code": "custom-pie",
+    "default_size_posi": {"width": 600, "height": 300, "y": 20, "x": 20},
+    "default_config": [
+        {
+            "key": "legend",
+            "desc": "图例",
+            "children": [
+                {"key": "fontSize", "desc": "文字大小", "value": 12, "show_type": "font_size_select"},
+                {"key": "color", "desc": "文字颜色", "value": "rgba(255, 255, 255, 0.85)", "show_type": "color_input_new"}
+            ]
+        },
+        {
+            "key": "label",
+            "desc": "数值标签", 
+            "children": [
+                {"key": "color", "desc": "颜色", "value": "#ffffff", "show_type": "color_input_new"},
+                {"key": "fontSize", "desc": "文字大小", "value": 14, "show_type": "font_size_select"},
+                {"key": "lineColor", "desc": "引导线", "value": "rgba(255, 255, 255, 0.45)", "show_type": "color_input_new"}
+            ]
+        }
+    ],
+    "default_static_data": [
+        {
+            "value": 120,
+            "name": "系列一"
+        },
+        {
+            "value": 60,
+            "name": "系列二"
+        },
+        {
+            "value": 30,
+            "name": "系列三"
+        },
+        {
+            "value": 20,
+            "name": "系列四"
+        }
+    ]
+}
+
+
