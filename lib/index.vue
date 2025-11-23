@@ -9,13 +9,13 @@
 
       <!-- 右侧 详情栏 -->
       <div v-if="showDetailPanel" class="right-panel">
-        <div class="detail-header" :class="{ active: showDetailPanel }">
+        <div class="detail-header">
           <div class="title-container">
             <img class="title-icon" src="./assets/img/Frame.png" alt="icon" />
             <span class="detail-title">{{ selectedNodeLabel }}</span>
           </div>
         </div>
-        <div class="detail-content">
+        <div class="combo-detail-content" v-if="showType === 'combo'">
           <div
             v-for="(item, index) in detailItems"
             :key="index"
@@ -31,6 +31,35 @@
             </div>
           </div>
         </div>
+        <div class="node-detail-content" v-if="showType === 'node'">
+          <!-- 动态渲染每个层级 -->
+          <div
+            v-for="(section, index) in detailItems"
+            :key="index"
+            class="detail-section"
+          >
+            <div class="section-title">{{ section.title }}</div>
+            <div class="section-body">
+              <div class="section-grid">
+                <div
+                  v-for="(item, i) in section.items"
+                  :key="i"
+                  class="section-item"
+                >
+                  <div class="item-label">{{ item.label }}</div>
+                  <div class="item-value">
+                    <span v-if="item.trend" :style="{ color: item.color }">
+                      <span v-if="item.trend === 'up'">▲</span>
+                      <span v-else-if="item.trend === 'down'">▼</span>
+                      <span v-else>▬</span>
+                    </span>
+                    {{ item.value }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -39,7 +68,7 @@
 <script>
 import G6 from "@antv/g6";
 import "./customNode.js"; // 导入自定义节点定义文件
-
+import "./customParentCombo.js";
 // 在你的组件中使用这个自定义布局
 export default {
   name: "custom-component",
@@ -54,6 +83,7 @@ export default {
 
       // 添加面板控制状态
       showDetailPanel: false, // 控制右侧详情面板是否显示
+      showType: "combo", // 当前选中的是节点还是combo
       selectedNodeLabel: "Node 1111", // 默认选中的节点标签
       selectedItem: 0, // 默认选中第一个详情项
       tabRawData: {},
@@ -107,15 +137,15 @@ export default {
           const matrix = new DOMMatrixReadOnly(transform);
           console.log(matrix, "matrix");
           const scale = { scaleX: matrix.a, scaleY: matrix.d };
-          console.log(this.$refs.component.style, "this.$refs.component.style");
+          console.log(this.$refs.ringChart.style, "this.$refs.ringChart.style");
 
-          this.$refs.component.style.transform = `scale(${1 / scale.scaleX}, ${
+          this.$refs.ringChart.style.transform = `scale(${1 / scale.scaleX}, ${
             1 / scale.scaleY
           })`;
-          // this.$refs.component.style.transformOrigin = "center center";
+          // this.$refs.ringChart.style.transformOrigin = "center center";
         } else {
           // 清除缩放
-          this.$refs.component.style.transform = "";
+          this.$refs.ringChart.style.transform = "";
         }
       }
     },
@@ -126,9 +156,9 @@ export default {
      * @param {String} comboId - combo ID
      */
     layoutComboNodes(nodes, comboId) {
-      const nodeSize = 80;
-      const nodeSpacing = 20;
-      const padding = 20;
+      const nodeSize = 200;
+      const nodeSpacing = 150; // 从20增大到30，增加节点间距
+      const padding = 20; // 从20增大到30，增加内边距
       const nodesPerRow = 4;
       const labelHeight = 20; // 节点标签高度
       const totalNodeHeight = nodeSize + labelHeight; // 节点+标签的总高度
@@ -186,42 +216,115 @@ export default {
      * @param {Array} nodes - 节点数组
      */
     layoutCombos(combos, nodes) {
-      const nodeSize = 80;
-      const nodeSpacing = 20;
-      const padding = 20;
-      const nodesPerRow = 4;
-      const labelHeight = 20; // 节点标签高度
-      const totalNodeHeight = nodeSize + labelHeight; // 节点+标签的总高度
+      const spacing = 30; // 间距
+      const maxPerRow = 2; // 每行最多两个
+      const titleHeight = 50; // 父容器标题高度
+      const parentVerticalSpacing = 50; // 主中心和灾备中心之间的垂直间距（从100减小到50）
 
-      // 按行排列combos，每行最多2个
-      const combosPerRow = 2;
+      // 先找出所有父 combo（主中心、灾备中心）
+      const parentCombos = combos.filter(
+        (c) => c.id === "main-center" || c.id === "disaster-center"
+      );
 
-      combos.forEach((combo, index) => {
-        // 计算该combo内的节点数量
-        const comboNodes = nodes.filter((node) => node.comboId === combo.id);
-        const nodesCount = comboNodes.length;
-        const rows = Math.ceil(nodesCount / nodesPerRow) || 1;
+      // 先处理子 combo 的尺寸计算
+      const childCombos = combos.filter(
+        (c) => c.type === "custom-combo" && c.parentId
+      );
 
-        // 计算combo高度，包含节点和标签空间
-        // 确保上下边距一致
-        const comboHeight =
-          rows * (totalNodeHeight + nodeSpacing) -
-          nodeSpacing +
-          2 * padding +
-          30;
-        const comboWidth =
+      // 为每个子 combo 计算实际尺寸（基于内部节点数量）
+      childCombos.forEach((child) => {
+        // 获取该 combo 下的所有节点
+        const childNodes = nodes.filter((n) => n.comboId === child.id);
+        const nodesPerRow = 4;
+        const nodeSize = 200;
+        const nodeSpacing = 150;
+        const padding = 40;
+        const labelHeight = 20;
+
+        // 计算行数
+        const rows = Math.ceil(childNodes.length / nodesPerRow) || 1;
+
+        // 计算实际尺寸
+        const width =
           nodesPerRow * nodeSize +
           (nodesPerRow - 1) * nodeSpacing +
           2 * padding;
+        const height =
+          rows * (nodeSize + nodeSpacing + labelHeight) -
+          nodeSpacing +
+          2 * padding +
+          100;
 
-        const row = Math.floor(index / combosPerRow);
-        const col = index % combosPerRow;
+        child.width = width;
+        child.height = height;
+      });
 
-        // 设置combo的位置
-        combo.x =
-          col * (comboWidth + 50) -
-          ((Math.min(combos.length, combosPerRow) - 1) * (comboWidth + 50)) / 2;
-        combo.y = row * (comboHeight + 50) + 100; // 100px用于顶部留白
+      // 为每个父 combo 计算实际需要的尺寸
+      parentCombos.forEach((parent) => {
+        // 获取该父容器下的所有子combo
+        const children = combos.filter(
+          (c) => c.parentId === parent.id && c.type === "custom-combo"
+        );
+
+        if (children.length === 0) {
+          // 如果没有子combo，使用默认尺寸
+          parent.width = 600;
+          parent.height = 400;
+          return;
+        }
+
+        // 找到子combo中的最大尺寸作为基准
+        let maxWidth = 0;
+        let maxHeight = 0;
+        children.forEach((child) => {
+          maxWidth = Math.max(maxWidth, child.width || 250);
+          maxHeight = Math.max(maxHeight, child.height || 150);
+        });
+
+        // 计算需要的行数
+        const rows = Math.ceil(children.length / maxPerRow) || 1;
+
+        // 计算父容器尺寸
+        const parentWidth = maxWidth * maxPerRow + spacing * (maxPerRow + 1);
+        const parentHeight =
+          titleHeight + maxHeight * rows + spacing * (rows + 1);
+
+        parent.width = parentWidth;
+        parent.height = parentHeight;
+      });
+
+      // 为每个父 combo 设置位置
+      parentCombos.forEach((parent, index) => {
+        parent.x = 200; // 统一左边距
+        parent.y =
+          index === 0
+            ? 100
+            : 100 + parentVerticalSpacing + (parentCombos[0].height || 400); // 减小间距
+      });
+
+      // 处理每个父 combo 内的子 combo 布局
+      parentCombos.forEach((parent) => {
+        const children = combos.filter(
+          (c) => c.parentId === parent.id && c.type === "custom-combo"
+        );
+
+        // 找到子combo中的最大尺寸作为基准
+        let maxWidth = 0;
+        let maxHeight = 0;
+        children.forEach((child) => {
+          maxWidth = Math.max(maxWidth, child.width || 250);
+          maxHeight = Math.max(maxHeight, child.height || 150);
+        });
+
+        children.forEach((child, index) => {
+          const col = index % maxPerRow;
+          const row = Math.floor(index / maxPerRow);
+
+          // 子 combo 相对于父 combo 的偏移
+          child.x = parent.x + spacing + col * (maxWidth + spacing);
+          child.y =
+            parent.y + titleHeight + spacing + row * (maxHeight + spacing);
+        });
       });
     },
     convertToGraphData(rawData) {
@@ -229,54 +332,75 @@ export default {
         return { nodes: [], edges: [], combos: [] };
       }
 
-      // 转换节点数据，添加初始位置
-      const nodes = rawData.nodes.map((node) => {
-        return {
-          id: node.key,
-          label: node.text,
-          type: "custom-node",
-          draggable: true,
-          status: node.status,
-          source: node.source,
-          // G6 4.0 使用 comboId 而不是 combo
-          comboId: node.combo,
-          combo: node.combo, // 为了兼容性也保留combo字段
-          // 设置初始位置为0,0，后续会重新计算
-          x: 0,
-          y: 0,
-        };
-      });
+      // 转换节点数据
+      const nodes = rawData.nodes.map((node) => ({
+        id: node.key,
+        label: node.text,
+        type: "custom-node",
+        draggable: true,
+        status: node.status,
+        source: node.source,
+        detail: node.detail,
+        comboId: node.combo,
+        x: 0,
+        y: 0,
+      }));
 
       // 转换边数据
       let edges = [];
       if (rawData.edges && Array.isArray(rawData.edges)) {
-        edges = rawData.edges.map((edge) => {
-          return {
-            source: edge.source,
-            target: edge.target,
-            type: "orthogonal-edge",
-            status: edge.status,
-          };
-        });
+        edges = rawData.edges.map((edge) => ({
+          source: edge.source,
+          target: edge.target,
+          type: "orthogonal-edge",
+          status: edge.status,
+        }));
       }
 
-      // 转换combo数据
+      // 转换普通 combo（集群）
       let combos = [];
       if (rawData.combos && Array.isArray(rawData.combos)) {
         combos = rawData.combos.map((combo) => ({
           id: combo.id,
-          label: `组合 ${combo.id}`,
+          label: `应用集群 ${combo.id}`,
           type: "custom-combo",
           comboStatus: combo.status,
-          // 添加初始位置
           x: 0,
           y: 0,
         }));
       }
 
+      // 添加顶层 parent combo（主中心、灾备中心）
+      if (rawData.combosParent && Array.isArray(rawData.combosParent)) {
+        rawData.combosParent.forEach((parentCombo) => {
+          combos.push({
+            id: parentCombo.id,
+            label: parentCombo.name,
+            type: "custom-parent-combo",
+            comboStatus: "正常",
+            x: 0,
+            y: 0,
+            // width: 800, // 设置足够宽度
+            // height: 400, // 设置足够高度
+          });
+        });
+      }
+
+      // 设置父子关系：让每个 combo 的 parentId 成为其父 combo
+      combos.forEach((combo) => {
+        if (combo.id === "main-center" || combo.id === "disaster-center") {
+          return;
+        }
+        // 查找该 combo 的 parentId
+        const parent = rawData.combos.find((c) => c.id === combo.id);
+        if (parent && parent.parentId) {
+          combo.parentId = parent.parentId; // G6 支持 parentId 字段
+        }
+      });
+
       const graphData = { nodes, edges, combos };
 
-      // 预布局节点和combos
+      // 预布局节点和 combos
       return this.preLayoutNodes(graphData);
     },
 
@@ -352,6 +476,8 @@ export default {
      * 初始化图实例
      */
     initGraph() {
+      if (!this.$refs.ringChart) return;
+
       // 如果图表已经存在，先销毁
       if (this.graph) {
         this.graph.destroy();
@@ -372,11 +498,10 @@ export default {
         modes: {
           default: ["drag-node", "zoom-canvas", "drag-canvas", "drag-combo"],
         },
-        // 禁用自动布局，使用预设位置
         layout: null,
         defaultNode: {
           shape: "custom-node",
-          size: 80,
+          size: 200,
           color: "#333",
         },
         defaultEdge: {
@@ -392,7 +517,7 @@ export default {
           },
         },
         fitView: true,
-        fitViewPadding: [200, 200, 200, 200],
+        fitViewPadding: [100, 100, 100, 100],
         edgeStateStyles: {
           hover: {
             lineWidth: 3,
@@ -401,6 +526,7 @@ export default {
         comboCfg: {
           collapseExpand: false,
           enableDelegate: true,
+          nested: true,
         },
         groupByTypes: false,
       });
@@ -411,26 +537,38 @@ export default {
       // 节点点击事件
       this.graph.on("node:click", (evt) => {
         const node = evt.item;
-        const nodeId = node.get("id");
+        if (!node) return;
+
         const nodeModel = node.getModel();
         console.log(nodeModel, "nodeModel");
 
-        // 设置选中节点的标签
-        this.selectedNodeLabel = nodeModel.label || nodeId;
+        const nodeId = nodeModel.id;
 
-        // 获取详情数据并设置
+        // 获取节点详情数据
         const detailData = this.convertToNodeDetailData(this.tabRawData);
-        this.detailItems = detailData[nodeId] || [];
+        const nodeDetail = detailData[nodeId];
 
+        if (!nodeDetail || nodeDetail.length === 0) {
+          console.warn(`No detail data found for node ${nodeId}`);
+          return;
+        }
+
+        // 设置选中的节点标签
+        this.selectedNodeLabel = nodeModel.text || `节点 ${nodeId}`;
+
+        // 设置详情数据
+        this.detailItems = nodeDetail;
+        this.showType = "node";
+        // 显示详情面板
         this.showDetailPanel = true;
+
+        // 调整图表大小以适应右侧面板
         this.$nextTick(() => {
           if (this.graph) {
-            this.$nextTick(() => {
-              this.resizeGraphAndKeepView(
-                this.$refs.component.clientWidth * 0.75,
-                this.$refs.component.clientHeight
-              );
-            });
+            this.resizeGraphAndKeepView(
+              this.$refs.component.clientWidth * 0.75,
+              this.$refs.component.clientHeight
+            );
           }
         });
       });
@@ -438,52 +576,44 @@ export default {
       // combo点击事件
       this.graph.on("combo:click", (evt) => {
         const combo = evt.item;
-        const comboId = combo.get("id");
-        const comboModel = combo.getModel();
-        console.log(comboModel, "comboModel");
+        if (!combo) return; // 防止 undefined
 
-        // 设置选中combo的标签
+        const comboId = combo.get("id");
+        if (comboId === "main-center" || comboId === "disaster-center") {
+          return;
+        }
+
+        const comboModel = combo.getModel();
         this.selectedNodeLabel = comboModel.label || `组合 ${comboId}`;
 
-        // 获取combo详情数据并设置
         const detailData = this.convertToComboDetailData(this.tabRawData);
         this.detailItems = detailData[comboId] || [];
-
+        this.showType = "combo";
         this.showDetailPanel = true;
+
         this.$nextTick(() => {
           if (this.graph) {
-            this.$nextTick(() => {
-              this.resizeGraphAndKeepView(
-                this.$refs.component.clientWidth * 0.75,
-                this.$refs.component.clientHeight
-              );
-            });
+            this.resizeGraphAndKeepView(
+              this.$refs.component.clientWidth * 0.75,
+              this.$refs.component.clientHeight
+            );
           }
         });
       });
-
       // 节点鼠标悬浮事件
       this.graph.on("node:mouseenter", (evt) => {
         const node = evt.item;
         const nodeModel = node.getModel();
-
         // 构建提示内容
         let tooltipContent = `<div class="node-tooltip"><div class="tooltip-content">`;
 
         // 添加节点详情信息
         if (nodeModel.detail && nodeModel.detail.length > 0) {
           nodeModel.detail.forEach((detail) => {
-            if (nodeModel.status === "异常") {
-              tooltipContent += `<div class="tooltip-item" style="padding: 5px 0 !important;>
-    <span class="item-name">${detail.name}:</span>
-    <span class="item-value" style="color: #ff7478 !important;">${detail.value}</span>
-    </div>`;
-            } else {
-              tooltipContent += `<div class="tooltip-item" style="padding: 5px 0 !important;>
-    <span class="item-name">${detail.name}:</span>
-    <span class="item-value" >${detail.value}</span>
-    </div>`;
-            }
+            tooltipContent += `<div class="tooltip-item" style="padding: 5px 0 !important;">
+                              <span class="item-name">${detail.name}:</span>
+                              <span class="item-value"> ${detail.value}</span>
+                              </div>`;
           });
         } else {
           tooltipContent += `<div class="tooltip-item">暂无详细信息</div>`;
@@ -542,7 +672,7 @@ export default {
       // 初始化后自动适配视图
       this.$nextTick(() => {
         if (this.graph) {
-          this.graph.fitView([200, 200, 200, 200]);
+          this.graph.fitView([100, 100, 100, 100]);
 
           // 手动触发动画
           setTimeout(() => {
@@ -560,6 +690,11 @@ export default {
      * @param {Object} rawData - 原始数据
      * @returns {Object} combo详情数据映射
      */
+    /**
+     * 将原始数据转换为combo详情数据
+     * @param {Object} rawData - 原始数据
+     * @returns {Object} combo详情数据映射
+     */
     convertToComboDetailData(rawData) {
       const detailData = {};
 
@@ -567,11 +702,21 @@ export default {
         rawData.comboList.forEach((item) => {
           // 将listdetail数据转换为组件需要的详情项格式
           detailData[item.source] = item.listdetail.map((detail) => {
+            // 根据新的数据结构提取信息
             return {
               name: detail.name || "未知项",
-              successRate: detail.value?.value || "0%",
-              responseRate: "0%",
-              p99Time: "0ms",
+              successRate:
+                detail.values && detail.values.length > 0
+                  ? detail.values[0].value || "0%"
+                  : "0%",
+              responseRate:
+                detail.values && detail.values.length > 1
+                  ? detail.values[1].value || "0%"
+                  : "0%",
+              p99Time:
+                detail.values && detail.values.length > 2
+                  ? detail.values[2].value || "0ms"
+                  : "0ms",
             };
           });
         });
@@ -596,7 +741,7 @@ export default {
       });
     },
     /**
-     * 将原始数据转换为节点详情数据
+     * 将原始数据转换为节点详情数据（适配当前结构）
      * @param {Object} rawData - 原始数据
      * @returns {Object} 节点详情数据映射
      */
@@ -605,17 +750,67 @@ export default {
 
       if (rawData && rawData.nodeList) {
         rawData.nodeList.forEach((item) => {
-          // 将listdetail数据转换为组件需要的详情项格式
-          detailData[item.source] = item.listdetail.map((detail) => {
-            return {
-              name: detail.name || "未知项",
-              successRate: detail.value?.value || "0%",
-              responseRate: "0%",
-              p99Time: "0ms",
-            };
-          });
+          const source = item.source || item.key; // 使用 source 或 key 作为唯一标识
+          const listdetail = item.listdetail || [];
+
+          // 构建详情项
+          detailData[source] = [
+            {
+              type: "base",
+              title: "基础层指标",
+              items: [
+                {
+                  label: "主机状态",
+                  value: item.status === "在线" ? "🟢 在线" : "🔴 离线",
+                },
+                { label: "CPU型号", value: "IntelXeonE5-2676v3" },
+                { label: "磁盘总量", value: "500GB" },
+                { label: "操作系统", value: "Linux5.4.0-42-gen..." },
+                { label: "内存总量", value: "16GB" },
+                { label: "网络带宽", value: "1Gbps" },
+                { label: "系统错误日志信息", value: "oarm kill: 0" },
+              ],
+            },
+            {
+              type: "system",
+              title: "系统层指标",
+              items:
+                listdetail[0]?.systemMetrics?.map((v) => ({
+                  label: v.name,
+                  value: v.value,
+                })) || [],
+            },
+            {
+              type: "app",
+              title: "应用层指标",
+              items:
+                listdetail[0]?.appMetrics?.map((v) => ({
+                  label: v.name,
+                  value: v.value,
+                })) || [],
+            },
+            {
+              type: "business",
+              title: "业务层指标",
+              items:
+                listdetail[0]?.businessMetrics?.map((v) => ({
+                  label: v.name,
+                  value: v.value,
+                })) || [],
+            },
+            {
+              type: "operations",
+              title: "操作列表",
+              items:
+                listdetail[0]?.operations?.map((v) => ({
+                  label: v.name,
+                  value: v.value,
+                })) || [],
+            },
+          ];
         });
       }
+      console.log("detailData:", detailData);
 
       return detailData;
     },
@@ -633,33 +828,26 @@ export default {
 
     /** 组件数据变更时触发 */
     setData(data) {
-      // 根据传入的数据结构处理
-      if (data && typeof data === "object") {
-        // 直接使用传入的数据作为 tabRawData
-        this.tabRawData = data;
+      if (!data || typeof data !== "object") return;
 
-        // 转换为图数据
-        let graphData = this.convertToGraphData(this.tabRawData);
+      this.tabRawData = data;
+      let graphData = this.convertToGraphData(data);
 
-        if (this.graph) {
-          this.graph.changeData(graphData);
-          // 数据更新后自动适配视图
-          this.$nextTick(() => {
-            this.graph.fitView([200, 200, 200, 200]);
-          });
-        } else {
-          this.initGraph();
-        }
+      if (this.graph) {
+        this.graph.changeData(graphData);
+      } else {
+        this.initGraph(); // 确保 graph 已创建
       }
     },
-
     /** 组件销毁时触发 */
     destroy() {
-      if (!this.graph) {
-        return;
+      if (this.graph) {
+        this.graph.destroy();
       }
-      this.graph.destroy();
-      this.graph = null;
+      if (this.tooltipElement && this.tooltipElement.parentNode) {
+        this.tooltipElement.parentNode.removeChild(this.tooltipElement);
+      }
+      this.tooltipElement = null;
     },
   },
 };
@@ -692,8 +880,8 @@ export default {
     // 右侧面板 - 占据 25%
     .right-panel {
       flex: 0 0 20%; // 不放大不缩小，基础宽度 20%
-      min-width: 150px; // 设置最小宽度防止过小
-      height: calc(100% - 100px);
+      min-width: 300px; // 设置最小宽度防止过小
+      // height: calc(100% - 100px);
       background-color: #111d30;
       //   border-left: 1px solid #333;
       position: relative;
@@ -705,52 +893,10 @@ export default {
         align-items: center;
         padding: 0 15px;
         position: relative;
-        background: 
-        // linear-gradient(
-        //   90deg,
-        //   rgba(95, 199, 255, 0.3) 0%,
-        //   rgba(95, 199, 255, 0.1) 100%
-        // ),
-          url("./assets/img/bg.png");
+        background: url("./assets/img/bg.png");
         background-repeat: no-repeat;
         background-position: center;
         background-size: 100% 100%;
-        // &.active {
-        //   // 选中时添加上边框渐变
-        //   &::before {
-        //     content: "";
-        //     position: absolute;
-        //     top: 0;
-        //     left: 0;
-        //     right: 0;
-        //     height: 2px;
-        //     // 从左到右逐渐消失的渐变边框
-        //     background: linear-gradient(
-        //       90deg,
-        //       #5fc7ff 0%,
-        //       rgba(95, 199, 255, 0) 100%
-        //     );
-        //   }
-
-        //   // 选中时添加下边框渐变
-        //   &::after {
-        //     content: "";
-        //     position: absolute;
-        //     bottom: 0;
-        //     left: 0;
-        //     right: 0;
-        //     height: 2px;
-        //     // 从左到右逐渐消失的渐变边框
-        //     background: linear-gradient(
-        //       90deg,
-        //       #5fc7ff 0%,
-        //       rgba(95, 199, 255, 0) 100%
-        //     );
-        //   }
-
-        //   // 选中时添加左边框（纯色）
-        //   border-left: 2px solid #5fc7ff;
-        // }
 
         .title-container {
           display: flex;
@@ -771,7 +917,7 @@ export default {
         }
       }
 
-      .detail-content {
+      .combo-detail-content {
         width: 100%;
         height: calc(100% - 60px);
         color: #fff;
@@ -828,6 +974,99 @@ export default {
             .response-rate,
             .p99-time {
               color: #fff;
+            }
+          }
+        }
+      }
+      .node-detail-content {
+        width: 100%;
+        height: calc(100% - 60px);
+        color: #fff;
+        box-sizing: border-box;
+        overflow-y: auto;
+        padding: 10px;
+
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: #000;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: #10375d;
+          border-radius: 3px;
+        }
+
+        .detail-section {
+          border-radius: 4px;
+          margin-bottom: 10px;
+          overflow: hidden;
+
+          .section-title {
+            padding: 10px 0 10px 0;
+            // background: linear-gradient(
+            //   90deg,
+            //   rgba(95, 199, 255, 0.3) 0%,
+            //   rgba(95, 199, 255, 0.1) 100%
+            // );
+            color: #ffff;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(95, 199, 255, 0.8),
+              0 0 10px rgba(95, 199, 255, 0.5);
+            // box-shadow: 0 0 10px rgba(95, 199, 255, 0.3) inset;
+          }
+
+          .section-body {
+            border-radius: 4px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            background-color: #020c1d;
+
+            &:hover {
+              background-color: #10375d;
+            }
+            .section-grid {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 8px;
+            }
+            .section-item {
+              display: flex;
+              justify-content: space-between;
+              padding: 8px 0;
+
+              &:last-child {
+                border-bottom: none;
+              }
+
+              .item-label {
+                font-size: 12px;
+                color: #ccc;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+
+              .item-value {
+                font-size: 12px;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                min-width: 0; /* 允许flex项目收缩 */
+                span {
+                  font-size: 12px;
+                  line-height: 1;
+                }
+              }
             }
           }
         }
