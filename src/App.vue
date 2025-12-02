@@ -19,9 +19,77 @@ export default {
         nodes: [
           // 主中心 - 73集群 (3个节点)
           {
+            key: "loadBalancer",
+            text: "负载均衡",
+            status: "normal",
+            combo: "",
+            source: "负载均衡器",
+            detail: [
+              {
+                name: "负载均衡利用",
+                value: "20%",
+              },
+              {
+                name: "负载均衡内存",
+                value: "45%",
+              },
+            ],
+          },
+          {
+            key: "node0-1",
+            text: "DB集群1",
+            status: "normal",
+            combo: "G",
+            source: "DB集群1",
+            detail: [
+              {
+                name: "DB集群CPU利用率",
+                value: "20%",
+              },
+              {
+                name: "DB集群内存利用率",
+                value: "45%",
+              },
+            ],
+          },
+          {
+            key: "node0-2",
+            text: "DB集群2",
+            status: "normal",
+            combo: "G",
+            source: "DB集群2",
+            detail: [
+              {
+                name: "DB集群CPU利用率",
+                value: "20%",
+              },
+              {
+                name: "DB集群内存利用率",
+                value: "45%",
+              },
+            ],
+          },
+          {
+            key: "node0-3",
+            text: "DB集群3",
+            status: "normal",
+            combo: "G",
+            source: "DB集群3",
+            detail: [
+              {
+                name: "DB集群CPU利用率",
+                value: "20%",
+              },
+              {
+                name: "DB集群内存利用率",
+                value: "45%",
+              },
+            ],
+          },
+          {
             key: "node1",
             text: "73集群",
-            status: "正常",
+            status: "normal",
             combo: "A",
             source: "模块.svg",
             detail: [
@@ -38,7 +106,7 @@ export default {
           {
             key: "node2",
             text: "73集群-节点2",
-            status: "正常",
+            status: "normal",
             combo: "A",
             source: "模块.svg",
             detail: [
@@ -55,7 +123,7 @@ export default {
           {
             key: "node3",
             text: "73集群-节点3",
-            status: "正常",
+            status: "normal",
             combo: "A",
             source: "模块.svg",
             detail: [
@@ -73,7 +141,7 @@ export default {
           {
             key: "node4",
             text: "90集群",
-            status: "正常",
+            status: "normal",
             combo: "B",
             source: "模块.svg",
             detail: [
@@ -90,7 +158,7 @@ export default {
           {
             key: "node5",
             text: "90集群-节点2",
-            status: "正常",
+            status: "normal",
             combo: "B",
             source: "模块.svg",
             detail: [
@@ -107,7 +175,7 @@ export default {
           {
             key: "node6",
             text: "90集群-节点3",
-            status: "正常",
+            status: "normal",
             combo: "B",
             source: "模块.svg",
             detail: [
@@ -124,7 +192,7 @@ export default {
           {
             key: "node7",
             text: "90集群-节点4",
-            status: "正常",
+            status: "normal",
             combo: "B",
             source: "模块.svg",
             detail: [
@@ -142,7 +210,7 @@ export default {
           {
             key: "node8",
             text: "100集群",
-            status: "正常",
+            status: "normal",
             combo: "C",
             source: "模块.svg",
             detail: [
@@ -160,7 +228,7 @@ export default {
           {
             key: "node9",
             text: "116集群",
-            status: "正常",
+            status: "normal",
             combo: "D",
             source: "模块.svg",
             detail: [
@@ -177,7 +245,7 @@ export default {
           {
             key: "node10",
             text: "116集群-节点2",
-            status: "正常",
+            status: "normal",
             combo: "D",
             source: "模块.svg",
             detail: [
@@ -194,7 +262,7 @@ export default {
           {
             key: "node11",
             text: "116集群-节点3",
-            status: "正常",
+            status: "normal",
             combo: "D",
             source: "模块.svg",
             detail: [
@@ -211,7 +279,7 @@ export default {
           {
             key: "node12",
             text: "116集群-节点4",
-            status: "正常",
+            status: "normal",
             combo: "D",
             source: "模块.svg",
             detail: [
@@ -229,7 +297,7 @@ export default {
           {
             key: "node13",
             text: "141集群",
-            status: "正常",
+            status: "normal",
             combo: "E",
             source: "模块.svg",
             detail: [
@@ -246,7 +314,7 @@ export default {
           {
             key: "node14",
             text: "141集群-节点2",
-            status: "正常",
+            status: "normal",
             combo: "E",
             source: "模块.svg",
             detail: [
@@ -263,7 +331,7 @@ export default {
           {
             key: "node15",
             text: "141集群-节点3",
-            status: "正常",
+            status: "normal",
             combo: "E",
             source: "模块.svg",
             detail: [
@@ -280,7 +348,7 @@ export default {
           {
             key: "node16",
             text: "141集群-节点4",
-            status: "正常",
+            status: "normal",
             combo: "E",
             source: "模块.svg",
             detail: [
@@ -298,7 +366,7 @@ export default {
           {
             key: "node17",
             text: "160集群",
-            status: "正常",
+            status: "idle",
             combo: "F",
             source: "模块.svg",
             detail: [
@@ -315,7 +383,7 @@ export default {
           {
             key: "node18",
             text: "160集群-节点2",
-            status: "正常",
+            status: "idle",
             combo: "F",
             source: "模块.svg",
             detail: [
@@ -332,7 +400,7 @@ export default {
           {
             key: "node19",
             text: "160集群-节点3",
-            status: "正常",
+            status: "idle",
             combo: "F",
             source: "模块.svg",
             detail: [
@@ -347,36 +415,142 @@ export default {
             ],
           },
         ],
+        // edges: [
+        //   {
+        //     source: "loadBalancer", // 负载均衡器节点
+        //     target: "mainCenter", // 主中心
+        //     status: "normal",
+        //     name: "负载均衡器至主中心",
+        //     detailValue: [
+        //       { name: "带宽使用率", value: "45%" },
+        //       { name: "延迟", value: "2ms" },
+        //       { name: "丢包率", value: "0%" },
+        //     ],
+        //     hoverValue: [
+        //       { name: "带宽使用率", value: "45%" },
+        //       { name: "延迟", value: "2ms" },
+        //       { name: "丢包率", value: "0%" },
+        //     ],
+        //   },
+        //   {
+        //     source: "mainCenter", // 主中心
+        //     target: "loadBalancer", // 负载均衡器节点
+        //     status: "warning",
+        //     name: "主中心至负载均衡器",
+        //     detailValue: [
+        //       { name: "带宽使用率", value: "32%" },
+        //       { name: "延迟", value: "2ms" },
+        //       { name: "丢包率", value: "0%" },
+        //     ],
+        //   },
+        //   // 负载均衡器到灾备中心的双向连接
+        //   {
+        //     source: "loadBalancer", // 负载均衡器节点
+        //     target: "disasterCenter", // 灾备中心
+        //     status: "normal",
+        //     name: "负载均衡器至灾备中心",
+        //     detailValue: [
+        //       { name: "带宽使用率", value: "45%" },
+        //       { name: "延迟", value: "2ms" },
+        //       { name: "丢包率", value: "0%" },
+        //     ],
+        //     hoverValue: [
+        //       { name: "带宽使用率", value: "45%" },
+        //       { name: "延迟", value: "2ms" },
+        //       { name: "丢包率", value: "0%" },
+        //     ],
+        //   },
+        //   {
+        //     source: "disasterCenter", // 灾备中心
+        //     target: "loadBalancer", // 负载均衡器节点
+        //     status: "normal",
+        //     name: "灾备中心至 负载均衡器",
+        //     detailValue: [
+        //       { name: "带宽使用率", value: "45%" },
+        //       { name: "延迟", value: "2ms" },
+        //       { name: "丢包率", value: "0%" },
+        //     ],
+        //     hoverValue: [
+        //       { name: "带宽使用率", value: "45%" },
+        //       { name: "延迟", value: "2ms" },
+        //       { name: "丢包率", value: "0%" },
+        //     ],
+        //   },
+        //   {
+        //     source: "A", // 应用集群A
+        //     target: "G", // DB集群
+        //     status: "normal",
+        //     name: "应用集群A至DB集群",
+        //     detailValue: [
+        //       { name: "带宽使用率", value: "35%" },
+        //       { name: "延迟", value: "3ms" },
+        //       { name: "丢包率", value: "0%" },
+        //     ],
+        //     hoverValue: [
+        //       { name: "带宽使用率", value: "35%" },
+        //       { name: "延迟", value: "3ms" },
+        //       { name: "丢包率", value: "0%" },
+        //     ],
+        //   },
+        //   {
+        //     source: "G",
+        //     target: "A",
+        //     status: "normal",
+        //     name: "DB集群至应用集群A",
+        //     detailValue: [
+        //       { name: "带宽使用率", value: "35%" },
+        //       { name: "延迟", value: "3ms" },
+        //       { name: "丢包率", value: "0%" },
+        //     ],
+        //     hoverValue: [
+        //       { name: "带宽使用率", value: "35%" },
+        //       { name: "延迟", value: "3ms" },
+        //       { name: "丢包率", value: "0%" },
+        //     ],
+        //   },
+        // ],
         combos: [
           {
             id: "A",
-            parentId: "main-center",
-            status: "正常",
+            name: "应用集群A",
+            parentId: "mainCenter",
+            status: "normal",
           },
           {
             id: "B",
-            parentId: "main-center",
-            status: "正常",
+            name: "应用集群B",
+            parentId: "mainCenter",
+            status: "normal",
           },
           {
             id: "C",
-            parentId: "main-center",
-            status: "正常",
+            name: "应用集群C",
+            parentId: "mainCenter",
+            status: "normal",
           },
           {
             id: "D",
-            parentId: "main-center",
-            status: "正常",
+            name: "应用集群D",
+            parentId: "mainCenter",
+            status: "normal",
           },
           {
             id: "E",
-            parentId: "main-center",
-            status: "正常",
+            name: "应用集群E",
+            parentId: "mainCenter",
+            status: "normal",
           },
           {
             id: "F",
-            parentId: "disaster-center",
-            status: "正常",
+            name: "应用集群F",
+            parentId: "disasterCenter",
+            status: "idle", //状态为闲置时，combo颜色为绿色
+          },
+          {
+            id: "G",
+            name: "DB集群",
+            parentId: "noneCenter",
+            status: "normal",
           },
         ],
         // 节点详情数据
@@ -388,4098 +562,146 @@ export default {
                 name: "73集群详情",
                 Alerts: "0",
                 url: "http://73-cluster.com",
-                status: "正常",
-                values: [
+                status: "normal",
+                systemResourceLayer: [
                   {
-                    name: "CPU利用率",
+                    label: "主机状态",
+                    value: "🟢 在线",
+                    trend: "up",
+                  },
+                  {
+                    label: "主机运行时间",
+                    value: "120天",
+                    trend: "flat",
+                  },
+                  {
+                    label: "CPU数量",
+                    value: "8核",
+                    trend: "flat",
+                  },
+                  {
+                    label: "内存总量",
+                    value: "32GB",
+                    trend: "flat",
+                  },
+                  {
+                    label: "磁盘总量",
+                    value: "1TB",
+                    trend: "flat",
+                  },
+                  {
+                    label: "网络带宽",
+                    value: "1Gbps",
+                    trend: "flat",
+                  },
+                  {
+                    label: "CPU使用率",
                     value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
+                    trend: "up",
                   },
                   {
-                    name: "内存利用率",
+                    label: "内存使用率",
                     value: "45%",
-                    unit: "%",
                     trend: "up",
                   },
                   {
-                    name: "磁盘利用率",
+                    label: "磁盘使用率",
                     value: "35%",
-                    unit: "%",
                     trend: "down",
+                  },
+                  {
+                    label: "僵尸进程数量",
+                    value: "0",
+                    trend: "flat",
+                  },
+                  {
+                    label: "监控采集器状态",
+                    value: "🟢 normal",
+                    trend: "flat",
+                  },
+                  {
+                    label: "磁盘IO",
+                    value: "15%",
+                    trend: "up",
+                  },
+                  {
+                    label: "平均负载",
+                    value: "1.2",
+                    trend: "up",
                   },
                 ],
-                systemMetrics: [
+                applicationSoftwareLayer: [
                   {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
+                    label: "osb_server4进程状态",
+                    value: "🟢 运行中",
                     trend: "flat",
-                    color: "#5fc7ff",
                   },
                   {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
+                    label: "SYN_SEND总数",
+                    value: "120",
+                    trend: "up",
+                  },
+                  {
+                    label: "SYN_RECV总数",
+                    value: "85",
+                    trend: "up",
+                  },
+                  {
+                    label: "SOCKET使用量",
+                    value: "420",
+                    trend: "up",
+                  },
+                  {
+                    label: "监听端口请求量",
+                    value: "2450",
+                    trend: "up",
+                  },
+                  {
+                    label: "网络接口丢包率",
+                    value: "0.01%",
+                    trend: "down",
+                  },
+                  {
+                    label: "僵尸进程数量",
+                    value: "0",
                     trend: "flat",
-                    color: "#5fc7ff",
                   },
                 ],
-                appMetrics: [
+                businessServiceLayer: [
                   {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
+                    label: "响应率",
+                    value: "99.9%",
                     trend: "up",
-                    color: "#5fc7ff",
                   },
                   {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
+                    label: "成功率",
+                    value: "99.5%",
                     trend: "up",
-                    color: "#5fc7ff",
                   },
                   {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
+                    label: "交易量阈值",
+                    value: "5000TPS",
+                    trend: "flat",
                   },
                   {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
+                    label: "平均响应时间",
+                    value: "120ms",
+                    trend: "down",
                   },
                   {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
+                    label: "错误请求数",
                     value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node2",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node3",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node4",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node5",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node6",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node7",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node8",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node9",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node10",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node11",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node12",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node13",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node14",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node15",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node16",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node17",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node18",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
-                  {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
-                  },
-                  {
-                    name: "其他操作",
-                    action: "other-actions",
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            source: "node19",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "正常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                    unit: "%",
-                    trend: "up", // up/down/flat
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                    unit: "%",
-                    trend: "up",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                    unit: "%",
-                    trend: "down",
-                  },
-                ],
-                systemMetrics: [
-                  {
-                    name: "CPU使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "var分区磁盘空间",
-                    value: "80%",
-                    unit: "%",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "入站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络流量",
-                    value: "出站 200",
-                    unit: "Mbps",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "磁盘IO",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络延迟",
-                    value: "80ms",
-                    unit: "ms",
-                    trend: "down",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "网络丢包",
-                    value: "0%",
-                    unit: "%",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "平均负载",
-                    value: "0.5 0.3 0.2",
-                    unit: "",
-                    trend: "flat",
-                    color: "#5fc7ff",
-                  },
-                ],
-                appMetrics: [
-                  {
-                    name: "osb_server5接口状态",
-                    value: "8888",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5进程状态",
-                    value: "6666",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "osb_server5服务状态",
-                    value: "8889",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "JVM内存使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "线程池使用率",
-                    value: "80%",
-                    unit: "%",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "日志错误数",
-                    value: "5",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "告警数量",
-                    value: "2",
-                    unit: "个",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "GC次数",
-                    value: "50次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "GC时间",
-                    value: "200ms",
-                    unit: "ms",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                ],
-                businessMetrics: [
-                  {
-                    name: "请求量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "交易量",
-                    value: "1500次/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#5fc7ff",
-                  },
-                  {
-                    name: "失败数",
-                    value: "5笔/分钟",
-                    unit: "",
-                    trend: "up",
-                    color: "#ff7478",
-                  },
-                  {
-                    name: "响应时间",
-                    value: "200ms",
-                    unit: "ms",
                     trend: "down",
-                    color: "#5fc7ff",
                   },
                 ],
-                operations: [
-                  {
-                    name: "重启主机",
-                    action: "restart-host",
-                  },
-                  {
-                    name: "重启所有节点",
-                    action: "restart-all-nodes",
-                  },
+                operationList: [
                   {
-                    name: "重启osb_server5服务",
-                    action: "restart-osb-service",
+                    label: "操作1",
+                    value: "三板斧应急操作",
                   },
                   {
-                    name: "其他操作",
-                    action: "other-actions",
+                    label: "操作2",
+                    value: "告警详情查看",
                   },
                 ],
               },
@@ -4496,7 +718,7 @@ export default {
                 name: "73集群",
                 Alerts: "0",
                 url: "http://73-cluster.com",
-                status: "正常",
+                status: "normal",
                 values: [
                   {
                     name: "CPU利用率",
@@ -4536,7 +758,7 @@ export default {
                 name: "73集群-节点3",
                 Alerts: "0",
                 url: "http://73-node3.com",
-                status: "正常",
+                status: "normal",
                 values: [
                   {
                     name: "CPU利用率",
@@ -4562,7 +784,7 @@ export default {
                 name: "90集群",
                 Alerts: "0",
                 url: "http://90-cluster.com",
-                status: "正常",
+                status: "normal",
                 values: [
                   {
                     name: "CPU利用率",
@@ -4582,7 +804,7 @@ export default {
                 name: "90集群-节点2",
                 Alerts: "0",
                 url: "http://90-node2.com",
-                status: "正常",
+                status: "normal",
                 values: [
                   {
                     name: "CPU利用率",
@@ -4622,7 +844,7 @@ export default {
                 name: "90集群-节点4",
                 Alerts: "0",
                 url: "http://90-node4.com",
-                status: "正常",
+                status: "normal",
                 values: [
                   {
                     name: "CPU利用率",
@@ -4674,7 +896,7 @@ export default {
                 name: "116集群",
                 Alerts: "0",
                 url: "http://116-cluster.com",
-                status: "正常",
+                status: "normal",
                 values: [
                   {
                     name: "CPU利用率",
@@ -4694,7 +916,7 @@ export default {
                 name: "116集群-节点2",
                 Alerts: "0",
                 url: "http://116-node2.com",
-                status: "正常",
+                status: "normal",
                 values: [
                   {
                     name: "CPU利用率",
@@ -4714,7 +936,7 @@ export default {
                 name: "116集群-节点3",
                 Alerts: "0",
                 url: "http://116-node3.com",
-                status: "正常",
+                status: "normal",
                 values: [
                   {
                     name: "CPU利用率",
@@ -4760,7 +982,7 @@ export default {
                 name: "141集群",
                 Alerts: "0",
                 url: "http://141-cluster.com",
-                status: "正常",
+                status: "normal",
                 values: [
                   {
                     name: "CPU利用率",
@@ -4780,7 +1002,7 @@ export default {
                 name: "141集群-节点2",
                 Alerts: "0",
                 url: "http://141-node2.com",
-                status: "正常",
+                status: "normal",
                 values: [
                   {
                     name: "CPU利用率",
@@ -4820,7 +1042,7 @@ export default {
                 name: "141集群-节点4",
                 Alerts: "0",
                 url: "http://141-node4.com",
-                status: "正常",
+                status: "normal",
                 values: [
                   {
                     name: "CPU利用率",
@@ -4846,7 +1068,7 @@ export default {
                 name: "160集群",
                 Alerts: "0",
                 url: "http://160-cluster.com",
-                status: "正常",
+                status: "normal",
                 values: [
                   {
                     name: "CPU利用率",
@@ -4886,7 +1108,7 @@ export default {
                 name: "160集群-节点3",
                 Alerts: "0",
                 url: "http://160-node3.com",
-                status: "正常",
+                status: "normal",
                 values: [
                   {
                     name: "CPU利用率",
@@ -4909,19 +1131,32 @@ export default {
         combosParent: [
           {
             name: "主中心",
-            id: "main-center",
+            id: "mainCenter",
             children: ["A", "B", "C", "D", "E"],
+            status: "normal", //状态为normal时，combo颜色为默认颜色蓝色
+          },
+          {
+            name: "",
+            id: "noneCenter",
+            children: ["G"],
+            status: "normal", //状态为normal时，combo颜色为默认颜色蓝色
           },
           {
             name: "灾备中心",
-            id: "disaster-center",
+            id: "disasterCenter",
             children: ["F"],
+            status: "idle", //状态为闲置时，combo颜色为绿色
           },
         ],
       },
     };
   },
   mounted() {
+    //   const newObject = Object.fromEntries(
+    //     Object.entries(this.tabRawData).map(([key, value]) => [ `"${key}"`, value ])
+    // );
+    // console.log(JSON.stringify(newObject),'newObject');
+
     this.com = new CustomComponent();
     this.com.init(
       this.$refs.container,
@@ -4938,12 +1173,9 @@ export default {
         },
       } // 在组件初始化后执行反缩放
     );
-    // 等待 init 完成后再执行后续操作
-    this.$nextTick(() => {
-      this.com.resize();
-      this.com.setStyle("legend$color", "#ccc");
-      this.com.setData(this.tabRawData);
-    });
+    this.com.resize();
+    this.com.setStyle("legend$color", "#ccc");
+    this.com.setData(this.tabRawData);
   },
   methods: {},
 };
@@ -4951,7 +1183,7 @@ export default {
 <style lang="scss">
 #panel {
   width: 90vw;
-  height: 90vh;
+  height: 98vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4961,7 +1193,7 @@ export default {
 #com-container {
   width: 100%;
   height: 100%;
-  // background-color: #0b1421;
+  background-color: #0b1421;
   // 确保容器可以正确应用变换
   transform-origin: center center;
 }

@@ -15,6 +15,7 @@
             <span class="detail-title">{{ selectedNodeLabel }}</span>
           </div>
         </div>
+        <!-- 替换 index.vue 模板中的 combo-detail-content 部分 -->
         <div class="combo-detail-content" v-if="showType === 'combo'">
           <div
             v-for="(item, index) in detailItems"
@@ -25,9 +26,15 @@
           >
             <div class="item-name">{{ item.name }}</div>
             <div class="item-stats">
-              <span class="success-rate">成功率: {{ item.successRate }}</span>
-              <span class="response-rate">响应率: {{ item.responseRate }}</span>
-              <span class="p99-time">P99耗时: {{ item.p99Time }}</span>
+              <!-- 直接展示 values 数组中的内容 -->
+              <div
+                v-for="(value, valueIndex) in item.values"
+                :key="valueIndex"
+                class="value-item"
+              >
+                <span class="value-name">{{ value.name }}:</span>
+                <span class="value-data">{{ value.value }}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -46,14 +53,18 @@
                   :key="i"
                   class="section-item"
                 >
-                  <div class="item-label">{{ item.label }}</div>
+                  <div class="item-label" v-if="section.title != '操作列表'">
+                    {{ item.label }}:
+                  </div>
                   <div class="item-value">
-                    <span v-if="item.trend" :style="{ color: item.color }">
-                      <span v-if="item.trend === 'up'">▲</span>
-                      <span v-else-if="item.trend === 'down'">▼</span>
-                      <span v-else>▬</span>
+                    <span
+                      :style="{
+                        color:
+                          item.color || getValueColor(item.value, item.label),
+                      }"
+                    >
+                      {{ item.value }}
                     </span>
-                    {{ item.value }}
                   </div>
                 </div>
               </div>
@@ -89,7 +100,7 @@ export default {
       tabRawData: {},
       // 详情项数据
       detailItems: [],
-
+      parentComboPositions: null,
       activeTab: "internal", // 默认选中第一个tab
     };
   },
@@ -131,99 +142,187 @@ export default {
         const computedStyle = window.getComputedStyle(previewWrap);
         const transform =
           computedStyle.transform || computedStyle.webkitTransform;
-        console.log(transform, "transform");
-
         if (transform && transform !== "none") {
           const matrix = new DOMMatrixReadOnly(transform);
           console.log(matrix, "matrix");
           const scale = { scaleX: matrix.a, scaleY: matrix.d };
-          console.log(this.$refs.ringChart.style, "this.$refs.ringChart.style");
 
-          this.$refs.ringChart.style.transform = `scale(${1 / scale.scaleX}, ${
+          this.$refs.component.style.transform = `scale(${1 / scale.scaleX}, ${
             1 / scale.scaleY
           })`;
-          // this.$refs.ringChart.style.transformOrigin = "center center";
+          // this.$refs.component.style.transformOrigin = "center center";
         } else {
           // 清除缩放
-          this.$refs.ringChart.style.transform = "";
+          this.$refs.component.style.transform = "";
         }
       }
     },
-
     /**
      * 为combo内的节点预设位置
      * @param {Array} nodes - 节点数组
      * @param {String} comboId - combo ID
      */
     layoutComboNodes(nodes, comboId) {
+      // 检查combo的parentId是否为mainCenter
+      const combo = this.tabRawData.combos?.find((c) => c.id === comboId);
+      const isMainCenterChild = combo && combo.parentId === "mainCenter";
+
       const nodeSize = 200;
-      const nodeSpacing = 150; // 从20增大到30，增加节点间距
-      const padding = 20; // 从20增大到30，增加内边距
-      const nodesPerRow = 4;
-      const labelHeight = 20; // 节点标签高度
-      const totalNodeHeight = nodeSize + labelHeight; // 节点+标签的总高度
+      const nodeSpacing = 150;
+      const padding = 50;
+      const labelHeight = 40;
+      const totalNodeHeight = nodeSize + labelHeight;
 
       // 获取属于当前combo的节点
       const comboNodes = nodes.filter((node) => node.comboId === comboId);
 
-      // 为每个节点计算位置（相对于combo的局部坐标系）
-      comboNodes.forEach((node, index) => {
-        const row = Math.floor(index / nodesPerRow);
-        const col = index % nodesPerRow;
+      if (isMainCenterChild) {
+        // 对于mainCenter的子combo，使用竖向排列，每列最多2个节点
+        const nodesPerColumn = 2; // 每列最多2个节点
 
-        // 计算节点位置：横向排列，相对于combo内部
-        node.x = padding + col * (nodeSize + nodeSpacing);
-        // 调整节点y坐标，使节点+标签整体在combo内垂直居中
-        node.y =
-          padding +
-          30 +
-          row * (totalNodeHeight + nodeSpacing) +
-          totalNodeHeight / 2 -
-          labelHeight / 2;
-      });
+        // 特别处理只有一个节点的情况，使其居中显示
+        if (comboNodes.length === 1) {
+          comboNodes[0].x = padding + nodeSize / 2;
+          comboNodes[0].y = padding + nodeSize / 2;
+        } else {
+          comboNodes.forEach((node, index) => {
+            const column = Math.floor(index / nodesPerColumn); // 列数（从左到右）
+            const row = index % nodesPerColumn; // 行数（从上到下）
+
+            // 计算节点位置：竖向排列，每列最多2个
+            node.x =
+              padding + column * (nodeSize + (column > 0 ? nodeSpacing : 0));
+            node.y =
+              padding +
+              row * (nodeSize + (row > 0 ? nodeSpacing : 0)) +
+              nodeSize / 2;
+          });
+
+          // 特别处理奇数个节点的情况，将最后一列的单个节点垂直居中
+          if (comboNodes.length % 2 === 1 && comboNodes.length > 1) {
+            const lastIndex = comboNodes.length - 1;
+            const lastNode = comboNodes[lastIndex];
+
+            // 最后一个节点应该放在第二列（column=1）垂直居中位置
+            lastNode.x =
+              padding +
+              Math.floor(comboNodes.length / nodesPerColumn) *
+                (nodeSize + nodeSpacing); // 第二列的x位置
+            lastNode.y = padding + (nodeSize + nodeSpacing) / 2 + nodeSize / 2; // 在该列中垂直居中
+          }
+        }
+      } else {
+        // 其他combo保持原来的4列布局
+        const nodesPerRow = 4;
+
+        // 特别处理只有一个节点的情况，使其居中显示
+        if (comboNodes.length === 1) {
+          comboNodes[0].x = padding + nodeSize / 2; // 修正：移除nodeSpacing的影响
+          comboNodes[0].y = padding + totalNodeHeight / 2;
+        } else {
+          comboNodes.forEach((node, index) => {
+            const row = Math.floor(index / nodesPerRow);
+            const col = index % nodesPerRow;
+
+            // 计算节点位置：横向排列，相对于combo内部
+            node.x = padding + col * (nodeSize + (col > 0 ? nodeSpacing : 0)); // 修正：仅在多列时添加间距
+            // 调整节点y坐标，使节点+标签整体在combo内垂直居中
+            node.y =
+              padding +
+              row * (totalNodeHeight + (row > 0 ? nodeSpacing : 0)) +
+              totalNodeHeight / 2;
+          });
+        }
+      }
 
       return nodes;
     },
 
-    /**
-     * 预布局所有节点
-     * @param {Object} graphData - 图数据
-     */
-    preLayoutNodes(graphData) {
-      // 按combo分组节点
-      const nodesByCombo = {};
-      graphData.nodes.forEach((node) => {
-        const comboId = node.comboId || "default";
-        if (!nodesByCombo[comboId]) {
-          nodesByCombo[comboId] = [];
+   /**
+ * 预布局所有节点
+ * @param {Object} graphData - 图数据
+ */
+preLayoutNodes(graphData) {
+  // 按combo分组节点
+  const nodesByCombo = {};
+  // 注意：这里不再需要单独处理独立节点，因为它们会在layoutCombos中处理
+
+  graphData.nodes.forEach((node) => {
+    const comboId = node.comboId || "default";
+    if (comboId && comboId !== "default") {
+      if (!nodesByCombo[comboId]) {
+        nodesByCombo[comboId] = [];
+      }
+      nodesByCombo[comboId].push(node);
+    }
+  });
+
+  // 为每个combo内的节点设置位置
+  Object.keys(nodesByCombo).forEach((comboId) => {
+    this.layoutComboNodes(graphData.nodes, comboId);
+  });
+
+  // 为combo设置位置，避免重叠
+  // 独立节点的布局将在layoutCombos方法中完成
+  this.layoutCombos(graphData.combos, graphData.nodes);
+
+  // 特别处理loadBalancer节点位置
+  const loadBalancerNode = graphData.nodes.find(node => node.id === "loadBalancer");
+  if (loadBalancerNode && this.parentComboPositions) {
+    // 获取所有父combo
+    const parentIds = ["mainCenter", "noneCenter", "disasterCenter"];
+    const validParents = parentIds.filter(id => this.parentComboPositions[id]);
+    
+    if (validParents.length > 0) {
+      if (validParents.length % 2 === 1) {
+        // 奇数个父combo，将loadBalancer放在中间那个的左侧
+        const middleIndex = Math.floor(validParents.length / 2);
+        const middleParentId = validParents[middleIndex];
+        const middleParentPos = this.parentComboPositions[middleParentId];
+        
+        // 放置在中间父combo的左侧
+        loadBalancerNode.x = middleParentPos.x - 200; // 左侧200px位置
+        loadBalancerNode.y = middleParentPos.y + middleParentPos.height / 2; // 垂直居中
+      } else {
+        // 偶数个父combo，将loadBalancer放在整个布局的左侧中间
+        // 计算所有父combo的垂直范围
+        let minY = Infinity;
+        let maxY = -Infinity;
+        
+        validParents.forEach(id => {
+          const pos = this.parentComboPositions[id];
+          minY = Math.min(minY, pos.y);
+          maxY = Math.max(maxY, pos.y + pos.height);
+        });
+        
+        if (minY !== Infinity && maxY !== -Infinity) {
+          // 放置在整个布局的左侧中间
+          loadBalancerNode.x = 100; // 左侧固定位置
+          loadBalancerNode.y = (minY + maxY) / 2; // 垂直居中
         }
-        nodesByCombo[comboId].push(node);
-      });
+      }
+    }
+  }
 
-      // 为每个combo内的节点设置位置
-      Object.keys(nodesByCombo).forEach((comboId) => {
-        this.layoutComboNodes(graphData.nodes, comboId);
-      });
+  return graphData;
+},
 
-      // 为combo设置位置，避免重叠
-      this.layoutCombos(graphData.combos, graphData.nodes);
-
-      return graphData;
-    },
     /**
      * 为combos设置位置，避免重叠
      * @param {Array} combos - combo数组
      * @param {Array} nodes - 节点数组
      */
     layoutCombos(combos, nodes) {
-      const spacing = 30; // 间距
+      const spacing = 50; // 间距
       const maxPerRow = 2; // 每行最多两个
       const titleHeight = 50; // 父容器标题高度
-      const parentVerticalSpacing = 50; // 主中心和灾备中心之间的垂直间距（从100减小到50）
 
       // 先找出所有父 combo（主中心、灾备中心）
       const parentCombos = combos.filter(
-        (c) => c.id === "main-center" || c.id === "disaster-center"
+        (c) =>
+          c.id === "mainCenter" ||
+          c.id === "noneCenter" ||
+          c.id === "disasterCenter"
       );
 
       // 先处理子 combo 的尺寸计算
@@ -235,28 +334,72 @@ export default {
       childCombos.forEach((child) => {
         // 获取该 combo 下的所有节点
         const childNodes = nodes.filter((n) => n.comboId === child.id);
-        const nodesPerRow = 4;
+
+        // 检查combo的parentId是否为mainCenter
+        const combo = this.tabRawData.combos?.find((c) => c.id === child.id);
+        const isMainCenterChild = combo && combo.parentId === "mainCenter";
+
         const nodeSize = 200;
         const nodeSpacing = 150;
-        const padding = 40;
-        const labelHeight = 20;
+        const padding = 50;
+        const labelHeight = 40;
 
-        // 计算行数
-        const rows = Math.ceil(childNodes.length / nodesPerRow) || 1;
+        // 在 layoutCombos 方法中，针对 mainCenter 子 combo 的处理部分
 
-        // 计算实际尺寸
-        const width =
-          nodesPerRow * nodeSize +
-          (nodesPerRow - 1) * nodeSpacing +
-          2 * padding;
-        const height =
-          rows * (nodeSize + nodeSpacing + labelHeight) -
-          nodeSpacing +
-          2 * padding +
-          100;
+        if (isMainCenterChild) {
+          // 对于mainCenter的子combo：每列最多2个节点，从左到右排列
+          const nodesPerColumn = 2;
 
-        child.width = width;
-        child.height = height;
+          // 正确计算实际行数和列数
+          const actualRows = 2; // 最多2行，但不超过实际节点数
+          const columns = Math.ceil(childNodes.length / nodesPerColumn) || 1;
+
+          // 计算实际尺寸 - 只有当有多列或多行时才添加间距
+          const width =
+            columns * nodeSize +
+            (columns > 1 ? (columns - 1) * nodeSpacing : 0) +
+            2 * padding;
+
+          const height =
+            actualRows * nodeSize +
+            (actualRows > 1 ? (actualRows - 1) * nodeSpacing : 0) +
+            2 * padding +
+            labelHeight * 2;
+
+          child.width = width;
+          child.height = height;
+        } else {
+          // 其他combo使用4列水平布局
+          const nodesPerRow = 4;
+
+          // 计算实际行列数
+          const rows = Math.ceil(childNodes.length / nodesPerRow) || 1;
+          const cols = Math.min(childNodes.length, nodesPerRow);
+
+          // 特别处理只有一个节点的情况
+          if (childNodes.length === 1) {
+            // 单个节点时，combo只需要容纳一个节点的空间
+            const width = nodeSize + 2 * padding;
+            const height = nodeSize + labelHeight + 2 * padding;
+            child.width = width;
+            child.height = height;
+          } else {
+            // 计算实际尺寸
+            const width =
+              cols * nodeSize +
+              (cols > 1 ? (cols - 1) * nodeSpacing : 0) +
+              2 * padding;
+
+            const height =
+              rows * nodeSize +
+              (rows > 1 ? (rows - 1) * nodeSpacing : 0) +
+              2 * padding +
+              labelHeight;
+
+            child.width = width;
+            child.height = height;
+          }
+        }
       });
 
       // 为每个父 combo 计算实际需要的尺寸
@@ -268,7 +411,7 @@ export default {
 
         if (children.length === 0) {
           // 如果没有子combo，使用默认尺寸
-          parent.width = 600;
+          parent.width = 1200; // 先使用临时宽度，后续会统一
           parent.height = 400;
           return;
         }
@@ -281,26 +424,131 @@ export default {
           maxHeight = Math.max(maxHeight, child.height || 150);
         });
 
-        // 计算需要的行数
-        const rows = Math.ceil(children.length / maxPerRow) || 1;
+        // 在 layoutCombos 方法中修改这部分代码：
 
-        // 计算父容器尺寸
-        const parentWidth = maxWidth * maxPerRow + spacing * (maxPerRow + 1);
-        const parentHeight =
-          titleHeight + maxHeight * rows + spacing * (rows + 1);
+        // 特别处理mainCenter：水平排列
+        if (parent.id === "mainCenter") {
+          // 水平排列时，宽度是所有子combo宽度之和加上间距
+          let totalWidth = 0;
+          children.forEach((child, index) => {
+            totalWidth += child.width || 250;
+            if (index < children.length - 1) {
+              totalWidth += spacing; // 添加间距
+            }
+          });
 
-        parent.width = parentWidth;
-        parent.height = parentHeight;
+          parent.width = totalWidth + spacing * 2; // 左右各一个spacing
+          parent.height = (maxHeight || 150) + titleHeight * 2 + spacing * 2; // 上下各一个spacing，加上标题区域
+        } else {
+          // 特别处理noneCenter和disasterCenter，当只有一个子combo时，让父容器尺寸更大
+          if (
+            children.length === 1 &&
+            (parent.id === "noneCenter" || parent.id === "disasterCenter")
+          ) {
+            // 当noneCenter或disasterCenter只有一个子combo时，让父容器尺寸接近子combo尺寸但稍大一些
+            const child = children[0];
+            // 设置父容器尺寸稍大于子combo，确保有足够的边距
+            parent.width = (child.width || 250) + 200; // 增加左右各100px的边距
+            parent.height = (child.height || 150) + 200; // 增加上下各100px的边距
+          } else {
+            // 其他父combo保持原有计算方式
+            const rows = Math.ceil(children.length / maxPerRow) || 1;
+            const cols = Math.min(children.length, maxPerRow);
+
+            // 计算父容器尺寸
+            const parentWidth =
+              cols * maxWidth + (cols - 1) * spacing + spacing * 2;
+            const parentHeight =
+              titleHeight * 2 +
+              rows * maxHeight +
+              (rows - 1) * spacing +
+              spacing * 2 +
+              50; // 上下都增加标题区域高度
+
+            parent.width = parentWidth;
+            parent.height = parentHeight;
+          }
+        }
       });
 
-      // 为每个父 combo 设置位置
-      parentCombos.forEach((parent, index) => {
-        parent.x = 200; // 统一左边距
-        parent.y =
-          index === 0
-            ? 100
-            : 100 + parentVerticalSpacing + (parentCombos[0].height || 400); // 减小间距
-      });
+      // 确保所有父combo使用相同的宽度（以mainCenter为准）
+      if (parentCombos.length > 0) {
+        const mainCenter = parentCombos.find((c) => c.id === "mainCenter");
+        if (mainCenter) {
+          // 使用mainCenter的宽度作为统一宽度
+          const unifiedWidth = mainCenter.width;
+
+          // 为所有父combo设置相同的宽度
+          parentCombos.forEach((parent) => {
+            parent.width = unifiedWidth;
+          });
+        }
+      }
+
+      // 三区域布局：上(主中心)、中(独立combo)、下(灾备中心)
+      if (parentCombos.length >= 2) {
+        // 按照固定顺序排列
+        const mainCenter = parentCombos.find((c) => c.id === "mainCenter");
+        const noneCenter = parentCombos.find((c) => c.id === "noneCenter");
+        const disasterCenter = parentCombos.find(
+          (c) => c.id === "disasterCenter"
+        );
+
+        const allParents = [mainCenter, noneCenter, disasterCenter].filter(
+          Boolean
+        );
+
+        if (allParents.length > 0) {
+          // 使用统一间距
+          const verticalSpacing = 200; // 统一间距
+          const startX = 100;
+
+          // 计算所有父combo的位置，确保间距一致
+          let currentY = verticalSpacing;
+
+          allParents.forEach((parent, index) => {
+            if (parent) {
+              parent.x = startX;
+              parent.y = currentY;
+
+              // 更新currentY为当前combo的底部位置
+              currentY += parent.height || 400;
+
+              // 如果不是最后一个元素，添加间距
+              if (index < allParents.length - 1) {
+                currentY += verticalSpacing;
+              }
+            }
+          });
+
+          // 特别处理noneCenter，让它向上偏移自身高度的一半+边距
+          if (noneCenter) {
+            const offset = verticalSpacing / 2;
+            noneCenter.y -= offset;
+
+            // 同时调整上方和下方的combo，避免重叠
+            // if (mainCenter) {
+            //   mainCenter.y -= offset / 2;
+            // }
+            // if (disasterCenter) {
+            //   disasterCenter.y += offset / 2;
+            // }
+          }
+
+          // 存储位置信息
+          this.parentComboPositions = {};
+          allParents.forEach((parent, index) => {
+            if (parent) {
+              this.parentComboPositions[parent.id] = {
+                x: parent.x,
+                y: parent.y,
+                width: parent.width,
+                height: parent.height,
+              };
+            }
+          });
+        }
+      }
 
       // 处理每个父 combo 内的子 combo 布局
       parentCombos.forEach((parent) => {
@@ -308,53 +556,177 @@ export default {
           (c) => c.parentId === parent.id && c.type === "custom-combo"
         );
 
-        // 找到子combo中的最大尺寸作为基准
-        let maxWidth = 0;
-        let maxHeight = 0;
-        children.forEach((child) => {
-          maxWidth = Math.max(maxWidth, child.width || 250);
-          maxHeight = Math.max(maxHeight, child.height || 150);
-        });
+        // 特别处理mainCenter：水平从左到右排列
+        if (parent.id === "mainCenter") {
+          const titleHeight = 50;
+          // 计算垂直居中位置（考虑标题区域）
+          const centerY =
+            parent.y + titleHeight + (parent.height - titleHeight * 2) / 2;
 
-        children.forEach((child, index) => {
-          const col = index % maxPerRow;
-          const row = Math.floor(index / maxPerRow);
+          // 从父容器的左侧内边距开始计算
+          let currentX = parent.x + spacing;
 
-          // 子 combo 相对于父 combo 的偏移
-          child.x = parent.x + spacing + col * (maxWidth + spacing);
-          child.y =
-            parent.y + titleHeight + spacing + row * (maxHeight + spacing);
-        });
+          children.forEach((child, index) => {
+            // 特别处理应用集群C，让它向左偏移
+            let offsetX = 0;
+            if (child.id === "C") {
+              offsetX = -(child.width / 2) - spacing / 2; // 应用集群C向左偏移
+            }
+            // 水平排列，垂直居中（考虑标题区域）
+            child.x = currentX + offsetX;
+            child.y = centerY - (child.height || 150) / 2;
+
+            // 使用实际计算的宽度，如果没有则使用默认值
+            const childWidth = child.width || 250;
+            // 更新下一个元素的X位置，加上当前元素宽度和间距
+            currentX += childWidth + spacing;
+          });
+        } else {
+          // 特别处理noneCenter和disasterCenter，当只有一个子combo时，让其居中显示
+          if (
+            children.length === 1 &&
+            (parent.id === "noneCenter" || parent.id === "disasterCenter")
+          ) {
+            const child = children[0];
+            // 让子combo在父容器中居中显示
+            child.x = parent.x + (parent.width - (child.width || 250)) / 2;
+            child.y = parent.y + (parent.height - (child.height || 150)) / 2;
+          } else {
+            // 其他父combo保持原有布局逻辑
+            // 找到子combo中的最大尺寸作为基准
+            let maxWidth = 0;
+            let maxHeight = 0;
+            children.forEach((child) => {
+              maxWidth = Math.max(maxWidth, child.width || 250);
+              maxHeight = Math.max(maxHeight, child.height || 150);
+            });
+
+            children.forEach((child, index) => {
+              const col = index % maxPerRow;
+              const row = Math.floor(index / maxPerRow);
+
+              // 子 combo 相对于父 combo 的偏移（考虑标题区域）
+              child.x = parent.x + spacing + col * (maxWidth + spacing);
+              child.y =
+                parent.y +
+                titleHeight * 2 +
+                spacing +
+                row * (maxHeight + spacing);
+            });
+          }
+        }
       });
     },
+
     convertToGraphData(rawData) {
       if (!rawData || !rawData.nodes) {
         return { nodes: [], edges: [], combos: [] };
       }
 
       // 转换节点数据
-      const nodes = rawData.nodes.map((node) => ({
-        id: node.key,
-        label: node.text,
-        type: "custom-node",
-        draggable: true,
-        status: node.status,
-        source: node.source,
-        detail: node.detail,
-        comboId: node.combo,
-        x: 0,
-        y: 0,
-      }));
+      const nodes = rawData.nodes.map((node) => {
+        // 查找节点所属的combo
+        const combo = rawData.combos.find((c) => c.id === node.combo);
+        let isInDisasterCenter = false;
+
+        // 检查节点的combo是否属于disasterCenter
+        if (combo && combo.parentId === "disasterCenter") {
+          isInDisasterCenter = true;
+        }
+
+        return {
+          id: node.key,
+          label: node.text,
+          type: "custom-node",
+          draggable: true,
+          status: node.status,
+          source: node.source,
+          detail: node.detail,
+          comboId: node.combo,
+          x: 0,
+          y: 0,
+          // 添加额外属性用于标识是否在disasterCenter中
+          isInDisasterCenter: isInDisasterCenter,
+        };
+      });
 
       // 转换边数据
       let edges = [];
       if (rawData.edges && Array.isArray(rawData.edges)) {
-        edges = rawData.edges.map((edge) => ({
-          source: edge.source,
-          target: edge.target,
-          type: "orthogonal-edge",
-          status: edge.status,
-        }));
+        edges = rawData.edges.map((edge) => {
+          const newEdge = {
+            source: edge.source,
+            target: edge.target,
+            detailValue: edge.detailValue || [],
+            hoverValue: edge.hoverValue || [],
+            type: "orthogonal-edge",
+            status: edge.status,
+            name: edge.name || `${edge.source} → ${edge.target}`, // 添加 name 字段，默认值
+          };
+
+          // 定义锚点映射关系表（基于实际的锚点索引）
+          const anchorMap = {
+            // 负载均衡到主中心: 负载均衡的下1锚点(索引0)到主中心的上1锚点(索引0)
+            "loadBalancer->mainCenter": { sourceAnchor: 0, targetAnchor: 0 },
+            // 主中心到负载均衡: 主中心的上2锚点(索引1)到负载均衡的下2锚点(索引1)
+            "mainCenter->loadBalancer": { sourceAnchor: 1, targetAnchor: 1 },
+            // 负载均衡到灾备中心: 负载均衡的下4锚点(索引3)到灾备中心的上2锚点(索引1)
+            "loadBalancer->disasterCenter": {
+              sourceAnchor: 3,
+              targetAnchor: 1,
+            },
+            // 灾备中心到负载均衡: 灾备中心的上1锚点(索引0)到负载均衡的下3锚点(索引2)
+            "disasterCenter->loadBalancer": {
+              sourceAnchor: 0,
+              targetAnchor: 2,
+            },
+            "A->G": {
+              sourceAnchor: 2,
+              targetAnchor: 5,
+            },
+            "G->A": {
+              sourceAnchor: 4,
+              targetAnchor: 3,
+            },
+          };
+          // 特殊处理A和G之间的连接
+          if (edge.source === "A" && edge.target === "G") {
+            newEdge.sourceAnchor = 2; // A的下侧第一个锚点
+            newEdge.targetAnchor = 5; // G的上侧第一个锚点
+          } else if (edge.source === "G" && edge.target === "A") {
+            newEdge.sourceAnchor = 4; // G的上侧第二个锚点
+            newEdge.targetAnchor = 3; // A的下侧第二个锚点
+          } else {
+            // 构造当前边的标识符用于查找映射
+            const sourceType = edge.source.includes("loadBalancer")
+              ? "loadBalancer"
+              : edge.source.includes("mainCenter")
+              ? "mainCenter"
+              : edge.source.includes("disasterCenter")
+              ? "disasterCenter"
+              : "other";
+
+            const targetType = edge.target.includes("loadBalancer")
+              ? "loadBalancer"
+              : edge.target.includes("mainCenter")
+              ? "mainCenter"
+              : edge.target.includes("disasterCenter")
+              ? "disasterCenter"
+              : "other";
+
+            const key = `${sourceType}->${targetType}`;
+
+            // 应用对应的锚点配置
+            if (anchorMap[key]) {
+              newEdge.sourceAnchor = anchorMap[key].sourceAnchor;
+              newEdge.targetAnchor = anchorMap[key].targetAnchor;
+            } else {
+              // 可选：打印日志或设置默认锚点以防止意外情况
+              console.warn(`未找到对应锚点配置: ${key}`);
+            }
+          }
+          return newEdge;
+        });
       }
 
       // 转换普通 combo（集群）
@@ -362,7 +734,7 @@ export default {
       if (rawData.combos && Array.isArray(rawData.combos)) {
         combos = rawData.combos.map((combo) => ({
           id: combo.id,
-          label: `应用集群 ${combo.id}`,
+          label: combo.name,
           type: "custom-combo",
           comboStatus: combo.status,
           x: 0,
@@ -377,9 +749,10 @@ export default {
             id: parentCombo.id,
             label: parentCombo.name,
             type: "custom-parent-combo",
-            comboStatus: "正常",
+            comboStatus: parentCombo.status,
             x: 0,
             y: 0,
+            status:  parentCombo.status,
             // width: 800, // 设置足够宽度
             // height: 400, // 设置足够高度
           });
@@ -388,7 +761,11 @@ export default {
 
       // 设置父子关系：让每个 combo 的 parentId 成为其父 combo
       combos.forEach((combo) => {
-        if (combo.id === "main-center" || combo.id === "disaster-center") {
+        if (
+          combo.id === "mainCenter" ||
+          combo.id === "noneCenter" ||
+          combo.id === "disasterCenter"
+        ) {
           return;
         }
         // 查找该 combo 的 parentId
@@ -416,6 +793,7 @@ export default {
             this.$refs.ringChart.clientWidth,
             this.$refs.ringChart.clientHeight
           );
+          this.reverseScale();
         });
       }
     },
@@ -448,6 +826,8 @@ export default {
 
       this.graph.get("group").setMatrix(newTransform);
       this.graph.refresh();
+      // 重新应用反缩放
+      this.reverseScale();
     },
     /**
      * 创建或更新提示框
@@ -579,7 +959,7 @@ export default {
         if (!combo) return; // 防止 undefined
 
         const comboId = combo.get("id");
-        if (comboId === "main-center" || comboId === "disaster-center") {
+        if (comboId === "mainCenter" || comboId === "disasterCenter") {
           return;
         }
 
@@ -651,7 +1031,101 @@ export default {
             this.tooltipElement.style.display = "none";
           }
         });
+      // 边鼠标点击事件
+      this.graph.on("edge:click", (evt) => {
+        const edge = evt.item;
+        const edgeModel = edge.getModel();
 
+        // 设置选中边的标签
+        this.selectedNodeLabel =
+          edgeModel.name || `${edgeModel.source} → ${edgeModel.target}`;
+
+        // 构造边的详情数据
+        const edgeDetailItems = [];
+        if (edgeModel.detailValue && edgeModel.detailValue.length > 0) {
+          edgeDetailItems.push({
+            name: "连接详情",
+            values: edgeModel.detailValue,
+          });
+        } else {
+          edgeDetailItems.push({
+            name: "连接详情",
+            stats: [
+              { name: "源节点", value: edgeModel.source },
+              { name: "目标节点", value: edgeModel.target },
+              {
+                name: "状态",
+                value: edgeModel.status === "normal" ? "正常" : "异常",
+              },
+            ],
+          });
+        }
+
+        this.detailItems = edgeDetailItems;
+        this.showType = "combo";
+        this.showDetailPanel = true;
+        this.$nextTick(() => {
+          if (this.graph) {
+            this.resizeGraphAndKeepView(
+              this.$refs.component.clientWidth * 0.75,
+              this.$refs.component.clientHeight
+            );
+          }
+        });
+      });
+      //线鼠标悬浮事件
+      this.graph.on("edge:mouseenter", (evt) => {
+        const edge = evt.item;
+        const edgeModel = edge.getModel();
+
+        // 构建提示内容
+        let tooltipContent = `<div class="node-tooltip"><div class="tooltip-content">`;
+
+        // 添加节点详情信息
+        if (edgeModel.hoverValue && edgeModel.hoverValue.length > 0) {
+          edgeModel.hoverValue.forEach((detail) => {
+            tooltipContent += `<div class="tooltip-item" style="padding: 5px 0 !important;">
+                              <span class="item-name">${detail.name}:</span>
+                              <span class="item-value"> ${detail.value}</span>
+                              </div>`;
+          });
+        } else {
+          tooltipContent += `<div class="tooltip-item">暂无详细信息</div>`;
+        }
+
+        tooltipContent += `</div></div>`;
+
+        // 创建提示框元素
+        if (!this.edgeTooltipElement) {
+          this.edgeTooltipElement = document.createElement("div");
+          this.edgeTooltipElement.className = "g6-node-tooltip";
+          this.edgeTooltipElement.style.position = "absolute";
+          this.edgeTooltipElement.style.backgroundColor = "#111B30";
+          this.edgeTooltipElement.style.color = "#fff";
+          this.edgeTooltipElement.style.padding = "10px";
+          this.edgeTooltipElement.style.borderRadius = "4px";
+          this.edgeTooltipElement.style.fontSize = "12px";
+          this.edgeTooltipElement.style.zIndex = "999";
+          this.edgeTooltipElement.style.boxShadow =
+            "0 2px 6px rgba(0, 0, 0, 0.3)";
+          this.edgeTooltipElement.style.pointerEvents = "none";
+          document.body.appendChild(this.edgeTooltipElement);
+        }
+
+        this.edgeTooltipElement.innerHTML = tooltipContent;
+        // 设置提示框位置为鼠标右侧
+        this.edgeTooltipElement.style.left = evt.canvasX + "px";
+        this.edgeTooltipElement.style.top = evt.canvasY + "px";
+        this.edgeTooltipElement.style.transform = "translate(80px, 0)";
+
+        this.edgeTooltipElement.style.display = "block";
+      }),
+        // 边鼠标移出事件
+        this.graph.on("edge:mouseleave", (evt) => {
+          if (this.edgeTooltipElement) {
+            this.edgeTooltipElement.style.display = "none";
+          }
+        });
       // 添加画布点击事件（点击空白处）
       this.graph.on("canvas:click", (evt) => {
         this.closeDetailPanel();
@@ -705,18 +1179,8 @@ export default {
             // 根据新的数据结构提取信息
             return {
               name: detail.name || "未知项",
-              successRate:
-                detail.values && detail.values.length > 0
-                  ? detail.values[0].value || "0%"
-                  : "0%",
-              responseRate:
-                detail.values && detail.values.length > 1
-                  ? detail.values[1].value || "0%"
-                  : "0%",
-              p99Time:
-                detail.values && detail.values.length > 2
-                  ? detail.values[2].value || "0ms"
-                  : "0ms",
+
+              values: detail.values || [],
             };
           });
         });
@@ -753,68 +1217,145 @@ export default {
           const source = item.source || item.key; // 使用 source 或 key 作为唯一标识
           const listdetail = item.listdetail || [];
 
-          // 构建详情项
+          // 构建详情项，按新的三层结构组织
           detailData[source] = [
             {
-              type: "base",
-              title: "基础层指标",
-              items: [
-                {
-                  label: "主机状态",
-                  value: item.status === "在线" ? "🟢 在线" : "🔴 离线",
-                },
-                { label: "CPU型号", value: "IntelXeonE5-2676v3" },
-                { label: "磁盘总量", value: "500GB" },
-                { label: "操作系统", value: "Linux5.4.0-42-gen..." },
-                { label: "内存总量", value: "16GB" },
-                { label: "网络带宽", value: "1Gbps" },
-                { label: "系统错误日志信息", value: "oarm kill: 0" },
-              ],
-            },
-            {
               type: "system",
-              title: "系统层指标",
-              items:
-                listdetail[0]?.systemMetrics?.map((v) => ({
-                  label: v.name,
-                  value: v.value,
-                })) || [],
+              title: "系统资源层",
+              items: listdetail[0]?.systemResourceLayer || [],
             },
             {
-              type: "app",
-              title: "应用层指标",
-              items:
-                listdetail[0]?.appMetrics?.map((v) => ({
-                  label: v.name,
-                  value: v.value,
-                })) || [],
+              type: "application",
+              title: "应用软件层",
+              items: listdetail[0]?.applicationSoftwareLayer || [],
             },
             {
               type: "business",
-              title: "业务层指标",
-              items:
-                listdetail[0]?.businessMetrics?.map((v) => ({
-                  label: v.name,
-                  value: v.value,
-                })) || [],
+              title: "业务服务层",
+              items: listdetail[0]?.businessServiceLayer || [],
             },
             {
-              type: "operations",
+              type: "operation",
               title: "操作列表",
-              items:
-                listdetail[0]?.operations?.map((v) => ({
-                  label: v.name,
-                  value: v.value,
-                })) || [],
+              items: listdetail[0]?.operationList || [],
             },
           ];
         });
       }
-      console.log("detailData:", detailData);
 
       return detailData;
     },
+    /**
+     * 根据指标值获取数值颜色
+     * @param {String} value - 指标值
+     * @param {String} label - 指标名称
+     * @returns {String} 颜色值
+     */
+    getValueColor(value, label) {
+      // 如果数据中已经定义了颜色，优先使用
+      if (arguments.length > 2 && arguments[2]) {
+        return arguments[2]; // 第三个参数是color
+      }
 
+      // 移除单位，只保留数字部分进行比较
+      let numericValue = parseFloat(value);
+
+      // 特殊处理百分比字符串，如"20%"
+      if (typeof value === "string" && value.includes("%")) {
+        numericValue = parseFloat(value.replace("%", ""));
+      }
+
+      // 对于状态类文本，根据内容判断颜色
+      if (typeof value === "string") {
+        if (
+          value.includes("🟢") ||
+          value.includes("正常") ||
+          value.includes("在线")
+        ) {
+          return "#61bd4f"; // 绿色（枚举字段）
+        } else if (
+          value.includes("🔴") ||
+          value.includes("异常") ||
+          value.includes("离线") ||
+          value.includes("危险")
+        ) {
+          return "#ff4d4f"; // 红色（危险）
+        } else if (value.includes("🟡") || value.includes("警告")) {
+          return "#ffc53d"; // 黄色（警告）
+        } else if (value.includes("🟠") || value.includes("严重")) {
+          return "#ffa940"; // 橙色（严重警告）
+        } else if (
+          value.includes("运行中") ||
+          value.includes("已连接") ||
+          value.includes("启用") ||
+          value.includes("开启")
+        ) {
+          return "#61bd4f"; // 绿色（枚举字段）
+        }
+      }
+
+      // 如果不是数字，且不是特殊状态文本，根据字段类型判断
+      if (isNaN(numericValue)) {
+        // 判断是否为枚举字段（状态类字段）
+        if (
+          label.includes("状态") ||
+          label.includes("进程") ||
+          label.includes("采集器") ||
+          label.includes("时间")
+        ) {
+          return "#61bd4f"; // 绿色（枚举字段）
+        }
+        return "#ffffff"; // 白色（默认）
+      }
+
+      // 对于数值类型，根据指标名称和数值判断状态颜色
+      if (
+        label.includes("CPU使用率") ||
+        label.includes("内存使用率") ||
+        label.includes("磁盘使用率")
+      ) {
+        if (numericValue < 70) {
+          return "#ffffff"; // 白色（正常）
+        } else if (numericValue < 80) {
+          return "#ffc53d"; // 黄色（警告）
+        } else if (numericValue < 90) {
+          return "#ffa940"; // 橙色（严重警告）
+        } else {
+          return "#ff4d4f"; // 红色（危险）
+        }
+      }
+
+      if (label.includes("成功率") || label.includes("响应率")) {
+        if (numericValue > 99) {
+          return "#ffffff"; // 白色（正常）
+        } else if (numericValue > 95) {
+          return "#ffc53d"; // 黄色（警告）
+        } else if (numericValue > 90) {
+          return "#ffa940"; // 橙色（严重警告）
+        } else {
+          return "#ff4d4f"; // 红色（危险）
+        }
+      }
+
+      if (
+        label.includes("错误") ||
+        label.includes("失败") ||
+        label.includes("丢包")
+      ) {
+        if (numericValue === 0) {
+          return "#ffffff"; // 白色（正常）
+        } else if (numericValue <= 5) {
+          return "#ffc53d"; // 黄色（警告）
+        } else if (numericValue <= 10) {
+          return "#ffa940"; // 橙色（严重警告）
+        } else {
+          return "#ff4d4f"; // 红色（危险）
+        }
+      }
+
+      // 默认返回白色（数值类型）
+      return "#ffffff";
+    },
     /** 组件配置项变更时触发 */
     setStyle(k, v) {
       const keyList = k.split("$");
@@ -835,6 +1376,7 @@ export default {
 
       if (this.graph) {
         this.graph.changeData(graphData);
+        this.graph.fitView([100, 100, 100, 100]);
       } else {
         this.initGraph(); // 确保 graph 已创建
       }
@@ -881,7 +1423,7 @@ export default {
     .right-panel {
       flex: 0 0 20%; // 不放大不缩小，基础宽度 20%
       min-width: 300px; // 设置最小宽度防止过小
-      // height: calc(100% - 100px);
+      height: calc(100% - 100px);
       background-color: #111d30;
       //   border-left: 1px solid #333;
       position: relative;
@@ -1038,7 +1580,7 @@ export default {
             .section-item {
               display: flex;
               justify-content: space-between;
-              padding: 8px 0;
+              padding: 5px 0;
 
               &:last-child {
                 border-bottom: none;
@@ -1046,7 +1588,7 @@ export default {
 
               .item-label {
                 font-size: 12px;
-                color: #ccc;
+                color: #fff;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -1070,119 +1612,6 @@ export default {
             }
           }
         }
-      }
-    }
-  }
-}
-.left-panel {
-  flex: 0 0 15%; // 不放大不缩小，基础宽度 15%
-  min-width: 100px; // 设置最小宽度防止过小
-  background-color: #000;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center; // 垂直居中
-  justify-content: center; // 水平居中（如果需要）
-
-  .tab-content {
-    width: 80%;
-    box-sizing: border-box;
-    padding: 10px 0;
-    display: flex;
-    flex-direction: column;
-
-    // 垂直居中关键：使用 margin auto
-    margin: auto 0;
-
-    .tab-item {
-      height: 60px;
-      // 设置从左到右的浅蓝色到透明的渐变背景
-      background: linear-gradient(
-        90deg,
-        rgba(95, 199, 255, 0.2) 0%,
-        rgba(95, 199, 255, 0) 100%
-      );
-      margin: 5px 10px 5px 10px;
-      //   border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 15px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      position: relative;
-
-      &:hover {
-        background-color: rgba(68, 68, 68, 0.7);
-      }
-
-      &.active {
-        // background-image: url('./assets/img/tabbg.png');
-
-        background: 
-        // linear-gradient(
-        //   90deg,
-        //   rgba(95, 199, 255, 0.3) 0%,
-        //   rgba(95, 199, 255, 0.1) 100%
-        // ),
-          url("./assets/img/tabbg.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-
-        // 选中时添加上边框渐变
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 2px;
-          // 从左到右逐渐消失的渐变边框
-          background: linear-gradient(
-            90deg,
-            #5fc7ff 0%,
-            rgba(95, 199, 255, 0) 100%
-          );
-        }
-
-        // 选中时添加下边框渐变
-        &::after {
-          content: "";
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 2px;
-          // 从左到右逐渐消失的渐变边框
-          background: linear-gradient(
-            90deg,
-            #5fc7ff 0%,
-            rgba(95, 199, 255, 0) 100%
-          );
-        }
-
-        // 选中时添加左边框（纯色）
-        border-left: 2px solid #5fc7ff;
-        // 调整border-radius以适应左边框
-        border-radius: 0 4px 4px 0;
-
-        .tab-label {
-          color: #5fc7ff;
-        }
-      }
-
-      .tab-label {
-        color: #fff;
-        font-size: 14px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .arrow-icon {
-        width: 28px;
-        height: 28px;
-        flex-shrink: 0;
       }
     }
   }
