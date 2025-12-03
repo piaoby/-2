@@ -23,7 +23,6 @@ export default {
             text: "负载均衡",
             status: "normal",
             combo: "",
-            source: "负载均衡器",
             detail: [
               {
                 name: "负载均衡利用",
@@ -40,7 +39,6 @@ export default {
             text: "DB集群1",
             status: "normal",
             combo: "G",
-            source: "DB集群1",
             detail: [
               {
                 name: "DB集群CPU利用率",
@@ -57,7 +55,6 @@ export default {
             text: "DB集群2",
             status: "normal",
             combo: "G",
-            source: "DB集群2",
             detail: [
               {
                 name: "DB集群CPU利用率",
@@ -74,7 +71,6 @@ export default {
             text: "DB集群3",
             status: "normal",
             combo: "G",
-            source: "DB集群3",
             detail: [
               {
                 name: "DB集群CPU利用率",
@@ -91,7 +87,7 @@ export default {
             text: "73集群",
             status: "normal",
             combo: "A",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -102,13 +98,143 @@ export default {
                 value: "45%",
               },
             ],
+            listdetail: {
+              name: "73集群详情",
+              Alerts: "0",
+              url: "http://73-cluster.com",
+              status: "normal",
+              systemResourceLayer: [
+                {
+                  label: "主机状态",
+                  value: " 在线",
+                  level: "0", //告警等级 0-3 分别对应0-3级告警
+                  type: "enum", //枚举
+                },
+                {
+                  label: "主机运行时间",
+                  value: "120天",
+                  level: "0",
+                  type: "numeric", //数值
+                },
+                {
+                  label: "CPU数量",
+                  value: "8核",
+                  level: "0",
+                  type: "numeric",
+                },
+                {
+                  label: "内存总量",
+                  value: "32GB",
+                  level: "0",
+                  type: "numeric",
+                },
+                {
+                  label: "磁盘总量",
+                  value: "1TB",
+                  level: "0",
+                  type: "numeric",
+                },
+                {
+                  label: "网络带宽",
+                  value: "1Gbps",
+                  level: "0",
+                  type: "numeric",
+                },
+                {
+                  label: "CPU使用率",
+                  value: "20%",
+                  level: "0",
+                  type: "numeric",
+                },
+                {
+                  label: "内存使用率",
+                  value: "45%",
+                  level: "0",
+                  type: "numeric",
+                },
+                {
+                  label: "磁盘使用率",
+                  value: "35%",
+                  level: "0",
+                  type: "numeric",
+                },
+                {
+                  label: "僵尸进程数量",
+                  value: "0",
+                  level: "0",
+                  type: "numeric",
+                },
+                {
+                  label: "监控采集器状态",
+                  value: " normal",
+                  level: "0",
+                  type: "enum",
+                },
+                {
+                  label: "磁盘IO",
+                  value: "15%",
+                  level: "0",
+                  type: "numeric",
+                },
+                {
+                  label: "平均负载",
+                  value: "1.2",
+                  level: "0",
+                  type: "numeric",
+                },
+              ],
+              applicationSoftwareLayer: [
+                {
+                  label: "osb_server4进程状态",
+                  value: " 运行中",
+                  level: "0",
+                  type: "enum",
+                },
+                {
+                  label: "SYN_SEND总数",
+                  value: "120",
+                  level: "0",
+                  type: "numeric",
+                },
+                {
+                  label: "SYN_RECV总数",
+                  value: "85",
+                  level: "0",
+                  type: "numeric",
+                },
+                {
+                  label: "SOCKET使用量",
+                  value: "420",
+                  level: "0",
+                  type: "numeric",
+                },
+                {
+                  label: "监听端口请求量",
+                  value: "2450",
+                  level: "0",
+                  type: "numeric",
+                },
+                {
+                  label: "网络接口丢包率",
+                  value: "0.01%",
+                  level: "0",
+                  type: "numeric",
+                },
+                {
+                  label: "僵尸进程数量",
+                  value: "0",
+                  level: "0",
+                  type: "numeric",
+                },
+              ],
+            },
           },
           {
             key: "node2",
             text: "73集群-节点2",
             status: "normal",
             combo: "A",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -125,7 +251,7 @@ export default {
             text: "73集群-节点3",
             status: "normal",
             combo: "A",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -143,7 +269,7 @@ export default {
             text: "90集群",
             status: "normal",
             combo: "B",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -160,7 +286,7 @@ export default {
             text: "90集群-节点2",
             status: "normal",
             combo: "B",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -177,7 +303,7 @@ export default {
             text: "90集群-节点3",
             status: "normal",
             combo: "B",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -194,7 +320,7 @@ export default {
             text: "90集群-节点4",
             status: "normal",
             combo: "B",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -212,7 +338,7 @@ export default {
             text: "100集群",
             status: "normal",
             combo: "C",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -230,7 +356,7 @@ export default {
             text: "116集群",
             status: "normal",
             combo: "D",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -247,7 +373,7 @@ export default {
             text: "116集群-节点2",
             status: "normal",
             combo: "D",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -264,7 +390,7 @@ export default {
             text: "116集群-节点3",
             status: "normal",
             combo: "D",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -281,7 +407,7 @@ export default {
             text: "116集群-节点4",
             status: "normal",
             combo: "D",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -299,7 +425,7 @@ export default {
             text: "141集群",
             status: "normal",
             combo: "E",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -316,7 +442,7 @@ export default {
             text: "141集群-节点2",
             status: "normal",
             combo: "E",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -333,7 +459,7 @@ export default {
             text: "141集群-节点3",
             status: "normal",
             combo: "E",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -350,7 +476,7 @@ export default {
             text: "141集群-节点4",
             status: "normal",
             combo: "E",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -368,7 +494,7 @@ export default {
             text: "160集群",
             status: "idle",
             combo: "F",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -385,7 +511,7 @@ export default {
             text: "160集群-节点2",
             status: "idle",
             combo: "F",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -402,7 +528,7 @@ export default {
             text: "160集群-节点3",
             status: "idle",
             combo: "F",
-            source: "模块.svg",
+
             detail: [
               {
                 name: "CPU利用率",
@@ -415,100 +541,88 @@ export default {
             ],
           },
         ],
-        // edges: [
-        //   {
-        //     source: "loadBalancer", // 负载均衡器节点
-        //     target: "mainCenter", // 主中心
-        //     status: "normal",
-        //     name: "负载均衡器至主中心",
-        //     detailValue: [
-        //       { name: "带宽使用率", value: "45%" },
-        //       { name: "延迟", value: "2ms" },
-        //       { name: "丢包率", value: "0%" },
-        //     ],
-        //     hoverValue: [
-        //       { name: "带宽使用率", value: "45%" },
-        //       { name: "延迟", value: "2ms" },
-        //       { name: "丢包率", value: "0%" },
-        //     ],
-        //   },
-        //   {
-        //     source: "mainCenter", // 主中心
-        //     target: "loadBalancer", // 负载均衡器节点
-        //     status: "warning",
-        //     name: "主中心至负载均衡器",
-        //     detailValue: [
-        //       { name: "带宽使用率", value: "32%" },
-        //       { name: "延迟", value: "2ms" },
-        //       { name: "丢包率", value: "0%" },
-        //     ],
-        //   },
-        //   // 负载均衡器到灾备中心的双向连接
-        //   {
-        //     source: "loadBalancer", // 负载均衡器节点
-        //     target: "disasterCenter", // 灾备中心
-        //     status: "normal",
-        //     name: "负载均衡器至灾备中心",
-        //     detailValue: [
-        //       { name: "带宽使用率", value: "45%" },
-        //       { name: "延迟", value: "2ms" },
-        //       { name: "丢包率", value: "0%" },
-        //     ],
-        //     hoverValue: [
-        //       { name: "带宽使用率", value: "45%" },
-        //       { name: "延迟", value: "2ms" },
-        //       { name: "丢包率", value: "0%" },
-        //     ],
-        //   },
-        //   {
-        //     source: "disasterCenter", // 灾备中心
-        //     target: "loadBalancer", // 负载均衡器节点
-        //     status: "normal",
-        //     name: "灾备中心至 负载均衡器",
-        //     detailValue: [
-        //       { name: "带宽使用率", value: "45%" },
-        //       { name: "延迟", value: "2ms" },
-        //       { name: "丢包率", value: "0%" },
-        //     ],
-        //     hoverValue: [
-        //       { name: "带宽使用率", value: "45%" },
-        //       { name: "延迟", value: "2ms" },
-        //       { name: "丢包率", value: "0%" },
-        //     ],
-        //   },
-        //   {
-        //     source: "A", // 应用集群A
-        //     target: "G", // DB集群
-        //     status: "normal",
-        //     name: "应用集群A至DB集群",
-        //     detailValue: [
-        //       { name: "带宽使用率", value: "35%" },
-        //       { name: "延迟", value: "3ms" },
-        //       { name: "丢包率", value: "0%" },
-        //     ],
-        //     hoverValue: [
-        //       { name: "带宽使用率", value: "35%" },
-        //       { name: "延迟", value: "3ms" },
-        //       { name: "丢包率", value: "0%" },
-        //     ],
-        //   },
-        //   {
-        //     source: "G",
-        //     target: "A",
-        //     status: "normal",
-        //     name: "DB集群至应用集群A",
-        //     detailValue: [
-        //       { name: "带宽使用率", value: "35%" },
-        //       { name: "延迟", value: "3ms" },
-        //       { name: "丢包率", value: "0%" },
-        //     ],
-        //     hoverValue: [
-        //       { name: "带宽使用率", value: "35%" },
-        //       { name: "延迟", value: "3ms" },
-        //       { name: "丢包率", value: "0%" },
-        //     ],
-        //   },
-        // ],
+        edges: [
+          {
+            source: "loadBalancer", // 负载均衡器节点
+            target: "mainCenter", // 主中心
+            status: "normal",
+            name: "负载均衡器至主中心",
+            detailValue: [
+              { name: "带宽使用率", value: "45%" },
+              { name: "延迟", value: "2ms" },
+              { name: "丢包率", value: "0%" },
+            ],
+            hoverValue: [
+              { name: "带宽使用率", value: "45%" },
+              { name: "延迟", value: "2ms" },
+              { name: "丢包率", value: "0%" },
+            ],
+          },
+          {
+            source: "loadBalancer", // 负载均衡器节点
+            target: "noneCenter", //
+            status: "normal",
+            name: "负载均衡器至集群",
+            detailValue: [
+              { name: "带宽使用率", value: "45%" },
+              { name: "延迟", value: "2ms" },
+              { name: "丢包率", value: "0%" },
+            ],
+            hoverValue: [
+              { name: "带宽使用率", value: "45%" },
+              { name: "延迟", value: "2ms" },
+              { name: "丢包率", value: "0%" },
+            ],
+          },
+          {
+            source: "loadBalancer", // 负载均衡器节点
+            target: "disasterCenter", // 灾备中心
+            status: "normal",
+            name: "负载均衡器至灾备中心",
+            detailValue: [
+              { name: "带宽使用率", value: "45%" },
+              { name: "延迟", value: "2ms" },
+              { name: "丢包率", value: "0%" },
+            ],
+            hoverValue: [
+              { name: "带宽使用率", value: "45%" },
+              { name: "延迟", value: "2ms" },
+              { name: "丢包率", value: "0%" },
+            ],
+          },
+          {
+            source: "node2", // 负载均衡器节点
+            target: "node0-1", // 灾备中心
+            status: "normal",
+            name: "负载均衡器至灾备中心",
+            detailValue: [
+              { name: "带宽使用率", value: "45%" },
+              { name: "延迟", value: "2ms" },
+              { name: "丢包率", value: "0%" },
+            ],
+            hoverValue: [
+              { name: "带宽使用率", value: "45%" },
+              { name: "延迟", value: "2ms" },
+              { name: "丢包率", value: "0%" },
+            ],
+          },
+          {
+            source: "node2", // 负载均衡器节点
+            target: "node0-2", // 灾备中心
+            status: "normal",
+            name: "负载均衡器至灾备中心",
+            detailValue: [
+              { name: "带宽使用率", value: "45%" },
+              { name: "延迟", value: "2ms" },
+              { name: "丢包率", value: "0%" },
+            ],
+            hoverValue: [
+              { name: "带宽使用率", value: "45%" },
+              { name: "延迟", value: "2ms" },
+              { name: "丢包率", value: "0%" },
+            ],
+          },
+        ],
         combos: [
           {
             id: "A",
@@ -553,578 +667,145 @@ export default {
             status: "normal",
           },
         ],
-        // 节点详情数据
-        nodeList: [
-          {
-            source: "node1",
-            listdetail: [
-              {
-                name: "73集群详情",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "normal",
-                systemResourceLayer: [
-                  {
-                    label: "主机状态",
-                    value: "🟢 在线",
-                    trend: "up",
-                  },
-                  {
-                    label: "主机运行时间",
-                    value: "120天",
-                    trend: "flat",
-                  },
-                  {
-                    label: "CPU数量",
-                    value: "8核",
-                    trend: "flat",
-                  },
-                  {
-                    label: "内存总量",
-                    value: "32GB",
-                    trend: "flat",
-                  },
-                  {
-                    label: "磁盘总量",
-                    value: "1TB",
-                    trend: "flat",
-                  },
-                  {
-                    label: "网络带宽",
-                    value: "1Gbps",
-                    trend: "flat",
-                  },
-                  {
-                    label: "CPU使用率",
-                    value: "20%",
-                    trend: "up",
-                  },
-                  {
-                    label: "内存使用率",
-                    value: "45%",
-                    trend: "up",
-                  },
-                  {
-                    label: "磁盘使用率",
-                    value: "35%",
-                    trend: "down",
-                  },
-                  {
-                    label: "僵尸进程数量",
-                    value: "0",
-                    trend: "flat",
-                  },
-                  {
-                    label: "监控采集器状态",
-                    value: "🟢 normal",
-                    trend: "flat",
-                  },
-                  {
-                    label: "磁盘IO",
-                    value: "15%",
-                    trend: "up",
-                  },
-                  {
-                    label: "平均负载",
-                    value: "1.2",
-                    trend: "up",
-                  },
-                ],
-                applicationSoftwareLayer: [
-                  {
-                    label: "osb_server4进程状态",
-                    value: "🟢 运行中",
-                    trend: "flat",
-                  },
-                  {
-                    label: "SYN_SEND总数",
-                    value: "120",
-                    trend: "up",
-                  },
-                  {
-                    label: "SYN_RECV总数",
-                    value: "85",
-                    trend: "up",
-                  },
-                  {
-                    label: "SOCKET使用量",
-                    value: "420",
-                    trend: "up",
-                  },
-                  {
-                    label: "监听端口请求量",
-                    value: "2450",
-                    trend: "up",
-                  },
-                  {
-                    label: "网络接口丢包率",
-                    value: "0.01%",
-                    trend: "down",
-                  },
-                  {
-                    label: "僵尸进程数量",
-                    value: "0",
-                    trend: "flat",
-                  },
-                ],
-                businessServiceLayer: [
-                  {
-                    label: "响应率",
-                    value: "99.9%",
-                    trend: "up",
-                  },
-                  {
-                    label: "成功率",
-                    value: "99.5%",
-                    trend: "up",
-                  },
-                  {
-                    label: "交易量阈值",
-                    value: "5000TPS",
-                    trend: "flat",
-                  },
-                  {
-                    label: "平均响应时间",
-                    value: "120ms",
-                    trend: "down",
-                  },
-                  {
-                    label: "错误请求数",
-                    value: "5",
-                    trend: "down",
-                  },
-                ],
-                operationList: [
-                  {
-                    label: "操作1",
-                    value: "三板斧应急操作",
-                  },
-                  {
-                    label: "操作2",
-                    value: "告警详情查看",
-                  },
-                ],
-              },
-            ],
-          },
-        ],
         // 组合详情数据
         comboList: [
           {
             source: "A",
-            listdetail: [
-              // 73集群节点详情
-              {
-                name: "73集群",
-                Alerts: "0",
-                url: "http://73-cluster.com",
-                status: "normal",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "35%",
-                  },
-                ],
-              },
-              {
-                name: "73集群-节点2",
-                Alerts: "1",
-                url: "http://73-node2.com",
-                status: "异常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "18%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "42%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "38%",
-                  },
-                ],
-              },
-              {
-                name: "73集群-节点3",
-                Alerts: "0",
-                url: "http://73-node3.com",
-                status: "normal",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "22%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "48%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "32%",
-                  },
-                ],
-              },
-            ],
+            listdetail: {
+              name: "应用集群A",
+              Alerts: "0",
+              url: "http://73-cluster.com",
+              status: "normal",
+              values: [
+                {
+                  name: "CPU利用率",
+                  value: "20%",
+                },
+                {
+                  name: "内存利用率",
+                  value: "45%",
+                },
+                {
+                  name: "磁盘利用率",
+                  value: "35%",
+                },
+              ],
+            },
           },
           {
             source: "B",
-            listdetail: [
-              // 90集群节点详情
-              {
-                name: "90集群",
-                Alerts: "0",
-                url: "http://90-cluster.com",
-                status: "normal",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "15%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "38%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "40%",
-                  },
-                ],
-              },
-              {
-                name: "90集群-节点2",
-                Alerts: "0",
-                url: "http://90-node2.com",
-                status: "normal",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "17%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "40%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "39%",
-                  },
-                ],
-              },
-              {
-                name: "90集群-节点3",
-                Alerts: "2",
-                url: "http://90-node3.com",
-                status: "异常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "19%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "43%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "41%",
-                  },
-                ],
-              },
-              {
-                name: "90集群-节点4",
-                Alerts: "0",
-                url: "http://90-node4.com",
-                status: "normal",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "16%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "39%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "37%",
-                  },
-                ],
-              },
-            ],
+            listdetail: {
+              name: "应用集群B",
+              Alerts: "0",
+              url: "http://90-cluster.com",
+              status: "normal",
+              values: [
+                {
+                  name: "CPU利用率",
+                  value: "15%",
+                },
+                {
+                  name: "内存利用率",
+                  value: "38%",
+                },
+                {
+                  name: "磁盘利用率",
+                  value: "40%",
+                },
+              ],
+            },
           },
           {
             source: "C",
-            listdetail: [
-              // 100集群节点详情
-              {
-                name: "100集群",
-                Alerts: "1",
-                url: "http://100-cluster.com",
-                status: "异常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "25%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "52%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "45%",
-                  },
-                ],
-              },
-            ],
+            listdetail: {
+              name: "应用集群C",
+              Alerts: "1",
+              url: "http://100-cluster.com",
+              status: "异常",
+              values: [
+                {
+                  name: "CPU利用率",
+                  value: "25%",
+                },
+                {
+                  name: "内存利用率",
+                  value: "52%",
+                },
+                {
+                  name: "磁盘利用率",
+                  value: "45%",
+                },
+              ],
+            },
           },
           {
             source: "D",
-            listdetail: [
-              // 116集群节点详情
-              {
-                name: "116集群",
-                Alerts: "0",
-                url: "http://116-cluster.com",
-                status: "normal",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "28%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "55%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "48%",
-                  },
-                ],
-              },
-              {
-                name: "116集群-节点2",
-                Alerts: "0",
-                url: "http://116-node2.com",
-                status: "normal",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "23%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "50%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "42%",
-                  },
-                ],
-              },
-              {
-                name: "116集群-节点3",
-                Alerts: "0",
-                url: "http://116-node3.com",
-                status: "normal",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "26%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "53%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "46%",
-                  },
-                ],
-              },
-              {
-                name: "116集群-节点4",
-                Alerts: "3",
-                url: "http://116-node4.com",
-                status: "异常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "24%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "51%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "44%",
-                  },
-                ],
-              },
-            ],
+            listdetail: {
+              name: "应用集群D",
+              Alerts: "0",
+              url: "http://116-cluster.com",
+              status: "normal",
+              values: [
+                {
+                  name: "CPU利用率",
+                  value: "28%",
+                },
+                {
+                  name: "内存利用率",
+                  value: "55%",
+                },
+                {
+                  name: "磁盘利用率",
+                  value: "48%",
+                },
+              ],
+            },
           },
           {
             source: "E",
-            listdetail: [
-              // 141集群节点详情
-              {
-                name: "141集群",
-                Alerts: "0",
-                url: "http://141-cluster.com",
-                status: "normal",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "30%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "60%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "50%",
-                  },
-                ],
-              },
-              {
-                name: "141集群-节点2",
-                Alerts: "0",
-                url: "http://141-node2.com",
-                status: "normal",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "27%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "58%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "49%",
-                  },
-                ],
-              },
-              {
-                name: "141集群-节点3",
-                Alerts: "1",
-                url: "http://141-node3.com",
-                status: "异常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "29%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "59%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "51%",
-                  },
-                ],
-              },
-              {
-                name: "141集群-节点4",
-                Alerts: "0",
-                url: "http://141-node4.com",
-                status: "normal",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "28%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "57%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "47%",
-                  },
-                ],
-              },
-            ],
+            listdetail: {
+              name: "应用集群E",
+              Alerts: "0",
+              url: "http://141-cluster.com",
+              status: "normal",
+              values: [
+                {
+                  name: "CPU利用率",
+                  value: "30%",
+                },
+                {
+                  name: "内存利用率",
+                  value: "60%",
+                },
+                {
+                  name: "磁盘利用率",
+                  value: "50%",
+                },
+              ],
+            },
           },
           {
             source: "F",
-            listdetail: [
-              // 160集群节点详情
-              {
-                name: "160集群",
-                Alerts: "0",
-                url: "http://160-cluster.com",
-                status: "normal",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "22%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "45%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "38%",
-                  },
-                ],
-              },
-              {
-                name: "160集群-节点2",
-                Alerts: "2",
-                url: "http://160-node2.com",
-                status: "异常",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "20%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "42%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "36%",
-                  },
-                ],
-              },
-              {
-                name: "160集群-节点3",
-                Alerts: "0",
-                url: "http://160-node3.com",
-                status: "normal",
-                values: [
-                  {
-                    name: "CPU利用率",
-                    value: "24%",
-                  },
-                  {
-                    name: "内存利用率",
-                    value: "48%",
-                  },
-                  {
-                    name: "磁盘利用率",
-                    value: "40%",
-                  },
-                ],
-              },
-            ],
+            listdetail: {
+              name: "应用集群F",
+              Alerts: "0",
+              url: "http://160-cluster.com",
+              status: "normal",
+              values: [
+                {
+                  name: "CPU利用率",
+                  value: "22%",
+                },
+                {
+                  name: "内存利用率",
+                  value: "45%",
+                },
+                {
+                  name: "磁盘利用率",
+                  value: "38%",
+                },
+              ],
+            },
           },
         ],
         // 新增的combosParent结构
@@ -1193,7 +874,7 @@ export default {
 #com-container {
   width: 100%;
   height: 100%;
-  background-color: #0b1421;
+  // background-color: #0b1421;
   // 确保容器可以正确应用变换
   transform-origin: center center;
 }

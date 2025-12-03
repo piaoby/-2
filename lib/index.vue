@@ -8,32 +8,32 @@
       </div>
 
       <!-- 右侧 详情栏 -->
-      <div v-if="showDetailPanel" class="right-panel">
+      <div class="right-panel">
         <div class="detail-header">
           <div class="title-container">
             <img class="title-icon" src="./assets/img/Frame.png" alt="icon" />
             <span class="detail-title">{{ selectedNodeLabel }}</span>
           </div>
         </div>
+        <div class="operation-list">
+          <span class="detail-title">三板斧应急操作</span>
+          <span class="detail-title">告警详情查看</span>
+        </div>
         <!-- 替换 index.vue 模板中的 combo-detail-content 部分 -->
-        <div class="combo-detail-content" v-if="showType === 'combo'">
-          <div
-            v-for="(item, index) in detailItems"
-            :key="index"
-            class="detail-item"
-            :class="{ active: selectedItem === index }"
-            @click="selectItem(index)"
-          >
-            <div class="item-name">{{ item.name }}</div>
-            <div class="item-stats">
+        <div class="node-detail-content" v-if="showType === 'combo'">
+          <div class="detail-section" @click="selectItem(index)">
+            <div class="section-title">业务服务层</div>
+            <div class="section-body">
               <!-- 直接展示 values 数组中的内容 -->
-              <div
-                v-for="(value, valueIndex) in item.values"
-                :key="valueIndex"
-                class="value-item"
-              >
-                <span class="value-name">{{ value.name }}:</span>
-                <span class="value-data">{{ value.value }}</span>
+              <div class="section-grid">
+                <div
+                  v-for="(value, index) in detailItems.values"
+                  :key="index"
+                  class="section-item"
+                >
+                  <span class="item-label">{{ value.name }}:</span>
+                  <span class="item-value">{{ value.value }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -60,7 +60,7 @@
                     <span
                       :style="{
                         color:
-                          item.color || getValueColor(item.value, item.label),
+                          item.color || getValueColor(item.type, item.level),
                       }"
                     >
                       {{ item.value }}
@@ -93,9 +93,9 @@ export default {
       options: null,
 
       // 添加面板控制状态
-      showDetailPanel: false, // 控制右侧详情面板是否显示
+      // showDetailPanel: false, // 控制右侧详情面板是否显示
       showType: "combo", // 当前选中的是节点还是combo
-      selectedNodeLabel: "Node 1111", // 默认选中的节点标签
+      selectedNodeLabel: "combo 1111", // 默认选中的节点标签
       selectedItem: 0, // 默认选中第一个详情项
       tabRawData: {},
       // 详情项数据
@@ -238,74 +238,79 @@ export default {
       return nodes;
     },
 
-   /**
- * 预布局所有节点
- * @param {Object} graphData - 图数据
- */
-preLayoutNodes(graphData) {
-  // 按combo分组节点
-  const nodesByCombo = {};
-  // 注意：这里不再需要单独处理独立节点，因为它们会在layoutCombos中处理
+    /**
+     * 预布局所有节点
+     * @param {Object} graphData - 图数据
+     */
+    preLayoutNodes(graphData) {
+      // 按combo分组节点
+      const nodesByCombo = {};
+      // 注意：这里不再需要单独处理独立节点，因为它们会在layoutCombos中处理
 
-  graphData.nodes.forEach((node) => {
-    const comboId = node.comboId || "default";
-    if (comboId && comboId !== "default") {
-      if (!nodesByCombo[comboId]) {
-        nodesByCombo[comboId] = [];
-      }
-      nodesByCombo[comboId].push(node);
-    }
-  });
+      graphData.nodes.forEach((node) => {
+        const comboId = node.comboId || "default";
+        if (comboId && comboId !== "default") {
+          if (!nodesByCombo[comboId]) {
+            nodesByCombo[comboId] = [];
+          }
+          nodesByCombo[comboId].push(node);
+        }
+      });
 
-  // 为每个combo内的节点设置位置
-  Object.keys(nodesByCombo).forEach((comboId) => {
-    this.layoutComboNodes(graphData.nodes, comboId);
-  });
+      // 为每个combo内的节点设置位置
+      Object.keys(nodesByCombo).forEach((comboId) => {
+        this.layoutComboNodes(graphData.nodes, comboId);
+      });
 
-  // 为combo设置位置，避免重叠
-  // 独立节点的布局将在layoutCombos方法中完成
-  this.layoutCombos(graphData.combos, graphData.nodes);
+      // 为combo设置位置，避免重叠
+      // 独立节点的布局将在layoutCombos方法中完成
+      this.layoutCombos(graphData.combos, graphData.nodes);
 
-  // 特别处理loadBalancer节点位置
-  const loadBalancerNode = graphData.nodes.find(node => node.id === "loadBalancer");
-  if (loadBalancerNode && this.parentComboPositions) {
-    // 获取所有父combo
-    const parentIds = ["mainCenter", "noneCenter", "disasterCenter"];
-    const validParents = parentIds.filter(id => this.parentComboPositions[id]);
-    
-    if (validParents.length > 0) {
-      if (validParents.length % 2 === 1) {
-        // 奇数个父combo，将loadBalancer放在中间那个的左侧
-        const middleIndex = Math.floor(validParents.length / 2);
-        const middleParentId = validParents[middleIndex];
-        const middleParentPos = this.parentComboPositions[middleParentId];
-        
-        // 放置在中间父combo的左侧
-        loadBalancerNode.x = middleParentPos.x - 200; // 左侧200px位置
-        loadBalancerNode.y = middleParentPos.y + middleParentPos.height / 2; // 垂直居中
-      } else {
-        // 偶数个父combo，将loadBalancer放在整个布局的左侧中间
-        // 计算所有父combo的垂直范围
-        let minY = Infinity;
-        let maxY = -Infinity;
-        
-        validParents.forEach(id => {
-          const pos = this.parentComboPositions[id];
-          minY = Math.min(minY, pos.y);
-          maxY = Math.max(maxY, pos.y + pos.height);
-        });
-        
-        if (minY !== Infinity && maxY !== -Infinity) {
-          // 放置在整个布局的左侧中间
-          loadBalancerNode.x = 100; // 左侧固定位置
-          loadBalancerNode.y = (minY + maxY) / 2; // 垂直居中
+      // 特别处理loadBalancer节点位置
+      const loadBalancerNode = graphData.nodes.find(
+        (node) => node.id === "loadBalancer"
+      );
+      if (loadBalancerNode && this.parentComboPositions) {
+        // 获取所有父combo
+        const parentIds = ["mainCenter", "noneCenter", "disasterCenter"];
+        const validParents = parentIds.filter(
+          (id) => this.parentComboPositions[id]
+        );
+
+        if (validParents.length > 0) {
+          if (validParents.length % 2 === 1) {
+            // 奇数个父combo，将loadBalancer放在中间那个的左侧
+            const middleIndex = Math.floor(validParents.length / 2);
+            const middleParentId = validParents[middleIndex];
+            const middleParentPos = this.parentComboPositions[middleParentId];
+
+            // 放置在中间父combo的左侧
+            loadBalancerNode.x =
+              middleParentPos.x - (middleParentPos.width / 3) * 2; // 左侧200px位置
+            loadBalancerNode.y = middleParentPos.y; // 垂直居中
+          } else {
+            // 偶数个父combo，将loadBalancer放在整个布局的左侧中间
+            // 计算所有父combo的垂直范围
+            let minY = Infinity;
+            let maxY = -Infinity;
+
+            validParents.forEach((id) => {
+              const pos = this.parentComboPositions[id];
+              minY = Math.min(minY, pos.y);
+              maxY = Math.max(maxY, pos.y + pos.height);
+            });
+
+            if (minY !== Infinity && maxY !== -Infinity) {
+              // 放置在整个布局的左侧中间
+              loadBalancerNode.x = 100; // 左侧固定位置
+              loadBalancerNode.y = (minY + maxY) / 2; // 垂直居中
+            }
+          }
         }
       }
-    }
-  }
 
-  return graphData;
-},
+      return graphData;
+    },
 
     /**
      * 为combos设置位置，避免重叠
@@ -411,8 +416,8 @@ preLayoutNodes(graphData) {
 
         if (children.length === 0) {
           // 如果没有子combo，使用默认尺寸
-          parent.width = 1200; // 先使用临时宽度，后续会统一
-          parent.height = 400;
+          parent.width = 1600; // 先使用临时宽度，后续会统一
+          parent.height = 800;
           return;
         }
 
@@ -438,7 +443,7 @@ preLayoutNodes(graphData) {
           });
 
           parent.width = totalWidth + spacing * 2; // 左右各一个spacing
-          parent.height = (maxHeight || 150) + titleHeight * 2 + spacing * 2; // 上下各一个spacing，加上标题区域
+          parent.height = (maxHeight || 150) + titleHeight * 2 + spacing * 3; // 上下各一个spacing，加上标题区域
         } else {
           // 特别处理noneCenter和disasterCenter，当只有一个子combo时，让父容器尺寸更大
           if (
@@ -500,7 +505,7 @@ preLayoutNodes(graphData) {
 
         if (allParents.length > 0) {
           // 使用统一间距
-          const verticalSpacing = 200; // 统一间距
+          const verticalSpacing = 100; // 统一间距
           const startX = 100;
 
           // 计算所有父combo的位置，确保间距一致
@@ -523,7 +528,7 @@ preLayoutNodes(graphData) {
 
           // 特别处理noneCenter，让它向上偏移自身高度的一半+边距
           if (noneCenter) {
-            const offset = verticalSpacing / 2;
+            const offset = verticalSpacing;
             noneCenter.y -= offset;
 
             // 同时调整上方和下方的combo，避免重叠
@@ -640,7 +645,6 @@ preLayoutNodes(graphData) {
           type: "custom-node",
           draggable: true,
           status: node.status,
-          source: node.source,
           detail: node.detail,
           comboId: node.combo,
           x: 0,
@@ -659,7 +663,7 @@ preLayoutNodes(graphData) {
             target: edge.target,
             detailValue: edge.detailValue || [],
             hoverValue: edge.hoverValue || [],
-            type: "orthogonal-edge",
+            type: "flowing-polyline",
             status: edge.status,
             name: edge.name || `${edge.source} → ${edge.target}`, // 添加 name 字段，默认值
           };
@@ -667,63 +671,45 @@ preLayoutNodes(graphData) {
           // 定义锚点映射关系表（基于实际的锚点索引）
           const anchorMap = {
             // 负载均衡到主中心: 负载均衡的下1锚点(索引0)到主中心的上1锚点(索引0)
-            "loadBalancer->mainCenter": { sourceAnchor: 0, targetAnchor: 0 },
-            // 主中心到负载均衡: 主中心的上2锚点(索引1)到负载均衡的下2锚点(索引1)
-            "mainCenter->loadBalancer": { sourceAnchor: 1, targetAnchor: 1 },
+            "loadBalancer->mainCenter": { sourceAnchor: 2, targetAnchor: 0 },
             // 负载均衡到灾备中心: 负载均衡的下4锚点(索引3)到灾备中心的上2锚点(索引1)
-            "loadBalancer->disasterCenter": {
-              sourceAnchor: 3,
-              targetAnchor: 1,
+            "loadBalancer->noneCenter": {
+              sourceAnchor: 1,
+              targetAnchor: 0,
             },
             // 灾备中心到负载均衡: 灾备中心的上1锚点(索引0)到负载均衡的下3锚点(索引2)
-            "disasterCenter->loadBalancer": {
-              sourceAnchor: 0,
-              targetAnchor: 2,
-            },
-            "A->G": {
-              sourceAnchor: 2,
-              targetAnchor: 5,
-            },
-            "G->A": {
-              sourceAnchor: 4,
-              targetAnchor: 3,
+            "loadBalancer->disasterCenter": {
+              sourceAnchor: 3,
+              targetAnchor: 0,
             },
           };
-          // 特殊处理A和G之间的连接
-          if (edge.source === "A" && edge.target === "G") {
-            newEdge.sourceAnchor = 2; // A的下侧第一个锚点
-            newEdge.targetAnchor = 5; // G的上侧第一个锚点
-          } else if (edge.source === "G" && edge.target === "A") {
-            newEdge.sourceAnchor = 4; // G的上侧第二个锚点
-            newEdge.targetAnchor = 3; // A的下侧第二个锚点
+
+          // 构造当前边的标识符用于查找映射
+          const sourceType = edge.source.includes("loadBalancer")
+            ? "loadBalancer"
+            : edge.source.includes("mainCenter")
+            ? "mainCenter"
+            : edge.source.includes("disasterCenter")
+            ? "disasterCenter"
+            : "other";
+
+          const targetType = edge.target.includes("loadBalancer")
+            ? "loadBalancer"
+            : edge.target.includes("mainCenter")
+            ? "mainCenter"
+            : edge.target.includes("disasterCenter")
+            ? "disasterCenter"
+            : "other";
+
+          const key = `${sourceType}->${targetType}`;
+
+          // 应用对应的锚点配置
+          if (anchorMap[key]) {
+            newEdge.sourceAnchor = anchorMap[key].sourceAnchor;
+            newEdge.targetAnchor = anchorMap[key].targetAnchor;
           } else {
-            // 构造当前边的标识符用于查找映射
-            const sourceType = edge.source.includes("loadBalancer")
-              ? "loadBalancer"
-              : edge.source.includes("mainCenter")
-              ? "mainCenter"
-              : edge.source.includes("disasterCenter")
-              ? "disasterCenter"
-              : "other";
-
-            const targetType = edge.target.includes("loadBalancer")
-              ? "loadBalancer"
-              : edge.target.includes("mainCenter")
-              ? "mainCenter"
-              : edge.target.includes("disasterCenter")
-              ? "disasterCenter"
-              : "other";
-
-            const key = `${sourceType}->${targetType}`;
-
-            // 应用对应的锚点配置
-            if (anchorMap[key]) {
-              newEdge.sourceAnchor = anchorMap[key].sourceAnchor;
-              newEdge.targetAnchor = anchorMap[key].targetAnchor;
-            } else {
-              // 可选：打印日志或设置默认锚点以防止意外情况
-              console.warn(`未找到对应锚点配置: ${key}`);
-            }
+            // 可选：打印日志或设置默认锚点以防止意外情况
+            console.warn(`未找到对应锚点配置: ${key}`);
           }
           return newEdge;
         });
@@ -752,7 +738,7 @@ preLayoutNodes(graphData) {
             comboStatus: parentCombo.status,
             x: 0,
             y: 0,
-            status:  parentCombo.status,
+            status: parentCombo.status,
             // width: 800, // 设置足够宽度
             // height: 400, // 设置足够高度
           });
@@ -885,7 +871,7 @@ preLayoutNodes(graphData) {
           color: "#333",
         },
         defaultEdge: {
-          type: "orthogonal-edge",
+          type: "flowing-polyline",
           style: {
             endArrow: true,
           },
@@ -897,7 +883,7 @@ preLayoutNodes(graphData) {
           },
         },
         fitView: true,
-        fitViewPadding: [100, 100, 100, 100],
+        fitViewPadding: [20, 100, 20, 100],
         edgeStateStyles: {
           hover: {
             lineWidth: 3,
@@ -913,6 +899,21 @@ preLayoutNodes(graphData) {
 
       this.graph.data(graphData);
       this.graph.render();
+      // 手动触发动画
+      this.$nextTick(() => {
+        if (this.graph) {
+          setTimeout(() => {
+            const edges = this.graph.getEdges();
+            edges.forEach((edge) => {
+              // 重新应用边的样式以触发动画
+              this.graph.refreshItem(edge);
+            });
+
+            // 图渲染完成后，自动显示第一个combo的详情
+            this.showFirstComboDetail();
+          }, 200);
+        }
+      });
 
       // 节点点击事件
       this.graph.on("node:click", (evt) => {
@@ -920,21 +921,21 @@ preLayoutNodes(graphData) {
         if (!node) return;
 
         const nodeModel = node.getModel();
-        console.log(nodeModel, "nodeModel");
 
         const nodeId = nodeModel.id;
 
         // 获取节点详情数据
         const detailData = this.convertToNodeDetailData(this.tabRawData);
         const nodeDetail = detailData[nodeId];
-
+        console.log(nodeDetail,'nodeDetail');
+        
         if (!nodeDetail || nodeDetail.length === 0) {
           console.warn(`No detail data found for node ${nodeId}`);
           return;
         }
 
         // 设置选中的节点标签
-        this.selectedNodeLabel = nodeModel.text || `节点 ${nodeId}`;
+        this.selectedNodeLabel = nodeModel.label || `节点 ${nodeId}`;
 
         // 设置详情数据
         this.detailItems = nodeDetail;
@@ -943,14 +944,14 @@ preLayoutNodes(graphData) {
         this.showDetailPanel = true;
 
         // 调整图表大小以适应右侧面板
-        this.$nextTick(() => {
-          if (this.graph) {
-            this.resizeGraphAndKeepView(
-              this.$refs.component.clientWidth * 0.75,
-              this.$refs.component.clientHeight
-            );
-          }
-        });
+        // this.$nextTick(() => {
+        //   if (this.graph) {
+        //     this.resizeGraphAndKeepView(
+        //       this.$refs.component.clientWidth * 0.75,
+        //       this.$refs.component.clientHeight
+        //     );
+        //   }
+        // });
       });
 
       // combo点击事件
@@ -971,15 +972,16 @@ preLayoutNodes(graphData) {
         this.showType = "combo";
         this.showDetailPanel = true;
 
-        this.$nextTick(() => {
-          if (this.graph) {
-            this.resizeGraphAndKeepView(
-              this.$refs.component.clientWidth * 0.75,
-              this.$refs.component.clientHeight
-            );
-          }
-        });
+        // this.$nextTick(() => {
+        //   if (this.graph) {
+        //     this.resizeGraphAndKeepView(
+        //       this.$refs.component.clientWidth * 0.75,
+        //       this.$refs.component.clientHeight
+        //     );
+        //   }
+        // });
       });
+
       // 节点鼠标悬浮事件
       this.graph.on("node:mouseenter", (evt) => {
         const node = evt.item;
@@ -1031,105 +1033,108 @@ preLayoutNodes(graphData) {
             this.tooltipElement.style.display = "none";
           }
         });
+
       // 边鼠标点击事件
-      this.graph.on("edge:click", (evt) => {
-        const edge = evt.item;
-        const edgeModel = edge.getModel();
+      // this.graph.on("edge:click", (evt) => {
+      //   const edge = evt.item;
+      //   const edgeModel = edge.getModel();
 
-        // 设置选中边的标签
-        this.selectedNodeLabel =
-          edgeModel.name || `${edgeModel.source} → ${edgeModel.target}`;
+      //   // 设置选中边的标签
+      //   this.selectedNodeLabel =
+      //     edgeModel.name || `${edgeModel.source} → ${edgeModel.target}`;
 
-        // 构造边的详情数据
-        const edgeDetailItems = [];
-        if (edgeModel.detailValue && edgeModel.detailValue.length > 0) {
-          edgeDetailItems.push({
-            name: "连接详情",
-            values: edgeModel.detailValue,
-          });
-        } else {
-          edgeDetailItems.push({
-            name: "连接详情",
-            stats: [
-              { name: "源节点", value: edgeModel.source },
-              { name: "目标节点", value: edgeModel.target },
-              {
-                name: "状态",
-                value: edgeModel.status === "normal" ? "正常" : "异常",
-              },
-            ],
-          });
-        }
+      //   // 构造边的详情数据
+      //   const edgeDetailItems = [];
+      //   if (edgeModel.detailValue && edgeModel.detailValue.length > 0) {
+      //     edgeDetailItems.push({
+      //       name: "连接详情",
+      //       values: edgeModel.detailValue,
+      //     });
+      //   } else {
+      //     edgeDetailItems.push({
+      //       name: "连接详情",
+      //       stats: [
+      //         { name: "源节点", value: edgeModel.source },
+      //         { name: "目标节点", value: edgeModel.target },
+      //         {
+      //           name: "状态",
+      //           value: edgeModel.status === "normal" ? "正常" : "异常",
+      //         },
+      //       ],
+      //     });
+      //   }
 
-        this.detailItems = edgeDetailItems;
-        this.showType = "combo";
-        this.showDetailPanel = true;
-        this.$nextTick(() => {
-          if (this.graph) {
-            this.resizeGraphAndKeepView(
-              this.$refs.component.clientWidth * 0.75,
-              this.$refs.component.clientHeight
-            );
-          }
-        });
-      });
+      //   this.detailItems = edgeDetailItems;
+      //   this.showType = "combo";
+      //   this.showDetailPanel = true;
+      //   // this.$nextTick(() => {
+      //   //   if (this.graph) {
+      //   //     this.resizeGraphAndKeepView(
+      //   //       this.$refs.component.clientWidth * 0.75,
+      //   //       this.$refs.component.clientHeight
+      //   //     );
+      //   //   }
+      //   // });
+      // });
+
       //线鼠标悬浮事件
-      this.graph.on("edge:mouseenter", (evt) => {
-        const edge = evt.item;
-        const edgeModel = edge.getModel();
+      // this.graph.on("edge:mouseenter", (evt) => {
+      //   const edge = evt.item;
+      //   const edgeModel = edge.getModel();
 
-        // 构建提示内容
-        let tooltipContent = `<div class="node-tooltip"><div class="tooltip-content">`;
+      //   // 构建提示内容
+      //   let tooltipContent = `<div class="node-tooltip"><div class="tooltip-content">`;
 
-        // 添加节点详情信息
-        if (edgeModel.hoverValue && edgeModel.hoverValue.length > 0) {
-          edgeModel.hoverValue.forEach((detail) => {
-            tooltipContent += `<div class="tooltip-item" style="padding: 5px 0 !important;">
-                              <span class="item-name">${detail.name}:</span>
-                              <span class="item-value"> ${detail.value}</span>
-                              </div>`;
-          });
-        } else {
-          tooltipContent += `<div class="tooltip-item">暂无详细信息</div>`;
-        }
+      //   // 添加节点详情信息
+      //   if (edgeModel.hoverValue && edgeModel.hoverValue.length > 0) {
+      //     edgeModel.hoverValue.forEach((detail) => {
+      //       tooltipContent += `<div class="tooltip-item" style="padding: 5px 0 !important;">
+      //                         <span class="item-name">${detail.name}:</span>
+      //                         <span class="item-value"> ${detail.value}</span>
+      //                         </div>`;
+      //     });
+      //   } else {
+      //     tooltipContent += `<div class="tooltip-item">暂无详细信息</div>`;
+      //   }
 
-        tooltipContent += `</div></div>`;
+      //   tooltipContent += `</div></div>`;
 
-        // 创建提示框元素
-        if (!this.edgeTooltipElement) {
-          this.edgeTooltipElement = document.createElement("div");
-          this.edgeTooltipElement.className = "g6-node-tooltip";
-          this.edgeTooltipElement.style.position = "absolute";
-          this.edgeTooltipElement.style.backgroundColor = "#111B30";
-          this.edgeTooltipElement.style.color = "#fff";
-          this.edgeTooltipElement.style.padding = "10px";
-          this.edgeTooltipElement.style.borderRadius = "4px";
-          this.edgeTooltipElement.style.fontSize = "12px";
-          this.edgeTooltipElement.style.zIndex = "999";
-          this.edgeTooltipElement.style.boxShadow =
-            "0 2px 6px rgba(0, 0, 0, 0.3)";
-          this.edgeTooltipElement.style.pointerEvents = "none";
-          document.body.appendChild(this.edgeTooltipElement);
-        }
+      //   // 创建提示框元素
+      //   if (!this.edgeTooltipElement) {
+      //     this.edgeTooltipElement = document.createElement("div");
+      //     this.edgeTooltipElement.className = "g6-node-tooltip";
+      //     this.edgeTooltipElement.style.position = "absolute";
+      //     this.edgeTooltipElement.style.backgroundColor = "#111B30";
+      //     this.edgeTooltipElement.style.color = "#fff";
+      //     this.edgeTooltipElement.style.padding = "10px";
+      //     this.edgeTooltipElement.style.borderRadius = "4px";
+      //     this.edgeTooltipElement.style.fontSize = "12px";
+      //     this.edgeTooltipElement.style.zIndex = "999";
+      //     this.edgeTooltipElement.style.boxShadow =
+      //       "0 2px 6px rgba(0, 0, 0, 0.3)";
+      //     this.edgeTooltipElement.style.pointerEvents = "none";
+      //     document.body.appendChild(this.edgeTooltipElement);
+      //   }
 
-        this.edgeTooltipElement.innerHTML = tooltipContent;
-        // 设置提示框位置为鼠标右侧
-        this.edgeTooltipElement.style.left = evt.canvasX + "px";
-        this.edgeTooltipElement.style.top = evt.canvasY + "px";
-        this.edgeTooltipElement.style.transform = "translate(80px, 0)";
+      //   this.edgeTooltipElement.innerHTML = tooltipContent;
+      //   // 设置提示框位置为鼠标右侧
+      //   this.edgeTooltipElement.style.left = evt.canvasX + "px";
+      //   this.edgeTooltipElement.style.top = evt.canvasY + "px";
+      //   this.edgeTooltipElement.style.transform = "translate(80px, 0)";
 
-        this.edgeTooltipElement.style.display = "block";
-      }),
+      //   this.edgeTooltipElement.style.display = "block";
+      // }),
         // 边鼠标移出事件
-        this.graph.on("edge:mouseleave", (evt) => {
-          if (this.edgeTooltipElement) {
-            this.edgeTooltipElement.style.display = "none";
-          }
-        });
+        // this.graph.on("edge:mouseleave", (evt) => {
+        //   if (this.edgeTooltipElement) {
+        //     this.edgeTooltipElement.style.display = "none";
+        //   }
+        // });
+
       // 添加画布点击事件（点击空白处）
-      this.graph.on("canvas:click", (evt) => {
-        this.closeDetailPanel();
-      });
+      // this.graph.on("canvas:click", (evt) => {
+      //   this.closeDetailPanel();
+      // });
 
       // 鼠标移动事件，用于更新提示框位置
       this.graph.on("mousemove", (evt) => {
@@ -1146,7 +1151,7 @@ preLayoutNodes(graphData) {
       // 初始化后自动适配视图
       this.$nextTick(() => {
         if (this.graph) {
-          this.graph.fitView([100, 100, 100, 100]);
+          this.graph.fitView([20, 100, 20, 100]);
 
           // 手动触发动画
           setTimeout(() => {
@@ -1155,6 +1160,9 @@ preLayoutNodes(graphData) {
               // 重新应用边的样式以触发动画
               this.graph.refreshItem(edge);
             });
+
+            // 图渲染完成后，自动显示第一个combo的详情
+            this.showFirstComboDetail();
           }, 200);
         }
       });
@@ -1175,14 +1183,7 @@ preLayoutNodes(graphData) {
       if (rawData && rawData.comboList) {
         rawData.comboList.forEach((item) => {
           // 将listdetail数据转换为组件需要的详情项格式
-          detailData[item.source] = item.listdetail.map((detail) => {
-            // 根据新的数据结构提取信息
-            return {
-              name: detail.name || "未知项",
-
-              values: detail.values || [],
-            };
-          });
+          detailData[item.source] = item.listdetail;
         });
       }
 
@@ -1212,9 +1213,9 @@ preLayoutNodes(graphData) {
     convertToNodeDetailData(rawData) {
       const detailData = {};
 
-      if (rawData && rawData.nodeList) {
-        rawData.nodeList.forEach((item) => {
-          const source = item.source || item.key; // 使用 source 或 key 作为唯一标识
+      if (rawData && rawData.nodes) {
+        rawData.nodes.forEach((item) => {
+          const source = item.key; // 使用 source 或 key 作为唯一标识
           const listdetail = item.listdetail || [];
 
           // 构建详情项，按新的三层结构组织
@@ -1222,23 +1223,23 @@ preLayoutNodes(graphData) {
             {
               type: "system",
               title: "系统资源层",
-              items: listdetail[0]?.systemResourceLayer || [],
+              items: listdetail?.systemResourceLayer || [],
             },
             {
               type: "application",
               title: "应用软件层",
-              items: listdetail[0]?.applicationSoftwareLayer || [],
+              items: listdetail?.applicationSoftwareLayer || [],
             },
-            {
-              type: "business",
-              title: "业务服务层",
-              items: listdetail[0]?.businessServiceLayer || [],
-            },
-            {
-              type: "operation",
-              title: "操作列表",
-              items: listdetail[0]?.operationList || [],
-            },
+            // {
+            //   type: "business",
+            //   title: "业务服务层",
+            //   items: listdetail[0]?.businessServiceLayer || [],
+            // },
+            // {
+            //   type: "operation",
+            //   title: "操作列表",
+            //   items: listdetail[0]?.operationList || [],
+            // },
           ];
         });
       }
@@ -1246,115 +1247,62 @@ preLayoutNodes(graphData) {
       return detailData;
     },
     /**
+     * 显示第一个combo的详情
+     */
+    showFirstComboDetail() {
+      // 确保有数据可用
+      if (
+        this.tabRawData &&
+        this.tabRawData.comboList &&
+        this.tabRawData.comboList.length > 0
+      ) {
+        // 获取第一个combo的数据
+        const firstCombo = this.tabRawData.comboList[0];
+        const comboId = firstCombo.source;
+
+        // 设置标签
+        this.selectedNodeLabel =
+          firstCombo.listdetail.name || `组合 ${comboId}`;
+
+        // 获取详情数据
+        const detailData = this.convertToComboDetailData(this.tabRawData);
+        this.detailItems = detailData[comboId] || [];
+        this.showType = "combo";
+        this.showDetailPanel = true;
+      }
+    },
+    /**
      * 根据指标值获取数值颜色
-     * @param {String} value - 指标值
-     * @param {String} label - 指标名称
+     * @param {String} type - 指标类型
+     * @param {String} level - 告警等级
      * @returns {String} 颜色值
      */
-    getValueColor(value, label) {
-      // 如果数据中已经定义了颜色，优先使用
-      if (arguments.length > 2 && arguments[2]) {
-        return arguments[2]; // 第三个参数是color
-      }
-
-      // 移除单位，只保留数字部分进行比较
-      let numericValue = parseFloat(value);
-
-      // 特殊处理百分比字符串，如"20%"
-      if (typeof value === "string" && value.includes("%")) {
-        numericValue = parseFloat(value.replace("%", ""));
-      }
-
+    getValueColor(type, level) {
       // 对于状态类文本，根据内容判断颜色
-      if (typeof value === "string") {
-        if (
-          value.includes("🟢") ||
-          value.includes("正常") ||
-          value.includes("在线")
-        ) {
-          return "#61bd4f"; // 绿色（枚举字段）
-        } else if (
-          value.includes("🔴") ||
-          value.includes("异常") ||
-          value.includes("离线") ||
-          value.includes("危险")
-        ) {
+      if (type === "numeric") {
+        if (level == "0") {
+          return " #fff"; // 绿色（数值字段）
+        } else if (level == "3") {
           return "#ff4d4f"; // 红色（危险）
-        } else if (value.includes("🟡") || value.includes("警告")) {
+        } else if (level == "1") {
           return "#ffc53d"; // 黄色（警告）
-        } else if (value.includes("🟠") || value.includes("严重")) {
+        } else if (level == "2") {
           return "#ffa940"; // 橙色（严重警告）
-        } else if (
-          value.includes("运行中") ||
-          value.includes("已连接") ||
-          value.includes("启用") ||
-          value.includes("开启")
-        ) {
-          return "#61bd4f"; // 绿色（枚举字段）
         }
       }
 
       // 如果不是数字，且不是特殊状态文本，根据字段类型判断
-      if (isNaN(numericValue)) {
-        // 判断是否为枚举字段（状态类字段）
-        if (
-          label.includes("状态") ||
-          label.includes("进程") ||
-          label.includes("采集器") ||
-          label.includes("时间")
-        ) {
-          return "#61bd4f"; // 绿色（枚举字段）
-        }
-        return "#ffffff"; // 白色（默认）
-      }
-
-      // 对于数值类型，根据指标名称和数值判断状态颜色
-      if (
-        label.includes("CPU使用率") ||
-        label.includes("内存使用率") ||
-        label.includes("磁盘使用率")
-      ) {
-        if (numericValue < 70) {
-          return "#ffffff"; // 白色（正常）
-        } else if (numericValue < 80) {
-          return "#ffc53d"; // 黄色（警告）
-        } else if (numericValue < 90) {
-          return "#ffa940"; // 橙色（严重警告）
-        } else {
+      if (type === "enum") {
+        if (level == "0") {
+          return "#61bd4f"; // 白色 （枚举字段）
+        } else if (level == "3") {
           return "#ff4d4f"; // 红色（危险）
-        }
-      }
-
-      if (label.includes("成功率") || label.includes("响应率")) {
-        if (numericValue > 99) {
-          return "#ffffff"; // 白色（正常）
-        } else if (numericValue > 95) {
+        } else if (level == "1") {
           return "#ffc53d"; // 黄色（警告）
-        } else if (numericValue > 90) {
+        } else if (level == "2") {
           return "#ffa940"; // 橙色（严重警告）
-        } else {
-          return "#ff4d4f"; // 红色（危险）
         }
       }
-
-      if (
-        label.includes("错误") ||
-        label.includes("失败") ||
-        label.includes("丢包")
-      ) {
-        if (numericValue === 0) {
-          return "#ffffff"; // 白色（正常）
-        } else if (numericValue <= 5) {
-          return "#ffc53d"; // 黄色（警告）
-        } else if (numericValue <= 10) {
-          return "#ffa940"; // 橙色（严重警告）
-        } else {
-          return "#ff4d4f"; // 红色（危险）
-        }
-      }
-
-      // 默认返回白色（数值类型）
-      return "#ffffff";
     },
     /** 组件配置项变更时触发 */
     setStyle(k, v) {
@@ -1376,7 +1324,16 @@ preLayoutNodes(graphData) {
 
       if (this.graph) {
         this.graph.changeData(graphData);
-        this.graph.fitView([100, 100, 100, 100]);
+        this.graph.fitView([20, 100, 20, 100]);
+        // 确保动画在数据更新后继续运行
+        this.$nextTick(() => {
+          setTimeout(() => {
+            const edges = this.graph.getEdges();
+            edges.forEach((edge) => {
+              this.graph.refreshItem(edge);
+            });
+          }, 100);
+        });
       } else {
         this.initGraph(); // 确保 graph 已创建
       }
@@ -1545,7 +1502,6 @@ preLayoutNodes(graphData) {
           border-radius: 4px;
           margin-bottom: 10px;
           overflow: hidden;
-
           .section-title {
             padding: 10px 0 10px 0;
             // background: linear-gradient(
@@ -1643,6 +1599,30 @@ preLayoutNodes(graphData) {
       color: #ff4d4f !important; // 红色警告色
     }
   }
+}
+// .detail-title {
+//             color: #5fc7ff;
+//             font-size: 16px;
+//             font-weight: bold;
+//           }
+
+.operation-list {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.operation-list .detail-title {
+  flex: 1;
+  text-align: center;
+  padding: 15px 10px;
+  background-color: #020c1d;
+  border-radius: 4px;
+  margin: 5px 5px;
+  color: #5fc7ff;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 // 全局样式确保提示框不会被其他元素遮挡
