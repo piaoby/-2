@@ -164,6 +164,68 @@
                         "type": "numeric"
                     }
                 ],
+                "businessServiceLayer": [
+                    {
+                        "label": "CPU利用率",
+                        "value": "20%",
+                        "level": "0",
+                        "type": "numeric"
+                    },
+                    {
+                        "label": "内存利用率",
+                        "value": "15%",
+                        "level": "0",
+                        "type": "numeric"
+                    },
+                    {
+                        "label": "服务响应时间",
+                        "value": "120ms",
+                        "level": "0",
+                        "type": "numeric"
+                    },
+                    {
+                        "label": "服务可用率",
+                        "value": "99.9%",
+                        "level": "0",
+                        "type": "numeric"
+                    },
+                    {
+                        "label": "请求成功率",
+                        "value": "99.5%",
+                        "level": "0",
+                        "type": "numeric"
+                    },
+                    {
+                        "label": "每秒请求数",
+                        "value": "1500",
+                        "level": "0",
+                        "type": "numeric"
+                    },
+                    {
+                        "label": "错误率",
+                        "value": "0.5%",
+                        "level": "1",
+                        "type": "numeric"
+                    },
+                    {
+                        "label": "响应时间",
+                        "value": "100ms",
+                        "level": "0",
+                        "type": "numeric"
+                    },
+                    {
+                        "label": "吞吐量",
+                        "value": "500KB/s",
+                        "level": "0",
+                        "type": "numeric"
+                    },
+                    {
+                        "label": "连接数",
+                        "value": "200",
+                        "level": "0",
+                        "type": "numeric"
+                    }
+                ],
                 "applicationSoftwareLayer": [
                     {
                         "label": "osb_server4进程状态",

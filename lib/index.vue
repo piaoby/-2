@@ -1226,15 +1226,15 @@ export default {
               items: listdetail?.systemResourceLayer || [],
             },
             {
+              type: "business",
+              title: "业务服务层",
+              items: listdetail?.businessServiceLayer || [],
+            },
+            {
               type: "application",
               title: "应用软件层",
               items: listdetail?.applicationSoftwareLayer || [],
             },
-            // {
-            //   type: "business",
-            //   title: "业务服务层",
-            //   items: listdetail[0]?.businessServiceLayer || [],
-            // },
             // {
             //   type: "operation",
             //   title: "操作列表",
@@ -1277,33 +1277,31 @@ export default {
      * @param {String} level - 告警等级
      * @returns {String} 颜色值
      */
-    getValueColor(type, level) {
-      // 对于状态类文本，根据内容判断颜色
-      if (type === "numeric") {
-        if (level == "0") {
-          return " #fff"; // 绿色（数值字段）
-        } else if (level == "3") {
-          return "#ff4d4f"; // 红色（危险）
-        } else if (level == "1") {
-          return "#ffc53d"; // 黄色（警告）
-        } else if (level == "2") {
-          return "#ffa940"; // 橙色（严重警告）
-        }
-      }
-
-      // 如果不是数字，且不是特殊状态文本，根据字段类型判断
-      if (type === "enum") {
-        if (level == "0") {
-          return "#61bd4f"; // 白色 （枚举字段）
-        } else if (level == "3") {
-          return "#ff4d4f"; // 红色（危险）
-        } else if (level == "1") {
-          return "#ffc53d"; // 黄色（警告）
-        } else if (level == "2") {
-          return "#ffa940"; // 橙色（严重警告）
-        }
-      }
-    },
+        getValueColor(type, level) {
+          // 定义颜色映射表
+          const colorMap = {
+            numeric: {
+              "0": "#fff",   // 白色（数值字段）
+              "1": "#ffc53d", // 黄色（警告）
+              "2": "#ffa940", // 橙色（严重警告）
+              "3": "#ff4d4f"  // 红色（危险）
+            },
+            enum: {
+              "0": "#61bd4f",  // 绿色（枚举字段）
+              "1": "#ffc53d",  // 黄色（警告）
+              "2": "#ffa940",  // 橙色（严重警告）
+              "3": "#ff4d4f"   // 红色（危险）
+            }
+          };
+    
+          // 根据类型和级别返回相应颜色
+          if (colorMap[type] && colorMap[type][level]) {
+            return colorMap[type][level];
+          }
+    
+          // 默认返回白色
+          return "#fff";
+        },
     /** 组件配置项变更时触发 */
     setStyle(k, v) {
       const keyList = k.split("$");
@@ -1321,7 +1319,8 @@ export default {
 
       this.tabRawData = data;
       let graphData = this.convertToGraphData(data);
-
+      console.log(graphData,'graphData');
+      
       if (this.graph) {
         this.graph.changeData(graphData);
         this.graph.fitView([20, 100, 20, 100]);
@@ -1380,7 +1379,7 @@ export default {
     .right-panel {
       flex: 0 0 20%; // 不放大不缩小，基础宽度 20%
       min-width: 300px; // 设置最小宽度防止过小
-      height: calc(100% - 100px);
+      height: calc(100% - 80px);
       background-color: #111d30;
       //   border-left: 1px solid #333;
       position: relative;
@@ -1477,44 +1476,46 @@ export default {
           }
         }
       }
-      .node-detail-content {
+    .node-detail-content {
         width: 100%;
-        height: calc(100% - 60px);
+        height: calc(100% - 150px);
+        // max-height: 600px;
         color: #fff;
         box-sizing: border-box;
         overflow-y: auto;
         padding: 10px;
+        scrollbar-width: thin;
+        scrollbar-color: #10375d #000;
 
         &::-webkit-scrollbar {
-          width: 6px;
+          width: 8px;
         }
 
         &::-webkit-scrollbar-track {
           background: #000;
+          border-radius: 4px;
         }
 
         &::-webkit-scrollbar-thumb {
           background: #10375d;
-          border-radius: 3px;
+          border-radius: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+          background: #0a2540;
         }
 
         .detail-section {
           border-radius: 4px;
-          margin-bottom: 10px;
           overflow: hidden;
+          margin-bottom: 5px;
           .section-title {
-            padding: 10px 0 10px 0;
-            // background: linear-gradient(
-            //   90deg,
-            //   rgba(95, 199, 255, 0.3) 0%,
-            //   rgba(95, 199, 255, 0.1) 100%
-            // );
+            padding: 5px 0 10px 0;
             color: #ffff;
             font-size: 14px;
             font-weight: bold;
             text-shadow: 0 0 5px rgba(95, 199, 255, 0.8),
               0 0 10px rgba(95, 199, 255, 0.5);
-            // box-shadow: 0 0 10px rgba(95, 199, 255, 0.3) inset;
           }
 
           .section-body {
@@ -1528,19 +1529,17 @@ export default {
             &:hover {
               background-color: #10375d;
             }
+            
             .section-grid {
               display: grid;
               grid-template-columns: 1fr 1fr;
               gap: 8px;
             }
+            
             .section-item {
               display: flex;
               justify-content: space-between;
               padding: 5px 0;
-
-              &:last-child {
-                border-bottom: none;
-              }
 
               .item-label {
                 font-size: 12px;
@@ -1548,6 +1547,7 @@ export default {
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                flex: 1;
               }
 
               .item-value {
@@ -1559,7 +1559,10 @@ export default {
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                min-width: 0; /* 允许flex项目收缩 */
+                min-width: 0;
+                flex: 1;
+                justify-content: flex-end;
+                
                 span {
                   font-size: 12px;
                   line-height: 1;
@@ -1609,6 +1612,7 @@ export default {
 .operation-list {
   margin-top: 10px;
   display: flex;
+  height: 60px;
   justify-content: space-between;
   margin-bottom: 10px;
 }
@@ -1616,10 +1620,11 @@ export default {
 .operation-list .detail-title {
   flex: 1;
   text-align: center;
-  padding: 15px 10px;
+  // padding: 15px 10px;
+  line-height: 60px;
   background-color: #020c1d;
   border-radius: 4px;
-  margin: 5px 5px;
+  margin: 0 10px;
   color: #5fc7ff;
   font-size: 16px;
   font-weight: bold;

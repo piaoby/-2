@@ -17,7 +17,6 @@ export default {
       com: null,
       tabRawData: {
         nodes: [
-          // 主中心 - 73集群 (3个节点)
           {
             key: "loadBalancer",
             text: "负载均衡",
@@ -35,639 +34,855 @@ export default {
             ],
           },
           {
-            key: "node0-1",
-            text: "DB集群1",
+            key: "33.114.5.53",
+            text: "33.114.5.53",
             status: "normal",
-            combo: "G",
+            combo: "820",
+            source: "",
             detail: [
               {
-                name: "DB集群CPU利用率",
-                value: "20%",
+                name: "CPU使用率",
+                value: 6.233294,
               },
               {
-                name: "DB集群内存利用率",
-                value: "45%",
-              },
-            ],
-          },
-          {
-            key: "node0-2",
-            text: "DB集群2",
-            status: "normal",
-            combo: "G",
-            detail: [
-              {
-                name: "DB集群CPU利用率",
-                value: "20%",
+                name: "物理内存已用量)",
+                value: 49804173312,
               },
               {
-                name: "DB集群内存利用率",
-                value: "45%",
-              },
-            ],
-          },
-          {
-            key: "node0-3",
-            text: "DB集群3",
-            status: "normal",
-            combo: "G",
-            detail: [
-              {
-                name: "DB集群CPU利用率",
-                value: "20%",
+                name: "磁盘空间使用率",
+                value: 18.92779,
               },
               {
-                name: "DB集群内存利用率",
-                value: "45%",
-              },
-            ],
-          },
-          {
-            key: "node1",
-            text: "73集群",
-            status: "normal",
-            combo: "A",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "20%",
+                name: "网卡入流量",
+                value: 500942,
               },
               {
-                name: "内存利用率",
-                value: "45%",
+                name: "网卡出流量",
+                value: 439913,
+              },
+              {
+                name: "I/O使用率",
+                value: 0.00296,
+              },
+              {
+                name: "5分钟平均负载)",
+                value: 2.63,
               },
             ],
             listdetail: {
-              name: "73集群详情",
-              Alerts: "0",
-              url: "http://73-cluster.com",
-              status: "normal",
+              name: "33.114.5.53",
               systemResourceLayer: [
                 {
-                  label: "主机状态",
-                  value: " 在线",
-                  level: "0", //告警等级 0-3 分别对应0-3级告警
-                  type: "enum", //枚举
+                  name: "CPU使用率",
+                  value: 6.233294,
                 },
                 {
-                  label: "主机运行时间",
-                  value: "120天",
-                  level: "0",
-                  type: "numeric", //数值
+                  name: "物理内存已用量)",
+                  value: 49804173312,
                 },
                 {
-                  label: "CPU数量",
-                  value: "8核",
-                  level: "0",
-                  type: "numeric",
+                  name: "磁盘空间使用率",
+                  value: 18.92779,
                 },
                 {
-                  label: "内存总量",
-                  value: "32GB",
-                  level: "0",
-                  type: "numeric",
+                  name: "网卡入流量",
+                  value: 500942,
                 },
                 {
-                  label: "磁盘总量",
-                  value: "1TB",
-                  level: "0",
-                  type: "numeric",
+                  name: "网卡出流量",
+                  value: 439913,
                 },
                 {
-                  label: "网络带宽",
-                  value: "1Gbps",
-                  level: "0",
-                  type: "numeric",
+                  name: "I/O使用率",
+                  value: 0.00296,
                 },
                 {
-                  label: "CPU使用率",
-                  value: "20%",
-                  level: "0",
-                  type: "numeric",
+                  name: "5分钟平均负载)",
+                  value: 2.63,
                 },
                 {
-                  label: "内存使用率",
-                  value: "45%",
-                  level: "0",
-                  type: "numeric",
+                  name: "CPU核心数",
+                  value: 32,
                 },
                 {
-                  label: "磁盘使用率",
-                  value: "35%",
-                  level: "0",
-                  type: "numeric",
+                  name: "CPU型号",
+                  value: "INTEL(R) XEON(R) GOLD 5520+",
                 },
                 {
-                  label: "僵尸进程数量",
-                  value: "0",
-                  level: "0",
-                  type: "numeric",
+                  name: "内存总量",
+                  value: 48023,
                 },
                 {
-                  label: "监控采集器状态",
-                  value: " normal",
-                  level: "0",
-                  type: "enum",
+                  name: "操作系统",
+                  value: "linux suse",
                 },
                 {
-                  label: "磁盘IO",
-                  value: "15%",
-                  level: "0",
-                  type: "numeric",
-                },
-                {
-                  label: "平均负载",
-                  value: "1.2",
-                  level: "0",
-                  type: "numeric",
+                  name: "磁盘总量",
+                  value: 286,
                 },
               ],
               applicationSoftwareLayer: [
                 {
-                  label: "osb_server4进程状态",
-                  value: " 运行中",
-                  level: "0",
-                  type: "enum",
+                  label: "outexception关键字异常",
+                  value: 1,
                 },
                 {
-                  label: "SYN_SEND总数",
-                  value: "120",
-                  level: "0",
-                  type: "numeric",
+                  label: "17356端口状态",
+                  value: 5,
                 },
                 {
-                  label: "SYN_RECV总数",
-                  value: "85",
-                  level: "0",
-                  type: "numeric",
+                  label: "告警数量",
+                  value: 0,
+                },
+              ],
+              businessServiceLayer: [
+                {
+                  label: "请求数",
+                  value: "1500次/分钟",
                 },
                 {
-                  label: "SOCKET使用量",
-                  value: "420",
-                  level: "0",
-                  type: "numeric",
+                  label: "交易量",
+                  value: "1500次/分钟",
                 },
                 {
-                  label: "监听端口请求量",
-                  value: "2450",
-                  level: "0",
-                  type: "numeric",
+                  label: "失败数",
+                  value: "5笔/分钟",
                 },
                 {
-                  label: "网络接口丢包率",
-                  value: "0.01%",
-                  level: "0",
-                  type: "numeric",
-                },
-                {
-                  label: "僵尸进程数量",
-                  value: "0",
-                  level: "0",
-                  type: "numeric",
+                  label: "响应时间",
+                  value: "200ms",
                 },
               ],
             },
           },
           {
-            key: "node2",
-            text: "73集群-节点2",
+            key: "33.114.5.54",
+            text: "33.114.5.54",
             status: "normal",
-            combo: "A",
-
+            combo: "821",
+            source: "",
             detail: [
               {
-                name: "CPU利用率",
-                value: "18%",
+                name: "CPU使用率",
+                value: 4.088693,
               },
               {
-                name: "内存利用率",
-                value: "42%",
+                name: "物理内存已用量)",
+                value: 49829715968,
+              },
+              {
+                name: "磁盘空间使用率",
+                value: 17.793992,
+              },
+              {
+                name: "网卡入流量",
+                value: 279176,
+              },
+              {
+                name: "网卡出流量",
+                value: 253829,
+              },
+              {
+                name: "I/O使用率",
+                value: 0.000373,
+              },
+              {
+                name: "5分钟平均负载)",
+                value: 1.35,
               },
             ],
+            listdetail: {
+              name: "33.114.5.54",
+              systemResourceLayer: [
+                {
+                  name: "CPU使用率",
+                  value: 4.088693,
+                },
+                {
+                  name: "物理内存已用量)",
+                  value: 49829715968,
+                },
+                {
+                  name: "磁盘空间使用率",
+                  value: 17.793992,
+                },
+                {
+                  name: "网卡入流量",
+                  value: 279176,
+                },
+                {
+                  name: "网卡出流量",
+                  value: 253829,
+                },
+                {
+                  name: "I/O使用率",
+                  value: 0.000373,
+                },
+                {
+                  name: "5分钟平均负载)",
+                  value: 1.35,
+                },
+                {
+                  name: "CPU核心数",
+                  value: 32,
+                },
+                {
+                  name: "CPU型号",
+                  value: "INTEL(R) XEON(R) GOLD 5520+",
+                },
+                {
+                  name: "内存总量",
+                  value: 48023,
+                },
+                {
+                  name: "操作系统",
+                  value: "linux suse",
+                },
+                {
+                  name: "磁盘总量",
+                  value: 286,
+                },
+              ],
+              applicationSoftwareLayer: [
+                {
+                  label: "outexception关键字异常",
+                  value: 1,
+                },
+                {
+                  label: "告警数量",
+                  value: 0,
+                },
+              ],
+              businessServiceLayer: [
+                {
+                  label: "请求数",
+                  value: "1500次/分钟",
+                },
+                {
+                  label: "交易量",
+                  value: "1500次/分钟",
+                },
+                {
+                  label: "失败数",
+                  value: "5笔/分钟",
+                },
+                {
+                  label: "响应时间",
+                  value: "200ms",
+                },
+              ],
+            },
           },
           {
-            key: "node3",
-            text: "73集群-节点3",
+            key: "32.114.72.6",
+            text: "32.114.72.6",
             status: "normal",
-            combo: "A",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "22%",
-              },
-              {
-                name: "内存利用率",
-                value: "48%",
-              },
-            ],
+            combo: "818",
+            source: "",
+            detail: [],
+            listdetail: {
+              name: "32.114.72.6",
+              systemResourceLayer: [
+                {
+                  name: "CPU核心数",
+                  value: null,
+                },
+                {
+                  name: "CPU型号",
+                  value: "",
+                },
+                {
+                  name: "内存总量",
+                  value: null,
+                },
+                {
+                  name: "操作系统",
+                  value: "",
+                },
+                {
+                  name: "磁盘总量",
+                  value: null,
+                },
+              ],
+              applicationSoftwareLayer: [
+                {
+                  label: "告警数量",
+                  value: 0,
+                },
+              ],
+              businessServiceLayer: [
+                {
+                  label: "请求数",
+                  value: "1500次/分钟",
+                },
+                {
+                  label: "交易量",
+                  value: "1500次/分钟",
+                },
+                {
+                  label: "失败数",
+                  value: "5笔/分钟",
+                },
+                {
+                  label: "响应时间",
+                  value: "200ms",
+                },
+              ],
+            },
           },
-          // 主中心 - 90集群 (4个节点)
           {
-            key: "node4",
-            text: "90集群",
+            key: "35.114.2.167",
+            text: "35.114.2.167",
             status: "normal",
-            combo: "B",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "15%",
-              },
-              {
-                name: "内存利用率",
-                value: "38%",
-              },
-            ],
+            combo: "818",
+            source: "",
+            detail: [],
+            listdetail: {
+              name: "35.114.2.167",
+              systemResourceLayer: [
+                {
+                  name: "CPU核心数",
+                  value: null,
+                },
+                {
+                  name: "CPU型号",
+                  value: "",
+                },
+                {
+                  name: "内存总量",
+                  value: null,
+                },
+                {
+                  name: "操作系统",
+                  value: "",
+                },
+                {
+                  name: "磁盘总量",
+                  value: null,
+                },
+              ],
+              applicationSoftwareLayer: [
+                {
+                  label: "outexception关键字异常",
+                  value: 1,
+                },
+                {
+                  label: "告警数量",
+                  value: 5,
+                },
+              ],
+              businessServiceLayer: [
+                {
+                  label: "请求数",
+                  value: "1500次/分钟",
+                },
+                {
+                  label: "交易量",
+                  value: "1500次/分钟",
+                },
+                {
+                  label: "失败数",
+                  value: "5笔/分钟",
+                },
+                {
+                  label: "响应时间",
+                  value: "200ms",
+                },
+              ],
+            },
           },
           {
-            key: "node5",
-            text: "90集群-节点2",
+            key: "172.34.2.177",
+            text: "172.34.2.177",
             status: "normal",
-            combo: "B",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "17%",
-              },
-              {
-                name: "内存利用率",
-                value: "40%",
-              },
-            ],
+            combo: "818",
+            source: "",
+            detail: [],
+            listdetail: {
+              name: "172.34.2.177",
+              systemResourceLayer: [
+                {
+                  name: "CPU核心数",
+                  value: null,
+                },
+                {
+                  name: "CPU型号",
+                  value: "",
+                },
+                {
+                  name: "内存总量",
+                  value: null,
+                },
+                {
+                  name: "操作系统",
+                  value: "",
+                },
+                {
+                  name: "磁盘总量",
+                  value: null,
+                },
+              ],
+              applicationSoftwareLayer: [
+                {
+                  label: "outexception关键字异常",
+                  value: 1,
+                },
+                {
+                  label: "告警数量",
+                  value: 1,
+                },
+              ],
+              businessServiceLayer: [
+                {
+                  label: "请求数",
+                  value: "1500次/分钟",
+                },
+                {
+                  label: "交易量",
+                  value: "1500次/分钟",
+                },
+                {
+                  label: "失败数",
+                  value: "5笔/分钟",
+                },
+                {
+                  label: "响应时间",
+                  value: "200ms",
+                },
+              ],
+            },
           },
           {
-            key: "node6",
-            text: "90集群-节点3",
+            key: "37.114.2.166",
+            text: "37.114.2.166",
             status: "normal",
-            combo: "B",
-
+            combo: "819",
+            source: "",
             detail: [
               {
-                name: "CPU利用率",
-                value: "19%",
+                name: "CPU使用率",
+                value: 0.468955,
               },
               {
-                name: "内存利用率",
-                value: "43%",
+                name: "物理内存已用量)",
+                value: 46421598208,
+              },
+              {
+                name: "磁盘空间使用率",
+                value: 13.873251,
+              },
+              {
+                name: "网卡入流量",
+                value: 51613,
+              },
+              {
+                name: "网卡出流量",
+                value: 60798,
+              },
+              {
+                name: "I/O使用率",
+                value: 0.000107,
+              },
+              {
+                name: "5分钟平均负载)",
+                value: 0.38,
               },
             ],
+            listdetail: {
+              name: "37.114.2.166",
+              systemResourceLayer: [
+                {
+                  name: "CPU使用率",
+                  value: 0.468955,
+                },
+                {
+                  name: "物理内存已用量)",
+                  value: 46421598208,
+                },
+                {
+                  name: "磁盘空间使用率",
+                  value: 13.873251,
+                },
+                {
+                  name: "网卡入流量",
+                  value: 51613,
+                },
+                {
+                  name: "网卡出流量",
+                  value: 60798,
+                },
+                {
+                  name: "I/O使用率",
+                  value: 0.000107,
+                },
+                {
+                  name: "5分钟平均负载)",
+                  value: 0.38,
+                },
+                {
+                  name: "CPU核心数",
+                  value: 32,
+                },
+                {
+                  name: "CPU型号",
+                  value: "INTEL(R) XEON(R) GOLD 5520+",
+                },
+                {
+                  name: "内存总量",
+                  value: 48024,
+                },
+                {
+                  name: "操作系统",
+                  value: "linux suse",
+                },
+                {
+                  name: "磁盘总量",
+                  value: 286,
+                },
+              ],
+              applicationSoftwareLayer: [
+                {
+                  label: "告警数量",
+                  value: 0,
+                },
+              ],
+              businessServiceLayer: [
+                {
+                  label: "请求数",
+                  value: "1500次/分钟",
+                },
+                {
+                  label: "交易量",
+                  value: "1500次/分钟",
+                },
+                {
+                  label: "失败数",
+                  value: "5笔/分钟",
+                },
+                {
+                  label: "响应时间",
+                  value: "200ms",
+                },
+              ],
+            },
           },
           {
-            key: "node7",
-            text: "90集群-节点4",
+            key: "35.114.1.24",
+            text: "35.114.1.24",
             status: "normal",
-            combo: "B",
-
+            combo: "819",
+            source: "",
             detail: [
               {
-                name: "CPU利用率",
-                value: "16%",
+                name: "CPU使用率",
+                value: 16.760663,
               },
               {
-                name: "内存利用率",
-                value: "39%",
+                name: "物理内存已用量)",
+                value: 50081943552,
+              },
+              {
+                name: "磁盘空间使用率",
+                value: 62.945834,
+              },
+              {
+                name: "网卡入流量",
+                value: 590547,
+              },
+              {
+                name: "网卡出流量",
+                value: 744768,
+              },
+              {
+                name: "I/O使用率",
+                value: 0.00338,
+              },
+              {
+                name: "5分钟平均负载)",
+                value: 4.4,
               },
             ],
-          },
-          // 主中心 - 100集群 (1个节点)
-          {
-            key: "node8",
-            text: "100集群",
-            status: "normal",
-            combo: "C",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "25%",
-              },
-              {
-                name: "内存利用率",
-                value: "52%",
-              },
-            ],
-          },
-          // 主中心 - 116集群 (4个节点)
-          {
-            key: "node9",
-            text: "116集群",
-            status: "normal",
-            combo: "D",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "28%",
-              },
-              {
-                name: "内存利用率",
-                value: "55%",
-              },
-            ],
-          },
-          {
-            key: "node10",
-            text: "116集群-节点2",
-            status: "normal",
-            combo: "D",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "23%",
-              },
-              {
-                name: "内存利用率",
-                value: "50%",
-              },
-            ],
-          },
-          {
-            key: "node11",
-            text: "116集群-节点3",
-            status: "normal",
-            combo: "D",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "26%",
-              },
-              {
-                name: "内存利用率",
-                value: "53%",
-              },
-            ],
-          },
-          {
-            key: "node12",
-            text: "116集群-节点4",
-            status: "normal",
-            combo: "D",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "24%",
-              },
-              {
-                name: "内存利用率",
-                value: "51%",
-              },
-            ],
-          },
-          // 主中心 - 141集群 (4个节点)
-          {
-            key: "node13",
-            text: "141集群",
-            status: "normal",
-            combo: "E",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "30%",
-              },
-              {
-                name: "内存利用率",
-                value: "60%",
-              },
-            ],
-          },
-          {
-            key: "node14",
-            text: "141集群-节点2",
-            status: "normal",
-            combo: "E",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "27%",
-              },
-              {
-                name: "内存利用率",
-                value: "58%",
-              },
-            ],
-          },
-          {
-            key: "node15",
-            text: "141集群-节点3",
-            status: "normal",
-            combo: "E",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "29%",
-              },
-              {
-                name: "内存利用率",
-                value: "59%",
-              },
-            ],
-          },
-          {
-            key: "node16",
-            text: "141集群-节点4",
-            status: "normal",
-            combo: "E",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "28%",
-              },
-              {
-                name: "内存利用率",
-                value: "57%",
-              },
-            ],
-          },
-          // 灾备中心 - 160集群 (3个节点)
-          {
-            key: "node17",
-            text: "160集群",
-            status: "idle",
-            combo: "F",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "22%",
-              },
-              {
-                name: "内存利用率",
-                value: "45%",
-              },
-            ],
-          },
-          {
-            key: "node18",
-            text: "160集群-节点2",
-            status: "idle",
-            combo: "F",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "20%",
-              },
-              {
-                name: "内存利用率",
-                value: "42%",
-              },
-            ],
-          },
-          {
-            key: "node19",
-            text: "160集群-节点3",
-            status: "idle",
-            combo: "F",
-
-            detail: [
-              {
-                name: "CPU利用率",
-                value: "24%",
-              },
-              {
-                name: "内存利用率",
-                value: "48%",
-              },
-            ],
+            listdetail: {
+              name: "35.114.1.24",
+              systemResourceLayer: [
+                {
+                  name: "CPU使用率",
+                  value: 16.760663,
+                },
+                {
+                  name: "物理内存已用量)",
+                  value: 50081943552,
+                },
+                {
+                  name: "磁盘空间使用率",
+                  value: 62.945834,
+                },
+                {
+                  name: "网卡入流量",
+                  value: 590547,
+                },
+                {
+                  name: "网卡出流量",
+                  value: 744768,
+                },
+                {
+                  name: "I/O使用率",
+                  value: 0.00338,
+                },
+                {
+                  name: "5分钟平均负载)",
+                  value: 4.4,
+                },
+                {
+                  name: "CPU核心数",
+                  value: 32,
+                },
+                {
+                  name: "CPU型号",
+                  value: "Intel(R) Xeon(R) Gold 5220R CPU @ 2.20GHz",
+                },
+                {
+                  name: "内存总量",
+                  value: 48124,
+                },
+                {
+                  name: "操作系统",
+                  value: "linux suse",
+                },
+                {
+                  name: "磁盘总量",
+                  value: 139,
+                },
+              ],
+              applicationSoftwareLayer: [
+                {
+                  label: "outexception关键字异常",
+                  value: 1,
+                },
+                {
+                  label: "告警数量",
+                  value: 0,
+                },
+              ],
+              businessServiceLayer: [
+                {
+                  label: "请求数",
+                  value: "1500次/分钟",
+                },
+                {
+                  label: "交易量",
+                  value: "1500次/分钟",
+                },
+                {
+                  label: "失败数",
+                  value: "5笔/分钟",
+                },
+                {
+                  label: "响应时间",
+                  value: "200ms",
+                },
+              ],
+            },
           },
         ],
-        edges: [
-          {
-            source: "loadBalancer", // 负载均衡器节点
-            target: "mainCenter", // 主中心
-            status: "normal",
-            name: "负载均衡器至主中心",
-            detailValue: [
-              { name: "带宽使用率", value: "45%" },
-              { name: "延迟", value: "2ms" },
-              { name: "丢包率", value: "0%" },
-            ],
-            hoverValue: [
-              { name: "带宽使用率", value: "45%" },
-              { name: "延迟", value: "2ms" },
-              { name: "丢包率", value: "0%" },
-            ],
-          },
-          {
-            source: "loadBalancer", // 负载均衡器节点
-            target: "noneCenter", //
-            status: "normal",
-            name: "负载均衡器至集群",
-            detailValue: [
-              { name: "带宽使用率", value: "45%" },
-              { name: "延迟", value: "2ms" },
-              { name: "丢包率", value: "0%" },
-            ],
-            hoverValue: [
-              { name: "带宽使用率", value: "45%" },
-              { name: "延迟", value: "2ms" },
-              { name: "丢包率", value: "0%" },
-            ],
-          },
-          {
-            source: "loadBalancer", // 负载均衡器节点
-            target: "disasterCenter", // 灾备中心
-            status: "normal",
-            name: "负载均衡器至灾备中心",
-            detailValue: [
-              { name: "带宽使用率", value: "45%" },
-              { name: "延迟", value: "2ms" },
-              { name: "丢包率", value: "0%" },
-            ],
-            hoverValue: [
-              { name: "带宽使用率", value: "45%" },
-              { name: "延迟", value: "2ms" },
-              { name: "丢包率", value: "0%" },
-            ],
-          },
-          {
-            source: "node2", // 负载均衡器节点
-            target: "node0-1", // 灾备中心
-            status: "normal",
-            name: "负载均衡器至灾备中心",
-            detailValue: [
-              { name: "带宽使用率", value: "45%" },
-              { name: "延迟", value: "2ms" },
-              { name: "丢包率", value: "0%" },
-            ],
-            hoverValue: [
-              { name: "带宽使用率", value: "45%" },
-              { name: "延迟", value: "2ms" },
-              { name: "丢包率", value: "0%" },
-            ],
-          },
-          {
-            source: "node2", // 负载均衡器节点
-            target: "node0-2", // 灾备中心
-            status: "normal",
-            name: "负载均衡器至灾备中心",
-            detailValue: [
-              { name: "带宽使用率", value: "45%" },
-              { name: "延迟", value: "2ms" },
-              { name: "丢包率", value: "0%" },
-            ],
-            hoverValue: [
-              { name: "带宽使用率", value: "45%" },
-              { name: "延迟", value: "2ms" },
-              { name: "丢包率", value: "0%" },
-            ],
-          },
-        ],
+        // edges: [
+        //   {
+        //     source: "loadBalancer",
+        //     target: "mainCenter",
+        //     status: "normal",
+        //     name: "负载均衡器至主中心",
+        //     detailValue: [
+        //       {
+        //         name: "带宽使用率",
+        //         value: "45%",
+        //       },
+        //       {
+        //         name: "延迟",
+        //         value: "2ms",
+        //       },
+        //       {
+        //         name: "丢包率",
+        //         value: "0%",
+        //       },
+        //     ],
+        //     hoverValue: [
+        //       {
+        //         name: "带宽使用率",
+        //         value: "45%",
+        //       },
+        //       {
+        //         name: "延迟",
+        //         value: "2ms",
+        //       },
+        //       {
+        //         name: "丢包率",
+        //         value: "0%",
+        //       },
+        //     ],
+        //   },
+        //   {
+        //     source: "loadBalancer",
+        //     target: "noneCenter",
+        //     status: "normal",
+        //     name: "负载均衡器至集群",
+        //     detailValue: [
+        //       {
+        //         name: "带宽使用率",
+        //         value: "45%",
+        //       },
+        //       {
+        //         name: "延迟",
+        //         value: "2ms",
+        //       },
+        //       {
+        //         name: "丢包率",
+        //         value: "0%",
+        //       },
+        //     ],
+        //     hoverValue: [
+        //       {
+        //         name: "带宽使用率",
+        //         value: "45%",
+        //       },
+        //       {
+        //         name: "延迟",
+        //         value: "2ms",
+        //       },
+        //       {
+        //         name: "丢包率",
+        //         value: "0%",
+        //       },
+        //     ],
+        //   },
+        //   {
+        //     source: "loadBalancer",
+        //     target: "disasterCenter",
+        //     status: "normal",
+        //     name: "负载均衡器至灾备中心",
+        //     detailValue: [
+        //       {
+        //         name: "带宽使用率",
+        //         value: "45%",
+        //       },
+        //       {
+        //         name: "延迟",
+        //         value: "2ms",
+        //       },
+        //       {
+        //         name: "丢包率",
+        //         value: "0%",
+        //       },
+        //     ],
+        //     hoverValue: [
+        //       {
+        //         name: "带宽使用率",
+        //         value: "45%",
+        //       },
+        //       {
+        //         name: "延迟",
+        //         value: "2ms",
+        //       },
+        //       {
+        //         name: "丢包率",
+        //         value: "0%",
+        //       },
+        //     ],
+        //   },
+        //   {
+        //     source: "node2",
+        //     target: "node0-1",
+        //     status: "normal",
+        //     name: "负载均衡器至灾备中心",
+        //     detailValue: [
+        //       {
+        //         name: "带宽使用率",
+        //         value: "45%",
+        //       },
+        //       {
+        //         name: "延迟",
+        //         value: "2ms",
+        //       },
+        //       {
+        //         name: "丢包率",
+        //         value: "0%",
+        //       },
+        //     ],
+        //     hoverValue: [
+        //       {
+        //         name: "带宽使用率",
+        //         value: "45%",
+        //       },
+        //       {
+        //         name: "延迟",
+        //         value: "2ms",
+        //       },
+        //       {
+        //         name: "丢包率",
+        //         value: "0%",
+        //       },
+        //     ],
+        //   },
+        //   {
+        //     source: "node2",
+        //     target: "node0-2",
+        //     status: "normal",
+        //     name: "负载均衡器至灾备中心",
+        //     detailValue: [
+        //       {
+        //         name: "带宽使用率",
+        //         value: "45%",
+        //       },
+        //       {
+        //         name: "延迟",
+        //         value: "2ms",
+        //       },
+        //       {
+        //         name: "丢包率",
+        //         value: "0%",
+        //       },
+        //     ],
+        //     hoverValue: [
+        //       {
+        //         name: "带宽使用率",
+        //         value: "45%",
+        //       },
+        //       {
+        //         name: "延迟",
+        //         value: "2ms",
+        //       },
+        //       {
+        //         name: "丢包率",
+        //         value: "0%",
+        //       },
+        //     ],
+        //   },
+        // ],
         combos: [
           {
-            id: "A",
-            name: "应用集群A",
+            id: "818",
+            name: "开发环境",
             parentId: "mainCenter",
             status: "normal",
           },
           {
-            id: "B",
-            name: "应用集群B",
+            id: "819",
+            name: "SIT环境",
             parentId: "mainCenter",
             status: "normal",
           },
           {
-            id: "C",
-            name: "应用集群C",
+            id: "820",
+            name: "UAT环境",
             parentId: "mainCenter",
             status: "normal",
           },
           {
-            id: "D",
-            name: "应用集群D",
+            id: "821",
+            name: "准生产环境",
             parentId: "mainCenter",
-            status: "normal",
-          },
-          {
-            id: "E",
-            name: "应用集群E",
-            parentId: "mainCenter",
-            status: "normal",
-          },
-          {
-            id: "F",
-            name: "应用集群F",
-            parentId: "disasterCenter",
-            status: "idle", //状态为闲置时，combo颜色为绿色
-          },
-          {
-            id: "G",
-            name: "DB集群",
-            parentId: "noneCenter",
             status: "normal",
           },
         ],
-        // 组合详情数据
         comboList: [
           {
             source: "A",
@@ -808,35 +1023,34 @@ export default {
             },
           },
         ],
-        // 新增的combosParent结构
         combosParent: [
           {
-            name: "主中心",
+            name: "开发测试",
             id: "mainCenter",
-            children: ["A", "B", "C", "D", "E"],
-            status: "normal", //状态为normal时，combo颜色为默认颜色蓝色
+            children: ["818", "819", "820", "821"],
+            status: "normal",
           },
           {
             name: "",
             id: "noneCenter",
             children: ["G"],
-            status: "normal", //状态为normal时，combo颜色为默认颜色蓝色
+            status: "normal",
           },
           {
             name: "灾备中心",
             id: "disasterCenter",
             children: ["F"],
-            status: "idle", //状态为闲置时，combo颜色为绿色
+            status: "idle",
           },
         ],
       },
     };
   },
   mounted() {
-    //   const newObject = Object.fromEntries(
-    //     Object.entries(this.tabRawData).map(([key, value]) => [ `"${key}"`, value ])
-    // );
-    // console.log(JSON.stringify(newObject),'newObject');
+    const newObject = Object.fromEntries(
+      Object.entries(this.tabRawData).map(([key, value]) => [`"${key}"`, value])
+    );
+    console.log(JSON.stringify(newObject), "newObject");
 
     this.com = new CustomComponent();
     this.com.init(
@@ -874,7 +1088,7 @@ export default {
 #com-container {
   width: 100%;
   height: 100%;
-  // background-color: #0b1421;
+  background-color: #0b1421;
   // 确保容器可以正确应用变换
   transform-origin: center center;
 }
