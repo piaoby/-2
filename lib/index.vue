@@ -302,7 +302,8 @@ export default {
 
             if (minY !== Infinity && maxY !== -Infinity) {
               // 放置在整个布局的左侧中间
-              loadBalancerNode.x = 100; // 左侧固定位置
+              loadBalancerNode.x =
+                validParents[0].x - (validParents[0].width / 3) * 2; // 左侧200px位置
               loadBalancerNode.y = (minY + maxY) / 2; // 垂直居中
             }
           }
@@ -318,17 +319,35 @@ export default {
      * @param {Array} nodes - 节点数组
      */
     layoutCombos(combos, nodes) {
-      const spacing = 50; // 间距
-      const maxPerRow = 2; // 每行最多两个
-      const titleHeight = 50; // 父容器标题高度
+      // 参数校验
+      if (!Array.isArray(combos) || !Array.isArray(nodes)) {
+        return;
+      }
 
-      // 先找出所有父 combo（主中心、灾备中心）
-      const parentCombos = combos.filter(
-        (c) =>
-          c.id === "mainCenter" ||
-          c.id === "noneCenter" ||
-          c.id === "disasterCenter"
-      );
+      // 提取常量
+      const SPACING = 100;
+      const MAX_PER_ROW = 2;
+      const TITLE_HEIGHT = 50;
+      const NODE_SIZE = 200;
+      const NODE_SPACING = 150;
+      const PADDING = 50;
+      const LABEL_HEIGHT = 40;
+      const VERTICAL_SPACING = 100;
+      const START_X = 100;
+
+      // 动态获取父combo ID，基于combosParent数据
+      let parentComboIds = [];
+      if (
+        this.tabRawData.combosParent &&
+        Array.isArray(this.tabRawData.combosParent)
+      ) {
+        parentComboIds = this.tabRawData.combosParent.map(
+          (parent) => parent.id
+        );
+      }
+
+      // 先找出所有父 combo（基于动态数据）
+      const parentCombos = combos.filter((c) => parentComboIds.includes(c.id));
 
       // 先处理子 combo 的尺寸计算
       const childCombos = combos.filter(
@@ -340,17 +359,14 @@ export default {
         // 获取该 combo 下的所有节点
         const childNodes = nodes.filter((n) => n.comboId === child.id);
 
-        // 检查combo的parentId是否为mainCenter
+        // 检查combo的parentId是否为mainCenter（第一个父combo作为mainCenter）
         const combo = this.tabRawData.combos?.find((c) => c.id === child.id);
-        const isMainCenterChild = combo && combo.parentId === "mainCenter";
-
-        const nodeSize = 200;
-        const nodeSpacing = 150;
-        const padding = 50;
-        const labelHeight = 40;
+        const isMainCenterChild =
+          combo &&
+          parentComboIds.length > 0 &&
+          combo.parentId === parentComboIds[0];
 
         // 在 layoutCombos 方法中，针对 mainCenter 子 combo 的处理部分
-
         if (isMainCenterChild) {
           // 对于mainCenter的子combo：每列最多2个节点，从左到右排列
           const nodesPerColumn = 2;
@@ -361,18 +377,19 @@ export default {
 
           // 计算实际尺寸 - 只有当有多列或多行时才添加间距
           const width =
-            columns * nodeSize +
-            (columns > 1 ? (columns - 1) * nodeSpacing : 0) +
-            2 * padding;
+            columns * NODE_SIZE +
+            (columns > 1 ? (columns - 1) * NODE_SPACING : 0) +
+            2 * PADDING;
 
           const height =
-            actualRows * nodeSize +
-            (actualRows > 1 ? (actualRows - 1) * nodeSpacing : 0) +
-            2 * padding +
-            labelHeight * 2;
+            actualRows * NODE_SIZE +
+            (actualRows > 1 ? (actualRows - 1) * NODE_SPACING : 0) +
+            2 * PADDING +
+            LABEL_HEIGHT * 2;
 
           child.width = width;
           child.height = height;
+          console.log("child.width", width);
         } else {
           // 其他combo使用4列水平布局
           const nodesPerRow = 4;
@@ -384,22 +401,22 @@ export default {
           // 特别处理只有一个节点的情况
           if (childNodes.length === 1) {
             // 单个节点时，combo只需要容纳一个节点的空间
-            const width = nodeSize + 2 * padding;
-            const height = nodeSize + labelHeight + 2 * padding;
+            const width = NODE_SIZE + 2 * PADDING;
+            const height = NODE_SIZE + LABEL_HEIGHT + 2 * PADDING;
             child.width = width;
             child.height = height;
           } else {
             // 计算实际尺寸
             const width =
-              cols * nodeSize +
-              (cols > 1 ? (cols - 1) * nodeSpacing : 0) +
-              2 * padding;
+              cols * NODE_SIZE +
+              (cols > 1 ? (cols - 1) * NODE_SPACING : 0) +
+              2 * PADDING;
 
             const height =
-              rows * nodeSize +
-              (rows > 1 ? (rows - 1) * nodeSpacing : 0) +
-              2 * padding +
-              labelHeight;
+              rows * NODE_SIZE +
+              (rows > 1 ? (rows - 1) * NODE_SPACING : 0) +
+              2 * PADDING +
+              LABEL_HEIGHT;
 
             child.width = width;
             child.height = height;
@@ -429,45 +446,47 @@ export default {
           maxHeight = Math.max(maxHeight, child.height || 150);
         });
 
-        // 在 layoutCombos 方法中修改这部分代码：
-
-        // 特别处理mainCenter：水平排列
-        if (parent.id === "mainCenter") {
+        // 特别处理第一个父combo（mainCenter）：水平排列
+        const isFirstParent =
+          parentComboIds.length > 0 && parent.id === parentComboIds[0];
+        if (isFirstParent) {
           // 水平排列时，宽度是所有子combo宽度之和加上间距
           let totalWidth = 0;
           children.forEach((child, index) => {
+            console.log(child.width, index);
             totalWidth += child.width || 250;
             if (index < children.length - 1) {
-              totalWidth += spacing; // 添加间距
+              totalWidth += SPACING; // 添加间距
             }
           });
 
-          parent.width = totalWidth + spacing * 2; // 左右各一个spacing
-          parent.height = (maxHeight || 150) + titleHeight * 2 + spacing * 3; // 上下各一个spacing，加上标题区域
+          parent.width = totalWidth + SPACING * 2; // 左右各一个spacing
+          console.log(parent.width, "parent.width");
+
+          parent.height = (maxHeight || 150) + TITLE_HEIGHT * 2 + SPACING; // 上下各一个spacing，加上标题区域
         } else {
-          // 特别处理noneCenter和disasterCenter，当只有一个子combo时，让父容器尺寸更大
-          if (
-            children.length === 1 &&
-            (parent.id === "noneCenter" || parent.id === "disasterCenter")
-          ) {
-            // 当noneCenter或disasterCenter只有一个子combo时，让父容器尺寸接近子combo尺寸但稍大一些
+          // 特别处理其他父combo，当只有一个子combo时，让父容器尺寸更大
+          const isSingleChild = children.length === 1;
+
+          if (isSingleChild) {
+            // 当父combo只有一个子combo时，让父容器尺寸接近子combo尺寸但稍大一些
             const child = children[0];
             // 设置父容器尺寸稍大于子combo，确保有足够的边距
             parent.width = (child.width || 250) + 200; // 增加左右各100px的边距
             parent.height = (child.height || 150) + 200; // 增加上下各100px的边距
           } else {
             // 其他父combo保持原有计算方式
-            const rows = Math.ceil(children.length / maxPerRow) || 1;
-            const cols = Math.min(children.length, maxPerRow);
+            const rows = Math.ceil(children.length / MAX_PER_ROW) || 1;
+            const cols = Math.min(children.length, MAX_PER_ROW);
 
             // 计算父容器尺寸
             const parentWidth =
-              cols * maxWidth + (cols - 1) * spacing + spacing * 2;
+              cols * maxWidth + (cols - 1) * SPACING + SPACING * 2;
             const parentHeight =
-              titleHeight * 2 +
+              TITLE_HEIGHT * 2 +
               rows * maxHeight +
-              (rows - 1) * spacing +
-              spacing * 2 +
+              (rows - 1) * SPACING +
+              SPACING * 2 +
               50; // 上下都增加标题区域高度
 
             parent.width = parentWidth;
@@ -476,12 +495,14 @@ export default {
         }
       });
 
-      // 确保所有父combo使用相同的宽度（以mainCenter为准）
-      if (parentCombos.length > 0) {
-        const mainCenter = parentCombos.find((c) => c.id === "mainCenter");
-        if (mainCenter) {
-          // 使用mainCenter的宽度作为统一宽度
-          const unifiedWidth = mainCenter.width;
+      // 确保所有父combo使用相同的宽度（以第一个父combo为准）
+      if (parentCombos.length > 0 && parentComboIds.length > 0) {
+        const firstParent = parentCombos.find(
+          (c) => c.id === parentComboIds[0]
+        );
+        if (firstParent) {
+          // 使用第一个父combo的宽度作为统一宽度
+          const unifiedWidth = firstParent.width;
 
           // 为所有父combo设置相同的宽度
           parentCombos.forEach((parent) => {
@@ -490,59 +511,36 @@ export default {
         }
       }
 
-      // 三区域布局：上(主中心)、中(独立combo)、下(灾备中心)
-      if (parentCombos.length >= 2) {
-        // 按照固定顺序排列
-        const mainCenter = parentCombos.find((c) => c.id === "mainCenter");
-        const noneCenter = parentCombos.find((c) => c.id === "noneCenter");
-        const disasterCenter = parentCombos.find(
-          (c) => c.id === "disasterCenter"
-        );
+      // 按照顺序排列所有父combo
+      if (parentCombos.length >= 1) {
+        // 按照parentComboIds的顺序排列
+        const orderedParents = parentComboIds
+          .map((id) => parentCombos.find((c) => c.id === id))
+          .filter(Boolean);
 
-        const allParents = [mainCenter, noneCenter, disasterCenter].filter(
-          Boolean
-        );
-
-        if (allParents.length > 0) {
-          // 使用统一间距
-          const verticalSpacing = 100; // 统一间距
-          const startX = 100;
-
+        if (orderedParents.length > 0) {
           // 计算所有父combo的位置，确保间距一致
-          let currentY = verticalSpacing;
+          let currentY = VERTICAL_SPACING;
 
-          allParents.forEach((parent, index) => {
+          orderedParents.forEach((parent, index) => {
             if (parent) {
-              parent.x = startX;
+              parent.x = START_X;
               parent.y = currentY;
 
               // 更新currentY为当前combo的底部位置
               currentY += parent.height || 400;
 
               // 如果不是最后一个元素，添加间距
-              if (index < allParents.length - 1) {
-                currentY += verticalSpacing;
+              if (index < orderedParents.length - 1) {
+                currentY += VERTICAL_SPACING;
               }
             }
           });
-
-          // 特别处理noneCenter，让它向上偏移自身高度的一半+边距
-          if (noneCenter) {
-            const offset = verticalSpacing;
-            noneCenter.y -= offset;
-
-            // 同时调整上方和下方的combo，避免重叠
-            // if (mainCenter) {
-            //   mainCenter.y -= offset / 2;
-            // }
-            // if (disasterCenter) {
-            //   disasterCenter.y += offset / 2;
-            // }
-          }
+          console.log(orderedParents, "orderedParents");
 
           // 存储位置信息
           this.parentComboPositions = {};
-          allParents.forEach((parent, index) => {
+          orderedParents.forEach((parent) => {
             if (parent) {
               this.parentComboPositions[parent.id] = {
                 x: parent.x,
@@ -560,63 +558,27 @@ export default {
         const children = combos.filter(
           (c) => c.parentId === parent.id && c.type === "custom-combo"
         );
+        {
+          const isSingleChild = children.length === 1;
 
-        // 特别处理mainCenter：水平从左到右排列
-        if (parent.id === "mainCenter") {
-          const titleHeight = 50;
-          // 计算垂直居中位置（考虑标题区域）
-          const centerY =
-            parent.y + titleHeight + (parent.height - titleHeight * 2) / 2;
-
-          // 从父容器的左侧内边距开始计算
-          let currentX = parent.x + spacing;
-
-          children.forEach((child, index) => {
-            // 特别处理应用集群C，让它向左偏移
-            let offsetX = 0;
-            if (child.id === "C") {
-              offsetX = -(child.width / 2) - spacing / 2; // 应用集群C向左偏移
-            }
-            // 水平排列，垂直居中（考虑标题区域）
-            child.x = currentX + offsetX;
-            child.y = centerY - (child.height || 150) / 2;
-
-            // 使用实际计算的宽度，如果没有则使用默认值
-            const childWidth = child.width || 250;
-            // 更新下一个元素的X位置，加上当前元素宽度和间距
-            currentX += childWidth + spacing;
-          });
-        } else {
-          // 特别处理noneCenter和disasterCenter，当只有一个子combo时，让其居中显示
-          if (
-            children.length === 1 &&
-            (parent.id === "noneCenter" || parent.id === "disasterCenter")
-          ) {
+          if (isSingleChild) {
             const child = children[0];
             // 让子combo在父容器中居中显示
             child.x = parent.x + (parent.width - (child.width || 250)) / 2;
             child.y = parent.y + (parent.height - (child.height || 150)) / 2;
           } else {
-            // 其他父combo保持原有布局逻辑
-            // 找到子combo中的最大尺寸作为基准
-            let maxWidth = 0;
-            let maxHeight = 0;
-            children.forEach((child) => {
-              maxWidth = Math.max(maxWidth, child.width || 250);
-              maxHeight = Math.max(maxHeight, child.height || 150);
-            });
+            let currentX = parent.x + SPACING;
+            let currentY = parent.y + SPACING; // 初始Y坐标
+            let rowMaxHeight = 0; // 当前行的最大高度
 
             children.forEach((child, index) => {
-              const col = index % maxPerRow;
-              const row = Math.floor(index / maxPerRow);
+              const childWidth = child.width || 250;
+          
 
-              // 子 combo 相对于父 combo 的偏移（考虑标题区域）
-              child.x = parent.x + spacing + col * (maxWidth + spacing);
-              child.y =
-                parent.y +
-                titleHeight * 2 +
-                spacing +
-                row * (maxHeight + spacing);
+              child.x = currentX;
+
+              // 更新当前位置
+              currentX += childWidth + SPACING;
             });
           }
         }
@@ -927,8 +889,8 @@ export default {
         // 获取节点详情数据
         const detailData = this.convertToNodeDetailData(this.tabRawData);
         const nodeDetail = detailData[nodeId];
-        console.log(nodeDetail,'nodeDetail');
-        
+        console.log(nodeDetail, "nodeDetail");
+
         if (!nodeDetail || nodeDetail.length === 0) {
           console.warn(`No detail data found for node ${nodeId}`);
           return;
@@ -1124,12 +1086,12 @@ export default {
 
       //   this.edgeTooltipElement.style.display = "block";
       // }),
-        // 边鼠标移出事件
-        // this.graph.on("edge:mouseleave", (evt) => {
-        //   if (this.edgeTooltipElement) {
-        //     this.edgeTooltipElement.style.display = "none";
-        //   }
-        // });
+      // 边鼠标移出事件
+      // this.graph.on("edge:mouseleave", (evt) => {
+      //   if (this.edgeTooltipElement) {
+      //     this.edgeTooltipElement.style.display = "none";
+      //   }
+      // });
 
       // 添加画布点击事件（点击空白处）
       // this.graph.on("canvas:click", (evt) => {
@@ -1277,31 +1239,31 @@ export default {
      * @param {String} level - 告警等级
      * @returns {String} 颜色值
      */
-        getValueColor(type, level) {
-          // 定义颜色映射表
-          const colorMap = {
-            numeric: {
-              "0": "#fff",   // 白色（数值字段）
-              "1": "#ffc53d", // 黄色（警告）
-              "2": "#ffa940", // 橙色（严重警告）
-              "3": "#ff4d4f"  // 红色（危险）
-            },
-            enum: {
-              "0": "#61bd4f",  // 绿色（枚举字段）
-              "1": "#ffc53d",  // 黄色（警告）
-              "2": "#ffa940",  // 橙色（严重警告）
-              "3": "#ff4d4f"   // 红色（危险）
-            }
-          };
-    
-          // 根据类型和级别返回相应颜色
-          if (colorMap[type] && colorMap[type][level]) {
-            return colorMap[type][level];
-          }
-    
-          // 默认返回白色
-          return "#fff";
+    getValueColor(type, level) {
+      // 定义颜色映射表
+      const colorMap = {
+        numeric: {
+          0: "#fff", // 白色（数值字段）
+          1: "#ffc53d", // 黄色（警告）
+          2: "#ffa940", // 橙色（严重警告）
+          3: "#ff4d4f", // 红色（危险）
         },
+        enum: {
+          0: "#61bd4f", // 绿色（枚举字段）
+          1: "#ffc53d", // 黄色（警告）
+          2: "#ffa940", // 橙色（严重警告）
+          3: "#ff4d4f", // 红色（危险）
+        },
+      };
+
+      // 根据类型和级别返回相应颜色
+      if (colorMap[type] && colorMap[type][level]) {
+        return colorMap[type][level];
+      }
+
+      // 默认返回白色
+      return "#fff";
+    },
     /** 组件配置项变更时触发 */
     setStyle(k, v) {
       const keyList = k.split("$");
@@ -1319,8 +1281,8 @@ export default {
 
       this.tabRawData = data;
       let graphData = this.convertToGraphData(data);
-      console.log(graphData,'graphData');
-      
+      console.log(graphData, "graphData");
+
       if (this.graph) {
         this.graph.changeData(graphData);
         this.graph.fitView([20, 100, 20, 100]);
@@ -1476,7 +1438,7 @@ export default {
           }
         }
       }
-    .node-detail-content {
+      .node-detail-content {
         width: 100%;
         height: calc(100% - 150px);
         // max-height: 600px;
@@ -1529,13 +1491,13 @@ export default {
             &:hover {
               background-color: #10375d;
             }
-            
+
             .section-grid {
               display: grid;
               grid-template-columns: 1fr 1fr;
               gap: 8px;
             }
-            
+
             .section-item {
               display: flex;
               justify-content: space-between;
@@ -1562,7 +1524,7 @@ export default {
                 min-width: 0;
                 flex: 1;
                 justify-content: flex-end;
-                
+
                 span {
                   font-size: 12px;
                   line-height: 1;
