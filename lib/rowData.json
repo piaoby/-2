@@ -86,79 +86,79 @@
                 "status": "normal",
                 "systemResourceLayer": [
                     {
-                        "label": "主机状态",
+                        "name": "主机状态",
                         "value": " 在线",
                         "level": "0",
                         "type": "enum"
                     },
                     {
-                        "label": "主机运行时间",
+                        "name": "主机运行时间",
                         "value": "120天",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "CPU数量",
+                        "name": "CPU数量",
                         "value": "8核",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "内存总量",
+                        "name": "内存总量",
                         "value": "32GB",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "磁盘总量",
+                        "name": "磁盘总量",
                         "value": "1TB",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "网络带宽",
+                        "name": "网络带宽",
                         "value": "1Gbps",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "CPU使用率",
+                        "name": "CPU使用率",
                         "value": "20%",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "内存使用率",
+                        "name": "内存使用率",
                         "value": "45%",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "磁盘使用率",
+                        "name": "磁盘使用率",
                         "value": "35%",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "僵尸进程数量",
+                        "name": "僵尸进程数量",
                         "value": "0",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "监控采集器状态",
+                        "name": "监控采集器状态",
                         "value": " normal",
                         "level": "0",
                         "type": "enum"
                     },
                     {
-                        "label": "磁盘IO",
+                        "name": "磁盘IO",
                         "value": "15%",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "平均负载",
+                        "name": "平均负载",
                         "value": "1.2",
                         "level": "0",
                         "type": "numeric"
@@ -166,61 +166,61 @@
                 ],
                 "businessServiceLayer": [
                     {
-                        "label": "CPU利用率",
+                        "name": "CPU利用率",
                         "value": "20%",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "内存利用率",
+                        "name": "内存利用率",
                         "value": "15%",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "服务响应时间",
+                        "name": "服务响应时间",
                         "value": "120ms",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "服务可用率",
+                        "name": "服务可用率",
                         "value": "99.9%",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "请求成功率",
+                        "name": "请求成功率",
                         "value": "99.5%",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "每秒请求数",
+                        "name": "每秒请求数",
                         "value": "1500",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "错误率",
+                        "name": "错误率",
                         "value": "0.5%",
                         "level": "1",
                         "type": "numeric"
                     },
                     {
-                        "label": "响应时间",
+                        "name": "响应时间",
                         "value": "100ms",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "吞吐量",
+                        "name": "吞吐量",
                         "value": "500KB/s",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "连接数",
+                        "name": "连接数",
                         "value": "200",
                         "level": "0",
                         "type": "numeric"
@@ -228,43 +228,43 @@
                 ],
                 "applicationSoftwareLayer": [
                     {
-                        "label": "osb_server4进程状态",
+                        "name": "osb_server4进程状态",
                         "value": " 运行中",
                         "level": "0",
                         "type": "enum"
                     },
                     {
-                        "label": "SYN_SEND总数",
+                        "name": "SYN_SEND总数",
                         "value": "120",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "SYN_RECV总数",
+                        "name": "SYN_RECV总数",
                         "value": "85",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "SOCKET使用量",
+                        "name": "SOCKET使用量",
                         "value": "420",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "监听端口请求量",
+                        "name": "监听端口请求量",
                         "value": "2450",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "网络接口丢包率",
+                        "name": "网络接口丢包率",
                         "value": "0.01%",
                         "level": "0",
                         "type": "numeric"
                     },
                     {
-                        "label": "僵尸进程数量",
+                        "name": "僵尸进程数量",
                         "value": "0",
                         "level": "0",
                         "type": "numeric"

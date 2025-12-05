@@ -1,5 +1,10 @@
 <template>
   <div class="custom-component" ref="component">
+    <!-- Loading状态 -->
+    <div v-if="isLoading" class="loading-container">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">加载中...</div>
+    </div>
     <!-- 三栏布局容器 -->
     <div class="layout-container">
       <!-- 中间 G6 画布 -->
@@ -31,8 +36,12 @@
                   :key="index"
                   class="section-item"
                 >
-                  <span class="item-label">{{ value.name }}:</span>
-                  <span class="item-value">{{ value.value }}</span>
+                  <span class="item-label" :title="value.name"
+                    >{{ value.name }}:</span
+                  >
+                  <span class="item-value" :title="value.value">{{
+                    value.value
+                  }}</span>
                 </div>
               </div>
             </div>
@@ -53,8 +62,12 @@
                   :key="i"
                   class="section-item"
                 >
-                  <div class="item-label" v-if="section.title != '操作列表'">
-                    {{ item.label }}:
+                  <div
+                    class="item-label"
+                    :title="item.name"
+                    v-if="section.title != '操作列表'"
+                  >
+                    {{ item.name }}:
                   </div>
                   <div class="item-value">
                     <span
@@ -62,6 +75,7 @@
                         color:
                           item.color || getValueColor(item.type, item.level),
                       }"
+                      :title="item.value"
                     >
                       {{ item.value }}
                     </span>
@@ -102,6 +116,8 @@ export default {
       detailItems: [],
       parentComboPositions: null,
       activeTab: "internal", // 默认选中第一个tab
+      // 添加loading状态
+      isLoading: true, // 默认为loading状态
     };
   },
   created() {
@@ -144,7 +160,6 @@ export default {
           computedStyle.transform || computedStyle.webkitTransform;
         if (transform && transform !== "none") {
           const matrix = new DOMMatrixReadOnly(transform);
-          console.log(matrix, "matrix");
           const scale = { scaleX: matrix.a, scaleY: matrix.d };
 
           this.$refs.component.style.transform = `scale(${1 / scale.scaleX}, ${
@@ -234,7 +249,6 @@ export default {
           });
         }
       }
-      console.log(nodes, "nodes");
 
       return nodes;
     },
@@ -335,9 +349,6 @@ export default {
       const LABEL_HEIGHT = 40;
       const VERTICAL_SPACING = 100;
       const START_X = this.graph ? this.graph.get("width") / 4 : 100;
-
-      console.log(START_X, "START_X");
-
       // 动态获取父combo ID，基于combosParent数据
       let parentComboIds = [];
       if (
@@ -622,49 +633,50 @@ export default {
             status: edge.status,
             name: edge.name || `${edge.source} → ${edge.target}`, // 添加 name 字段，默认值
           };
+          if (rawData.combosParent.length > 1) {
+            // 定义锚点映射关系表（基于实际的锚点索引）
+            const anchorMap = {
+              // 负载均衡到主中心: 负载均衡的下1锚点(索引0)到主中心的上1锚点(索引0)
+              "loadBalancer->mainCenter": { sourceAnchor: 2, targetAnchor: 0 },
+              // 负载均衡到灾备中心: 负载均衡的下4锚点(索引3)到灾备中心的上2锚点(索引1)
+              "loadBalancer->noneCenter": {
+                sourceAnchor: 1,
+                targetAnchor: 0,
+              },
+              // 灾备中心到负载均衡: 灾备中心的上1锚点(索引0)到负载均衡的下3锚点(索引2)
+              "loadBalancer->disasterCenter": {
+                sourceAnchor: 3,
+                targetAnchor: 0,
+              },
+            };
 
-          // 定义锚点映射关系表（基于实际的锚点索引）
-          const anchorMap = {
-            // 负载均衡到主中心: 负载均衡的下1锚点(索引0)到主中心的上1锚点(索引0)
-            "loadBalancer->mainCenter": { sourceAnchor: 2, targetAnchor: 0 },
-            // 负载均衡到灾备中心: 负载均衡的下4锚点(索引3)到灾备中心的上2锚点(索引1)
-            "loadBalancer->noneCenter": {
-              sourceAnchor: 1,
-              targetAnchor: 0,
-            },
-            // 灾备中心到负载均衡: 灾备中心的上1锚点(索引0)到负载均衡的下3锚点(索引2)
-            "loadBalancer->disasterCenter": {
-              sourceAnchor: 3,
-              targetAnchor: 0,
-            },
-          };
+            // 构造当前边的标识符用于查找映射
+            const sourceType = edge.source.includes("loadBalancer")
+              ? "loadBalancer"
+              : edge.source.includes("mainCenter")
+              ? "mainCenter"
+              : edge.source.includes("disasterCenter")
+              ? "disasterCenter"
+              : "other";
 
-          // 构造当前边的标识符用于查找映射
-          const sourceType = edge.source.includes("loadBalancer")
-            ? "loadBalancer"
-            : edge.source.includes("mainCenter")
-            ? "mainCenter"
-            : edge.source.includes("disasterCenter")
-            ? "disasterCenter"
-            : "other";
+            const targetType = edge.target.includes("loadBalancer")
+              ? "loadBalancer"
+              : edge.target.includes("mainCenter")
+              ? "mainCenter"
+              : edge.target.includes("disasterCenter")
+              ? "disasterCenter"
+              : "other";
 
-          const targetType = edge.target.includes("loadBalancer")
-            ? "loadBalancer"
-            : edge.target.includes("mainCenter")
-            ? "mainCenter"
-            : edge.target.includes("disasterCenter")
-            ? "disasterCenter"
-            : "other";
+            const key = `${sourceType}->${targetType}`;
 
-          const key = `${sourceType}->${targetType}`;
-
-          // 应用对应的锚点配置
-          if (anchorMap[key]) {
-            newEdge.sourceAnchor = anchorMap[key].sourceAnchor;
-            newEdge.targetAnchor = anchorMap[key].targetAnchor;
-          } else {
-            // 可选：打印日志或设置默认锚点以防止意外情况
-            console.warn(`未找到对应锚点配置: ${key}`);
+            // 应用对应的锚点配置
+            if (anchorMap[key]) {
+              newEdge.sourceAnchor = anchorMap[key].sourceAnchor;
+              newEdge.targetAnchor = anchorMap[key].targetAnchor;
+            } else {
+              // 可选：打印日志或设置默认锚点以防止意外情况
+              console.warn(`未找到对应锚点配置: ${key}`);
+            }
           }
           return newEdge;
         });
@@ -882,7 +894,6 @@ export default {
         // 获取节点详情数据
         const detailData = this.convertToNodeDetailData(this.tabRawData);
         const nodeDetail = detailData[nodeId];
-        console.log(nodeDetail, "nodeDetail");
 
         if (!nodeDetail || nodeDetail.length === 0) {
           console.warn(`No detail data found for node ${nodeId}`);
@@ -1115,9 +1126,6 @@ export default {
               // 重新应用边的样式以触发动画
               this.graph.refreshItem(edge);
             });
-
-            // 图渲染完成后，自动显示第一个combo的详情
-            this.showFirstComboDetail();
           }, 200);
         }
       });
@@ -1270,8 +1278,8 @@ export default {
 
     /** 组件数据变更时触发 */
     setData(data) {
-      if (!data || typeof data !== "object") return;
-
+      if (!data || typeof data !== "object" || Object.keys(data).length === 0)
+        return;
       this.tabRawData = data;
       let graphData = this.convertToGraphData(data);
       console.log(graphData, "graphData");
@@ -1291,6 +1299,10 @@ export default {
       } else {
         this.initGraph(); // 确保 graph 已创建
       }
+      // 图渲染完成后，自动显示第一个combo的详情
+      this.showFirstComboDetail();
+      // 数据加载完成后，关闭loading状态
+      this.isLoading = false;
     },
     /** 组件销毁时触发 */
     destroy() {
@@ -1310,7 +1322,36 @@ export default {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  .loading-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #111d30;
+    color: #409eff;
 
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #409eff;
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 16px;
+    }
+
+    .loading-text {
+      font-size: 16px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
   .layout-container {
     display: flex;
     width: 100%;
@@ -1326,6 +1367,7 @@ export default {
       .ring-chart {
         width: 100%;
         height: 100%;
+
         box-sizing: border-box;
       }
     }
@@ -1487,40 +1529,45 @@ export default {
 
             .section-grid {
               display: grid;
-              grid-template-columns: 1fr 1fr;
+              grid-template-columns: 1fr 1fr; /* 严格平均分配两列 */
               gap: 8px;
             }
 
             .section-item {
-              display: flex;
-              justify-content: space-between;
-              padding: 5px 0;
+              display: table;
+              width: 100%;
+              table-layout: fixed; /* 固定表格布局 */
 
               .item-label {
                 font-size: 12px;
                 color: #fff;
+                display: table-cell;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                flex: 1;
+                padding-right: 8px;
+                word-break: keep-all;
+                // width: 1%; /* 尽可能小，但让内容决定实际宽度 */
               }
 
               .item-value {
                 font-size: 12px;
                 color: #fff;
-                display: flex;
-                align-items: center;
-                gap: 4px;
+                display: table-cell;
+                text-align: right;
+                line-height: 1.3;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                min-width: 0;
-                flex: 1;
-                justify-content: flex-end;
+                width: auto; /* 占据剩余空间 */
 
                 span {
                   font-size: 12px;
-                  line-height: 1;
+                  line-height: 1.3;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  display: block;
                 }
               }
             }

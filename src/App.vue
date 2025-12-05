@@ -21,7 +21,7 @@
             //   Object.entries(this.tabRawData).map(([key, value]) => [`"${key}"`, value])
             // );
             // console.log(JSON.stringify(newObject), "newObject");
-            // this.tabRawData = require('../lib/rowData.json')
+            this.tabRawData = require('../lib/lib.json')
 
             this.com = new CustomComponent()
             this.com.init(
@@ -42,6 +42,11 @@
             this.com.resize()
             this.com.setStyle('legend$color', '#ccc')
             this.com.setData(this.tabRawData)
+
+            // setTimeout(() => {
+            //     // this.com.reverseScale()
+            //     this.com.setData(this.tabRawData)
+            // }, 5000)
         },
         methods: {}
     }
@@ -59,7 +64,7 @@
 #com-container {
   width: 100%;
   height: 100%;
-  background-color: #0b1421;
+  // background-color: #0b1421;
   // 确保容器可以正确应用变换
   transform-origin: center center;
 }
