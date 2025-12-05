@@ -234,6 +234,7 @@ export default {
           });
         }
       }
+      console.log(nodes, "nodes");
 
       return nodes;
     },
@@ -257,14 +258,14 @@ export default {
         }
       });
 
-      // 为每个combo内的节点设置位置
+      // 先为combo设置位置，避免重叠
+      // 独立节点的布局将在layoutCombos方法中完成
+      this.layoutCombos(graphData.combos, graphData.nodes);
+
+      // 在combo位置确定后，再为每个combo内的节点设置位置
       Object.keys(nodesByCombo).forEach((comboId) => {
         this.layoutComboNodes(graphData.nodes, comboId);
       });
-
-      // 为combo设置位置，避免重叠
-      // 独立节点的布局将在layoutCombos方法中完成
-      this.layoutCombos(graphData.combos, graphData.nodes);
 
       // 特别处理loadBalancer节点位置
       const loadBalancerNode = graphData.nodes.find(
@@ -333,7 +334,9 @@ export default {
       const PADDING = 50;
       const LABEL_HEIGHT = 40;
       const VERTICAL_SPACING = 100;
-      const START_X = 100;
+      const START_X = this.graph ? this.graph.get("width") / 4 : 100;
+
+      console.log(START_X, "START_X");
 
       // 动态获取父combo ID，基于combosParent数据
       let parentComboIds = [];
@@ -389,7 +392,6 @@ export default {
 
           child.width = width;
           child.height = height;
-          console.log("child.width", width);
         } else {
           // 其他combo使用4列水平布局
           const nodesPerRow = 4;
@@ -453,7 +455,6 @@ export default {
           // 水平排列时，宽度是所有子combo宽度之和加上间距
           let totalWidth = 0;
           children.forEach((child, index) => {
-            console.log(child.width, index);
             totalWidth += child.width || 250;
             if (index < children.length - 1) {
               totalWidth += SPACING; // 添加间距
@@ -461,7 +462,6 @@ export default {
           });
 
           parent.width = totalWidth + SPACING * 2; // 左右各一个spacing
-          console.log(parent.width, "parent.width");
 
           parent.height = (maxHeight || 150) + TITLE_HEIGHT * 2 + SPACING; // 上下各一个spacing，加上标题区域
         } else {
@@ -524,7 +524,7 @@ export default {
 
           orderedParents.forEach((parent, index) => {
             if (parent) {
-              parent.x = START_X;
+              parent.x = -parent.width / 2;
               parent.y = currentY;
 
               // 更新currentY为当前combo的底部位置
@@ -536,8 +536,6 @@ export default {
               }
             }
           });
-          console.log(orderedParents, "orderedParents");
-
           // 存储位置信息
           this.parentComboPositions = {};
           orderedParents.forEach((parent) => {
@@ -568,15 +566,9 @@ export default {
             child.y = parent.y + (parent.height - (child.height || 150)) / 2;
           } else {
             let currentX = parent.x + SPACING;
-            let currentY = parent.y + SPACING; // 初始Y坐标
-            let rowMaxHeight = 0; // 当前行的最大高度
-
             children.forEach((child, index) => {
               const childWidth = child.width || 250;
-          
-
-              child.x = currentX;
-
+              child.x = currentX + child.width / 2;
               // 更新当前位置
               currentX += childWidth + SPACING;
             });
@@ -608,9 +600,10 @@ export default {
           draggable: true,
           status: node.status,
           detail: node.detail,
+          source: node.source,
           comboId: node.combo,
-          x: 0,
-          y: 0,
+          // x: 0,
+          // y: 0,
           // 添加额外属性用于标识是否在disasterCenter中
           isInDisasterCenter: isInDisasterCenter,
         };

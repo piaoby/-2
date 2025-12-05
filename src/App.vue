@@ -21,7 +21,7 @@
             //   Object.entries(this.tabRawData).map(([key, value]) => [`"${key}"`, value])
             // );
             // console.log(JSON.stringify(newObject), "newObject");
-            this.tabRawData = require('../lib/lib.json')
+            // this.tabRawData = require('../lib/rowData.json')
 
             this.com = new CustomComponent()
             this.com.init(
