@@ -1,11 +1,225 @@
 {
+	"defaultLabel": "内部网络1",
+	"defaultData": [
+		{
+			"label": "防火墙1",
+			"detail": [
+				{
+					"name": "CPU利用率",
+					"value": "11%"
+				},
+				{
+					"name": "内存利用率",
+					"value": "22%"
+				},
+				{
+					"name": "模拟数据1",
+					"value": "11%"
+				},
+				{
+					"name": "模拟数据12",
+					"value": "22%"
+				}
+			]
+		},
+		{
+			"label": "防火墙1",
+			"detail": [
+				{
+					"name": "CPU利用率",
+					"value": "11%"
+				},
+				{
+					"name": "内存利用率",
+					"value": "22%"
+				},
+				{
+					"name": "模拟数据1",
+					"value": "11%"
+				},
+				{
+					"name": "模拟数据12",
+					"value": "22%"
+				}
+			]
+		},
+		{
+			"label": "防火墙1",
+			"detail": [
+				{
+					"name": "CPU利用率",
+					"value": "11%"
+				},
+				{
+					"name": "内存利用率",
+					"value": "22%"
+				},
+				{
+					"name": "模拟数据1",
+					"value": "11%"
+				},
+				{
+					"name": "模拟数据12",
+					"value": "22%"
+				}
+			]
+		},
+		{
+			"label": "防火墙1",
+			"detail": [
+				{
+					"name": "CPU利用率",
+					"value": "11%"
+				},
+				{
+					"name": "内存利用率",
+					"value": "22%"
+				},
+				{
+					"name": "模拟数据1",
+					"value": "11%"
+				},
+				{
+					"name": "模拟数据12",
+					"value": "22%"
+				}
+			]
+		},
+		{
+			"label": "防火墙1",
+			"detail": [
+				{
+					"name": "CPU利用率",
+					"value": "11%"
+				},
+				{
+					"name": "内存利用率",
+					"value": "22%"
+				},
+				{
+					"name": "模拟数据1",
+					"value": "11%"
+				},
+				{
+					"name": "模拟数据12",
+					"value": "22%"
+				}
+			]
+		},
+		{
+			"label": "防火墙1",
+			"detail": [
+				{
+					"name": "CPU利用率",
+					"value": "11%"
+				},
+				{
+					"name": "内存利用率",
+					"value": "22%"
+				},
+				{
+					"name": "模拟数据1",
+					"value": "11%"
+				},
+				{
+					"name": "模拟数据12",
+					"value": "22%"
+				}
+			]
+		},
+		{
+			"label": "防火墙1",
+			"detail": [
+				{
+					"name": "CPU利用率",
+					"value": "11%"
+				},
+				{
+					"name": "内存利用率",
+					"value": "22%"
+				},
+				{
+					"name": "模拟数据1",
+					"value": "11%"
+				},
+				{
+					"name": "模拟数据12",
+					"value": "22%"
+				}
+			]
+		},
+		{
+			"label": "防火墙1",
+			"detail": [
+				{
+					"name": "CPU利用率",
+					"value": "11%"
+				},
+				{
+					"name": "内存利用率",
+					"value": "22%"
+				},
+				{
+					"name": "模拟数据1",
+					"value": "11%"
+				},
+				{
+					"name": "模拟数据12",
+					"value": "22%"
+				}
+			]
+		},
+		{
+			"label": "防火墙1",
+			"detail": [
+				{
+					"name": "CPU利用率",
+					"value": "11%"
+				},
+				{
+					"name": "内存利用率",
+					"value": "22%"
+				},
+				{
+					"name": "模拟数据1",
+					"value": "11%"
+				},
+				{
+					"name": "模拟数据12",
+					"value": "22%"
+				}
+			]
+		},
+		{
+			"label": "防火墙2",
+			"detail": [
+				{
+					"name": "CPU利用率",
+					"value": "33%"
+				},
+				{
+					"name": "内存利用率",
+					"value": "44%"
+				},
+				{
+					"name": "模拟数据13",
+					"value": "33%"
+				},
+				{
+					"name": "模拟数据14",
+					"value": "44%"
+				}
+			]
+		}
+	],
 	"nodes": [
 		{
 			"key": "33.114.5.53",
 			"text": "33.114.5.53",
-			"status": "normal",
+			"status": "abnormal",
 			"combo": "818",
 			"source": "",
+			"Alerts": "3",
 			"detail": [
 				{
 					"name": "CPU使用率",
@@ -36,9 +250,9 @@
 					"value": 2.02
 				}
 			],
-			"listdetail": {
-				"name": "33.114.5.53",
-				"systemResourceLayer": [
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
 					{
 						"name": "CPU使用率",
 						"value": 4.03638
@@ -87,8 +301,11 @@
 						"name": "磁盘总量",
 						"value": 286
 					}
-				],
-				"applicationSoftwareLayer": [
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "业务服务层",
+				"listdetail": [
 					{
 						"name": "outexception关键字异常",
 						"value": 1
@@ -101,8 +318,11 @@
 						"name": "告警数量",
 						"value": 0
 					}
-				],
-				"businessServiceLayer": [
+				]
+			},
+			"businessServiceLayer": {
+				"name": "应用软件层",
+				"listdetail": [
 					{
 						"name": "请求数",
 						"value": "1500次/分钟"
@@ -158,28 +378,28 @@
 					"value": 1.41
 				}
 			],
-			"listdetail": {
-				"name": "33.114.5.54",
-				"systemResourceLayer": [
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
 					{
 						"name": "CPU使用率",
-						"value": 3.362729
+						"value": 4.03638
 					},
 					{
 						"name": "物理内存已用量)",
-						"value": 49876430848
+						"value": 49904500736
 					},
 					{
 						"name": "磁盘空间使用率",
-						"value": 17.779033
+						"value": 18.921063
 					},
 					{
 						"name": "网卡入流量",
-						"value": 334817
+						"value": 413393
 					},
 					{
 						"name": "网卡出流量",
-						"value": 295745
+						"value": 361025
 					},
 					{
 						"name": "I/O使用率",
@@ -187,7 +407,7 @@
 					},
 					{
 						"name": "5分钟平均负载)",
-						"value": 1.41
+						"value": 2.02
 					},
 					{
 						"name": "CPU核心数",
@@ -209,18 +429,28 @@
 						"name": "磁盘总量",
 						"value": 286
 					}
-				],
-				"applicationSoftwareLayer": [
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "业务服务层",
+				"listdetail": [
 					{
 						"name": "outexception关键字异常",
 						"value": 1
 					},
 					{
+						"name": "17356端口状态",
+						"value": 3
+					},
+					{
 						"name": "告警数量",
 						"value": 0
 					}
-				],
-				"businessServiceLayer": [
+				]
+			},
+			"businessServiceLayer": {
+				"name": "应用软件层",
+				"listdetail": [
 					{
 						"name": "请求数",
 						"value": "1500次/分钟"
@@ -247,37 +477,79 @@
 			"combo": "818",
 			"source": "",
 			"detail": [],
-			"listdetail": {
-				"name": "32.114.72.6",
-				"systemResourceLayer": [
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU使用率",
+						"value": 4.03638
+					},
+					{
+						"name": "物理内存已用量)",
+						"value": 49904500736
+					},
+					{
+						"name": "磁盘空间使用率",
+						"value": 18.921063
+					},
+					{
+						"name": "网卡入流量",
+						"value": 413393
+					},
+					{
+						"name": "网卡出流量",
+						"value": 361025
+					},
+					{
+						"name": "I/O使用率",
+						"value": 0.00016
+					},
+					{
+						"name": "5分钟平均负载)",
+						"value": 2.02
+					},
 					{
 						"name": "CPU核心数",
-						"value": null
+						"value": 32
 					},
 					{
 						"name": "CPU型号",
-						"value": ""
+						"value": "INTEL(R) XEON(R) GOLD 5520+"
 					},
 					{
 						"name": "内存总量",
-						"value": null
+						"value": 48023
 					},
 					{
 						"name": "操作系统",
-						"value": ""
+						"value": "linux suse"
 					},
 					{
 						"name": "磁盘总量",
-						"value": null
+						"value": 286
 					}
-				],
-				"applicationSoftwareLayer": [
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "业务服务层",
+				"listdetail": [
+					{
+						"name": "outexception关键字异常",
+						"value": 1
+					},
+					{
+						"name": "17356端口状态",
+						"value": 3
+					},
 					{
 						"name": "告警数量",
 						"value": 0
 					}
-				],
-				"businessServiceLayer": [
+				]
+			},
+			"businessServiceLayer": {
+				"name": "应用软件层",
+				"listdetail": [
 					{
 						"name": "请求数",
 						"value": "1500次/分钟"
@@ -304,41 +576,79 @@
 			"combo": "818",
 			"source": "",
 			"detail": [],
-			"listdetail": {
-				"name": "35.114.2.167",
-				"systemResourceLayer": [
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU使用率",
+						"value": 4.03638
+					},
+					{
+						"name": "物理内存已用量)",
+						"value": 49904500736
+					},
+					{
+						"name": "磁盘空间使用率",
+						"value": 18.921063
+					},
+					{
+						"name": "网卡入流量",
+						"value": 413393
+					},
+					{
+						"name": "网卡出流量",
+						"value": 361025
+					},
+					{
+						"name": "I/O使用率",
+						"value": 0.00016
+					},
+					{
+						"name": "5分钟平均负载)",
+						"value": 2.02
+					},
 					{
 						"name": "CPU核心数",
-						"value": null
+						"value": 32
 					},
 					{
 						"name": "CPU型号",
-						"value": ""
+						"value": "INTEL(R) XEON(R) GOLD 5520+"
 					},
 					{
 						"name": "内存总量",
-						"value": null
+						"value": 48023
 					},
 					{
 						"name": "操作系统",
-						"value": ""
+						"value": "linux suse"
 					},
 					{
 						"name": "磁盘总量",
-						"value": null
+						"value": 286
 					}
-				],
-				"applicationSoftwareLayer": [
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "业务服务层",
+				"listdetail": [
 					{
 						"name": "outexception关键字异常",
 						"value": 1
 					},
 					{
-						"name": "告警数量",
+						"name": "17356端口状态",
 						"value": 3
+					},
+					{
+						"name": "告警数量",
+						"value": 0
 					}
-				],
-				"businessServiceLayer": [
+				]
+			},
+			"businessServiceLayer": {
+				"name": "应用软件层",
+				"listdetail": [
 					{
 						"name": "请求数",
 						"value": "1500次/分钟"
@@ -365,41 +675,79 @@
 			"combo": "818",
 			"source": "",
 			"detail": [],
-			"listdetail": {
-				"name": "172.34.2.177",
-				"systemResourceLayer": [
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU使用率",
+						"value": 4.03638
+					},
+					{
+						"name": "物理内存已用量)",
+						"value": 49904500736
+					},
+					{
+						"name": "磁盘空间使用率",
+						"value": 18.921063
+					},
+					{
+						"name": "网卡入流量",
+						"value": 413393
+					},
+					{
+						"name": "网卡出流量",
+						"value": 361025
+					},
+					{
+						"name": "I/O使用率",
+						"value": 0.00016
+					},
+					{
+						"name": "5分钟平均负载)",
+						"value": 2.02
+					},
 					{
 						"name": "CPU核心数",
-						"value": null
+						"value": 32
 					},
 					{
 						"name": "CPU型号",
-						"value": ""
+						"value": "INTEL(R) XEON(R) GOLD 5520+"
 					},
 					{
 						"name": "内存总量",
-						"value": null
+						"value": 48023
 					},
 					{
 						"name": "操作系统",
-						"value": ""
+						"value": "linux suse"
 					},
 					{
 						"name": "磁盘总量",
-						"value": null
+						"value": 286
 					}
-				],
-				"applicationSoftwareLayer": [
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "业务服务层",
+				"listdetail": [
 					{
 						"name": "outexception关键字异常",
 						"value": 1
 					},
 					{
+						"name": "17356端口状态",
+						"value": 3
+					},
+					{
 						"name": "告警数量",
-						"value": 1
+						"value": 0
 					}
-				],
-				"businessServiceLayer": [
+				]
+			},
+			"businessServiceLayer": {
+				"name": "应用软件层",
+				"listdetail": [
 					{
 						"name": "请求数",
 						"value": "1500次/分钟"
@@ -455,36 +803,36 @@
 					"value": 1.87
 				}
 			],
-			"listdetail": {
-				"name": "37.114.2.166",
-				"systemResourceLayer": [
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
 					{
 						"name": "CPU使用率",
-						"value": 1.069909
+						"value": 4.03638
 					},
 					{
 						"name": "物理内存已用量)",
-						"value": 46943723520
+						"value": 49904500736
 					},
 					{
 						"name": "磁盘空间使用率",
-						"value": 13.878085
+						"value": 18.921063
 					},
 					{
 						"name": "网卡入流量",
-						"value": 173784
+						"value": 413393
 					},
 					{
 						"name": "网卡出流量",
-						"value": 198607
+						"value": 361025
 					},
 					{
 						"name": "I/O使用率",
-						"value": 0.000867
+						"value": 0.00016
 					},
 					{
 						"name": "5分钟平均负载)",
-						"value": 1.87
+						"value": 2.02
 					},
 					{
 						"name": "CPU核心数",
@@ -496,7 +844,7 @@
 					},
 					{
 						"name": "内存总量",
-						"value": 48024
+						"value": 48023
 					},
 					{
 						"name": "操作系统",
@@ -506,14 +854,28 @@
 						"name": "磁盘总量",
 						"value": 286
 					}
-				],
-				"applicationSoftwareLayer": [
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "业务服务层",
+				"listdetail": [
+					{
+						"name": "outexception关键字异常",
+						"value": 1
+					},
+					{
+						"name": "17356端口状态",
+						"value": 3
+					},
 					{
 						"name": "告警数量",
 						"value": 0
 					}
-				],
-				"businessServiceLayer": [
+				]
+			},
+			"businessServiceLayer": {
+				"name": "应用软件层",
+				"listdetail": [
 					{
 						"name": "请求数",
 						"value": "1500次/分钟"
@@ -569,36 +931,36 @@
 					"value": 0.21
 				}
 			],
-			"listdetail": {
-				"name": "35.114.1.24",
-				"systemResourceLayer": [
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
 					{
 						"name": "CPU使用率",
-						"value": 0.560978
+						"value": 4.03638
 					},
 					{
 						"name": "物理内存已用量)",
-						"value": 49976049664
+						"value": 49904500736
 					},
 					{
 						"name": "磁盘空间使用率",
-						"value": 62.933612
+						"value": 18.921063
 					},
 					{
 						"name": "网卡入流量",
-						"value": 60074
+						"value": 413393
 					},
 					{
 						"name": "网卡出流量",
-						"value": 55426
+						"value": 361025
 					},
 					{
 						"name": "I/O使用率",
-						"value": 0.000367
+						"value": 0.00016
 					},
 					{
 						"name": "5分钟平均负载)",
-						"value": 0.21
+						"value": 2.02
 					},
 					{
 						"name": "CPU核心数",
@@ -606,11 +968,11 @@
 					},
 					{
 						"name": "CPU型号",
-						"value": "Intel(R) Xeon(R) Gold 5220R CPU @ 2.20GHz"
+						"value": "INTEL(R) XEON(R) GOLD 5520+"
 					},
 					{
 						"name": "内存总量",
-						"value": 48124
+						"value": 48023
 					},
 					{
 						"name": "操作系统",
@@ -618,20 +980,30 @@
 					},
 					{
 						"name": "磁盘总量",
-						"value": 139
+						"value": 286
 					}
-				],
-				"applicationSoftwareLayer": [
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "业务服务层",
+				"listdetail": [
 					{
 						"name": "outexception关键字异常",
 						"value": 1
 					},
 					{
+						"name": "17356端口状态",
+						"value": 3
+					},
+					{
 						"name": "告警数量",
 						"value": 0
 					}
-				],
-				"businessServiceLayer": [
+				]
+			},
+			"businessServiceLayer": {
+				"name": "应用软件层",
+				"listdetail": [
 					{
 						"name": "请求数",
 						"value": "1500次/分钟"
@@ -658,20 +1030,48 @@
 			"combo": "820",
 			"source": "",
 			"detail": [],
-			"listdetail": {
-				"name": "35.114.1.114",
-				"systemResourceLayer": [
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU使用率",
+						"value": 4.03638
+					},
+					{
+						"name": "物理内存已用量)",
+						"value": 49904500736
+					},
+					{
+						"name": "磁盘空间使用率",
+						"value": 18.921063
+					},
+					{
+						"name": "网卡入流量",
+						"value": 413393
+					},
+					{
+						"name": "网卡出流量",
+						"value": 361025
+					},
+					{
+						"name": "I/O使用率",
+						"value": 0.00016
+					},
+					{
+						"name": "5分钟平均负载)",
+						"value": 2.02
+					},
 					{
 						"name": "CPU核心数",
 						"value": 32
 					},
 					{
 						"name": "CPU型号",
-						"value": "Intel(R) Xeon(R) Gold 5220R CPU @ 2.20GHz"
+						"value": "INTEL(R) XEON(R) GOLD 5520+"
 					},
 					{
 						"name": "内存总量",
-						"value": 48124
+						"value": 48023
 					},
 					{
 						"name": "操作系统",
@@ -679,20 +1079,30 @@
 					},
 					{
 						"name": "磁盘总量",
-						"value": 139
+						"value": 286
 					}
-				],
-				"applicationSoftwareLayer": [
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "业务服务层",
+				"listdetail": [
 					{
 						"name": "outexception关键字异常",
 						"value": 1
 					},
 					{
+						"name": "17356端口状态",
+						"value": 3
+					},
+					{
 						"name": "告警数量",
 						"value": 0
 					}
-				],
-				"businessServiceLayer": [
+				]
+			},
+			"businessServiceLayer": {
+				"name": "应用软件层",
+				"listdetail": [
 					{
 						"name": "请求数",
 						"value": "1500次/分钟"
@@ -719,20 +1129,48 @@
 			"combo": "821",
 			"source": "",
 			"detail": [],
-			"listdetail": {
-				"name": "34.114.1.204",
-				"systemResourceLayer": [
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU使用率",
+						"value": 4.03638
+					},
+					{
+						"name": "物理内存已用量)",
+						"value": 49904500736
+					},
+					{
+						"name": "磁盘空间使用率",
+						"value": 18.921063
+					},
+					{
+						"name": "网卡入流量",
+						"value": 413393
+					},
+					{
+						"name": "网卡出流量",
+						"value": 361025
+					},
+					{
+						"name": "I/O使用率",
+						"value": 0.00016
+					},
+					{
+						"name": "5分钟平均负载)",
+						"value": 2.02
+					},
 					{
 						"name": "CPU核心数",
 						"value": 32
 					},
 					{
 						"name": "CPU型号",
-						"value": "Hygon C86 5390 Processor"
+						"value": "INTEL(R) XEON(R) GOLD 5520+"
 					},
 					{
 						"name": "内存总量",
-						"value": 48024
+						"value": 48023
 					},
 					{
 						"name": "操作系统",
@@ -740,20 +1178,30 @@
 					},
 					{
 						"name": "磁盘总量",
-						"value": 188
+						"value": 286
 					}
-				],
-				"applicationSoftwareLayer": [
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "业务服务层",
+				"listdetail": [
 					{
 						"name": "outexception关键字异常",
 						"value": 1
 					},
 					{
+						"name": "17356端口状态",
+						"value": 3
+					},
+					{
 						"name": "告警数量",
 						"value": 0
 					}
-				],
-				"businessServiceLayer": [
+				]
+			},
+			"businessServiceLayer": {
+				"name": "应用软件层",
+				"listdetail": [
 					{
 						"name": "请求数",
 						"value": "1500次/分钟"
@@ -776,9 +1224,10 @@
 		{
 			"key": "loadBalancer",
 			"text": "负载均衡器",
-			"status": "idle",
-            "source": "负载均衡器",
+			"status": "abnormal",
+			"source": "负载均衡器",
 			"combo": "",
+			"Alerts": "3",
 			"detail": [
 				{
 					"name": "负载均衡利用",
@@ -817,43 +1266,42 @@
 			"status": "normal"
 		}
 	],
-     "edges": [
-        {
-            "source": "loadBalancer",
-            "target": "mainCenter",
-            "status": "normal",
-            "name": "负载均衡器至主中心",
-            "detailValue": [
-                {
-                    "name": "带宽使用率",
-                    "value": "45%"
-                },
-                {
-                    "name": "延迟",
-                    "value": "2ms"
-                },
-                {
-                    "name": "丢包率",
-                    "value": "0%"
-                }
-            ],
-            "hoverValue": [
-                {
-                    "name": "带宽使用率",
-                    "value": "45%"
-                },
-                {
-                    "name": "延迟",
-                    "value": "2ms"
-                },
-                {
-                    "name": "丢包率",
-                    "value": "0%"
-                }
-            ]
-        }
-      
-    ],
+	"edges": [
+		{
+			"source": "loadBalancer",
+			"target": "mainCenter",
+			"status": "normal",
+			"name": "负载均衡器至主中心",
+			"detailValue": [
+				{
+					"name": "带宽使用率",
+					"value": "45%"
+				},
+				{
+					"name": "延迟",
+					"value": "2ms"
+				},
+				{
+					"name": "丢包率",
+					"value": "0%"
+				}
+			],
+			"hoverValue": [
+				{
+					"name": "带宽使用率",
+					"value": "45%"
+				},
+				{
+					"name": "延迟",
+					"value": "2ms"
+				},
+				{
+					"name": "丢包率",
+					"value": "0%"
+				}
+			]
+		}
+	],
 	"comboList": [
 		{
 			"source": "818",

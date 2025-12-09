@@ -17,22 +17,50 @@
         <div class="detail-header">
           <div class="title-container">
             <img class="title-icon" src="./assets/img/Frame.png" alt="icon" />
-            <span class="detail-title">{{ selectedNodeLabel }}</span>
+            <span class="detail-top-title">{{ selectedNodeLabel }}</span>
           </div>
         </div>
         <div class="operation-list">
           <span class="detail-title">三板斧应急操作</span>
           <span class="detail-title">告警详情查看</span>
         </div>
+        <div class="default-detail-content" v-if="showType === 'default'">
+          <div
+            v-for="(item, index) in detailItems"
+            :key="index"
+            class="detail-item"
+            :class="{ active: selectedItem === index }"
+            @click="selectItem(index)"
+          >
+            <div class="item-name">{{ item.label }}</div>
+            <div class="item-stats">
+              <div class="stats-grid">
+                <span
+                  v-for="(item, statIndex) in item.detail"
+                  :key="statIndex"
+                  :class="item.className"
+                >
+                  <!-- {{ stat.name }}: {{ stat.value }} -->
+                  <span class="item-label" :title="item.name"
+                    >{{ item.name }}:</span
+                  >
+                  <span class="item-value" :title="item.value">{{
+                    item.value
+                  }}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- 替换 index.vue 模板中的 combo-detail-content 部分 -->
         <div class="node-detail-content" v-if="showType === 'combo'">
           <div class="detail-section" @click="selectItem(index)">
-            <div class="section-title">业务服务层</div>
+            <div class="section-title">{{ detailItems.title }}</div>
             <div class="section-body">
               <!-- 直接展示 values 数组中的内容 -->
               <div class="section-grid">
                 <div
-                  v-for="(value, index) in detailItems.values"
+                  v-for="(value, index) in detailItems.items"
                   :key="index"
                   class="section-item"
                 >
@@ -47,6 +75,7 @@
             </div>
           </div>
         </div>
+
         <div class="node-detail-content" v-if="showType === 'node'">
           <!-- 动态渲染每个层级 -->
           <div
@@ -62,24 +91,17 @@
                   :key="i"
                   class="section-item"
                 >
-                  <div
-                    class="item-label"
-                    :title="item.name"
-                    v-if="section.title != '操作列表'"
+                  <span class="item-label" :title="item.name"
+                    >{{ item.name }}:</span
                   >
-                    {{ item.name }}:
-                  </div>
-                  <div class="item-value">
-                    <span
-                      :style="{
-                        color:
-                          item.color || getValueColor(item.type, item.level),
-                      }"
-                      :title="item.value"
-                    >
-                      {{ item.value }}
-                    </span>
-                  </div>
+                  <span
+                    class="item-value"
+                    :style="{
+                      color: item.color || getValueColor(item.type, item.level),
+                    }"
+                    :title="item.value"
+                    >{{ item.value }}</span
+                  >
                 </div>
               </div>
             </div>
@@ -89,7 +111,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import G6 from "@antv/g6";
 import "./customNode.js"; // 导入自定义节点定义文件
@@ -105,11 +126,8 @@ export default {
       // 自定义数据
       graph: null,
       options: null,
-
-      // 添加面板控制状态
-      // showDetailPanel: false, // 控制右侧详情面板是否显示
-      showType: "combo", // 当前选中的是节点还是combo
-      selectedNodeLabel: "combo 1111", // 默认选中的节点标签
+      showType: "default", // 当前default还是选中的是节点还是combo
+      selectedNodeLabel: "", // 默认选中的节点标签
       selectedItem: 0, // 默认选中第一个详情项
       tabRawData: {},
       // 详情项数据
@@ -141,10 +159,18 @@ export default {
   methods: {
     /** 组件初始化时触发 */
     init() {
-      this.initGraph();
-      this.$nextTick(() => {
-        this.reverseScale();
-      });
+      // 确保loading状态开启
+      this.isLoading = true;
+      try {
+        this.initGraph();
+        this.$nextTick(() => {
+          this.reverseScale();
+        });
+      } catch (error) {
+        console.error("初始化图表时出错:", error);
+        // 出错时也隐藏loading
+        this.isLoading = false;
+      }
     },
     /**
      * 反缩放处理
@@ -612,6 +638,7 @@ export default {
           status: node.status,
           detail: node.detail,
           source: node.source,
+          Alerts: node.Alerts,
           comboId: node.combo,
           // x: 0,
           // y: 0,
@@ -816,78 +843,90 @@ export default {
         this.graph.destroy();
       }
 
-      // 直接使用 tabRawData 的数据
-      let graphData = this.convertToGraphData(this.tabRawData);
+      try {
+        // 尝试使用 tabRawData 的数据
+        let graphData = this.convertToGraphData(this.tabRawData);
 
-      this.graph = new G6.Graph({
-        container: this.$refs.ringChart,
-        width: this.$refs.ringChart.clientWidth || 600,
-        height: this.$refs.ringChart.clientHeight || 400,
-        animate: true,
-        animateCfg: {
-          duration: 500,
-          easing: "easeLinear",
-        },
-        modes: {
-          default: ["drag-node", "zoom-canvas", "drag-canvas", "drag-combo"],
-        },
-        layout: null,
-        defaultNode: {
-          shape: "custom-node",
-          size: 200,
-          color: "#333",
-        },
-        defaultEdge: {
-          type: "flowing-polyline",
-          style: {
-            endArrow: true,
+        this.graph = new G6.Graph({
+          container: this.$refs.ringChart,
+          width: this.$refs.ringChart.clientWidth || 600,
+          height: this.$refs.ringChart.clientHeight || 400,
+          animate: true,
+          animateCfg: {
+            duration: 500,
+            easing: "easeLinear",
           },
-        },
-        defaultCombo: {
-          type: "custom-combo",
-          style: {
-            lineWidth: 2,
+          modes: {
+            default: ["drag-node", "zoom-canvas", "drag-canvas", "drag-combo"],
           },
-        },
-        fitView: true,
-        fitViewPadding: [20, 100, 20, 100],
-        edgeStateStyles: {
-          hover: {
-            lineWidth: 3,
+          layout: null,
+          defaultNode: {
+            shape: "custom-node",
+            size: 200,
+            color: "#333",
           },
-        },
-        comboCfg: {
-          collapseExpand: false,
-          enableDelegate: true,
-          nested: true,
-        },
-        groupByTypes: false,
+          defaultEdge: {
+            type: "flowing-polyline",
+            style: {
+              endArrow: true,
+            },
+          },
+          defaultCombo: {
+            type: "custom-combo",
+            style: {
+              lineWidth: 2,
+            },
+          },
+          fitView: true,
+          fitViewPadding: [20, 100, 20, 100],
+          edgeStateStyles: {
+            hover: {
+              lineWidth: 3,
+            },
+          },
+          comboCfg: {
+            collapseExpand: false,
+            enableDelegate: true,
+            nested: true,
+          },
+          groupByTypes: false,
+        });
+
+        this.graph.data(graphData);
+        this.graph.render();
+
+        // 设置渲染完成后的回调
+        this.setupRenderCallback();
+
+        this.setupGraphEvents();
+      } catch (error) {
+        console.error("图表初始化过程中发生错误:", error);
+      }
+    },
+    /**
+     * 设置渲染完成后的回调
+     */
+    setupRenderCallback() {
+      if (!this.graph) return;
+
+      // 监听图表渲染完成事件
+      this.graph.on("afterrender", () => {
+        console.log("G6图表渲染完成");
       });
 
-      this.graph.data(graphData);
-      this.graph.render();
-      // 手动触发动画
-      this.$nextTick(() => {
-        if (this.graph) {
-          setTimeout(() => {
-            const edges = this.graph.getEdges();
-            edges.forEach((edge) => {
-              // 重新应用边的样式以触发动画
-              this.graph.refreshItem(edge);
-            });
-
-            // 图渲染完成后，自动显示第一个combo的详情
-            this.showFirstComboDetail();
-          }, 200);
-        }
+      // 监听动画完成事件
+      this.graph.on("afteranimate", () => {
+        console.log("G6动画完成");
       });
-
+    },
+    setupGraphEvents() {
       // 节点点击事件
       this.graph.on("node:click", (evt) => {
         const node = evt.item;
-        if (!node) return;
-
+        console.log(node, "sss");
         const nodeModel = node.getModel();
+
+        if (!node || nodeModel.id === "loadBalancer") return;
 
         const nodeId = nodeModel.id;
 
@@ -906,18 +945,6 @@ export default {
         // 设置详情数据
         this.detailItems = nodeDetail;
         this.showType = "node";
-        // 显示详情面板
-        this.showDetailPanel = true;
-
-        // 调整图表大小以适应右侧面板
-        // this.$nextTick(() => {
-        //   if (this.graph) {
-        //     this.resizeGraphAndKeepView(
-        //       this.$refs.component.clientWidth * 0.75,
-        //       this.$refs.component.clientHeight
-        //     );
-        //   }
-        // });
       });
 
       // combo点击事件
@@ -934,18 +961,10 @@ export default {
         this.selectedNodeLabel = comboModel.label || `组合 ${comboId}`;
 
         const detailData = this.convertToComboDetailData(this.tabRawData);
+        console.log(detailData, "detailData");
+
         this.detailItems = detailData[comboId] || [];
         this.showType = "combo";
-        this.showDetailPanel = true;
-
-        // this.$nextTick(() => {
-        //   if (this.graph) {
-        //     this.resizeGraphAndKeepView(
-        //       this.$refs.component.clientWidth * 0.75,
-        //       this.$refs.component.clientHeight
-        //     );
-        //   }
-        // });
       });
 
       // 节点鼠标悬浮事件
@@ -958,10 +977,22 @@ export default {
         // 添加节点详情信息
         if (nodeModel.detail && nodeModel.detail.length > 0) {
           nodeModel.detail.forEach((detail) => {
-            tooltipContent += `<div class="tooltip-item" style="padding: 5px 0 !important;">
-                              <span class="item-name">${detail.name}:</span>
-                              <span class="item-value"> ${detail.value}</span>
-                              </div>`;
+
+                if (nodeModel.status === "abnormal") {
+              tooltipContent += `<div class="tooltip-item" style="padding: 5px 0 !important;>
+            <span class="item-name">${detail.name}:</span>
+            <span class="item-value" style="color: #ff7478 !important;">${detail.value}</span>
+            </div>`;
+            } else {
+              tooltipContent += `<div class="tooltip-item" style="padding: 5px 0 !important;>
+            <span class="item-name">${detail.name}:</span>
+            <span class="item-value" >${detail.value}</span>
+            </div>`;
+            }
+            // tooltipContent += `<div class="tooltip-item" style="padding: 5px 0 !important;">
+            //                   <span class="item-name">${detail.name}:</span>
+            //                   <span class="item-value"> ${detail.value}</span>
+            //                   </div>`;
           });
         } else {
           tooltipContent += `<div class="tooltip-item">暂无详细信息</div>`;
@@ -1000,107 +1031,10 @@ export default {
           }
         });
 
-      // 边鼠标点击事件
-      // this.graph.on("edge:click", (evt) => {
-      //   const edge = evt.item;
-      //   const edgeModel = edge.getModel();
-
-      //   // 设置选中边的标签
-      //   this.selectedNodeLabel =
-      //     edgeModel.name || `${edgeModel.source} → ${edgeModel.target}`;
-
-      //   // 构造边的详情数据
-      //   const edgeDetailItems = [];
-      //   if (edgeModel.detailValue && edgeModel.detailValue.length > 0) {
-      //     edgeDetailItems.push({
-      //       name: "连接详情",
-      //       values: edgeModel.detailValue,
-      //     });
-      //   } else {
-      //     edgeDetailItems.push({
-      //       name: "连接详情",
-      //       stats: [
-      //         { name: "源节点", value: edgeModel.source },
-      //         { name: "目标节点", value: edgeModel.target },
-      //         {
-      //           name: "状态",
-      //           value: edgeModel.status === "normal" ? "正常" : "异常",
-      //         },
-      //       ],
-      //     });
-      //   }
-
-      //   this.detailItems = edgeDetailItems;
-      //   this.showType = "combo";
-      //   this.showDetailPanel = true;
-      //   // this.$nextTick(() => {
-      //   //   if (this.graph) {
-      //   //     this.resizeGraphAndKeepView(
-      //   //       this.$refs.component.clientWidth * 0.75,
-      //   //       this.$refs.component.clientHeight
-      //   //     );
-      //   //   }
-      //   // });
-      // });
-
-      //线鼠标悬浮事件
-      // this.graph.on("edge:mouseenter", (evt) => {
-      //   const edge = evt.item;
-      //   const edgeModel = edge.getModel();
-
-      //   // 构建提示内容
-      //   let tooltipContent = `<div class="node-tooltip"><div class="tooltip-content">`;
-
-      //   // 添加节点详情信息
-      //   if (edgeModel.hoverValue && edgeModel.hoverValue.length > 0) {
-      //     edgeModel.hoverValue.forEach((detail) => {
-      //       tooltipContent += `<div class="tooltip-item" style="padding: 5px 0 !important;">
-      //                         <span class="item-name">${detail.name}:</span>
-      //                         <span class="item-value"> ${detail.value}</span>
-      //                         </div>`;
-      //     });
-      //   } else {
-      //     tooltipContent += `<div class="tooltip-item">暂无详细信息</div>`;
-      //   }
-
-      //   tooltipContent += `</div></div>`;
-
-      //   // 创建提示框元素
-      //   if (!this.edgeTooltipElement) {
-      //     this.edgeTooltipElement = document.createElement("div");
-      //     this.edgeTooltipElement.className = "g6-node-tooltip";
-      //     this.edgeTooltipElement.style.position = "absolute";
-      //     this.edgeTooltipElement.style.backgroundColor = "#111B30";
-      //     this.edgeTooltipElement.style.color = "#fff";
-      //     this.edgeTooltipElement.style.padding = "10px";
-      //     this.edgeTooltipElement.style.borderRadius = "4px";
-      //     this.edgeTooltipElement.style.fontSize = "12px";
-      //     this.edgeTooltipElement.style.zIndex = "999";
-      //     this.edgeTooltipElement.style.boxShadow =
-      //       "0 2px 6px rgba(0, 0, 0, 0.3)";
-      //     this.edgeTooltipElement.style.pointerEvents = "none";
-      //     document.body.appendChild(this.edgeTooltipElement);
-      //   }
-
-      //   this.edgeTooltipElement.innerHTML = tooltipContent;
-      //   // 设置提示框位置为鼠标右侧
-      //   this.edgeTooltipElement.style.left = evt.canvasX + "px";
-      //   this.edgeTooltipElement.style.top = evt.canvasY + "px";
-      //   this.edgeTooltipElement.style.transform = "translate(80px, 0)";
-
-      //   this.edgeTooltipElement.style.display = "block";
-      // }),
-      // 边鼠标移出事件
-      // this.graph.on("edge:mouseleave", (evt) => {
-      //   if (this.edgeTooltipElement) {
-      //     this.edgeTooltipElement.style.display = "none";
-      //   }
-      // });
-
       // 添加画布点击事件（点击空白处）
-      // this.graph.on("canvas:click", (evt) => {
-      //   this.closeDetailPanel();
-      // });
+      this.graph.on("canvas:click", (evt) => {
+        this.initDefaultData();
+      });
 
       // 鼠标移动事件，用于更新提示框位置
       this.graph.on("mousemove", (evt) => {
@@ -1146,7 +1080,10 @@ export default {
       if (rawData && rawData.comboList) {
         rawData.comboList.forEach((item) => {
           // 将listdetail数据转换为组件需要的详情项格式
-          detailData[item.source] = item.listdetail;
+          detailData[item.source] = {
+            title: item.listdetail.name,
+            items: item.listdetail.values,
+          };
         });
       }
 
@@ -1154,7 +1091,6 @@ export default {
     },
     // 关闭详情面板
     closeDetailPanel() {
-      this.showDetailPanel = false;
       this.$nextTick(() => {
         setTimeout(() => {
           if (this.graph) {
@@ -1179,24 +1115,24 @@ export default {
       if (rawData && rawData.nodes) {
         rawData.nodes.forEach((item) => {
           const source = item.key; // 使用 source 或 key 作为唯一标识
-          const listdetail = item.listdetail || [];
+          // const listdetail = item || [];
 
           // 构建详情项，按新的三层结构组织
           detailData[source] = [
             {
               type: "system",
-              title: "系统资源层",
-              items: listdetail?.systemResourceLayer || [],
+              title: item?.systemResourceLayer?.name || "",
+              items: item?.systemResourceLayer?.listdetail || [],
             },
             {
               type: "business",
-              title: "业务服务层",
-              items: listdetail?.businessServiceLayer || [],
+              title: item?.businessServiceLayer?.name || "",
+              items: item?.businessServiceLayer?.listdetail || [],
             },
             {
               type: "application",
-              title: "应用软件层",
-              items: listdetail?.applicationSoftwareLayer || [],
+              title: item?.applicationSoftwareLayer?.name || "",
+              items: item?.applicationSoftwareLayer?.listdetail || [],
             },
             // {
             //   type: "operation",
@@ -1210,28 +1146,21 @@ export default {
       return detailData;
     },
     /**
-     * 显示第一个combo的详情
+     * 显示默认详情
      */
-    showFirstComboDetail() {
+    initDefaultData() {
       // 确保有数据可用
       if (
         this.tabRawData &&
-        this.tabRawData.comboList &&
-        this.tabRawData.comboList.length > 0
+        this.tabRawData.defaultLabel &&
+        this.tabRawData.defaultLabel.length > 0
       ) {
-        // 获取第一个combo的数据
-        const firstCombo = this.tabRawData.comboList[0];
-        const comboId = firstCombo.source;
-
         // 设置标签
-        this.selectedNodeLabel =
-          firstCombo.listdetail.name || `组合 ${comboId}`;
+        this.selectedNodeLabel = this.tabRawData.defaultLabel || `默认数据`;
 
         // 获取详情数据
-        const detailData = this.convertToComboDetailData(this.tabRawData);
-        this.detailItems = detailData[comboId] || [];
-        this.showType = "combo";
-        this.showDetailPanel = true;
+        this.detailItems = this.tabRawData.defaultData || [];
+        this.showType = "default";
       }
     },
     /**
@@ -1278,31 +1207,105 @@ export default {
 
     /** 组件数据变更时触发 */
     setData(data) {
-      if (!data || typeof data !== "object" || Object.keys(data).length === 0)
-        return;
-      this.tabRawData = data;
-      let graphData = this.convertToGraphData(data);
-      console.log(graphData, "graphData");
+      // 开始加载数据时显示loading
+      this.isLoading = true;
 
-      if (this.graph) {
-        this.graph.changeData(graphData);
-        this.graph.fitView([20, 100, 20, 100]);
-        // 确保动画在数据更新后继续运行
-        this.$nextTick(() => {
-          setTimeout(() => {
-            const edges = this.graph.getEdges();
-            edges.forEach((edge) => {
-              this.graph.refreshItem(edge);
-            });
-          }, 100);
-        });
-      } else {
-        this.initGraph(); // 确保 graph 已创建
+      try {
+        if (
+          !data ||
+          typeof data !== "object" ||
+          Object.keys(data).length === 0
+        ) {
+          // 即使数据无效也要隐藏loading
+          this.isLoading = false;
+          return;
+        }
+
+        this.tabRawData = data;
+        let graphData = this.convertToGraphData(data);
+        console.log(graphData, "graphData");
+
+        if (this.graph) {
+          this.graph.changeData(graphData);
+          this.graph.fitView([20, 100, 20, 100]);
+          // 确保动画在数据更新后继续运行
+          this.$nextTick(() => {
+            setTimeout(() => {
+              const edges = this.graph.getEdges();
+              edges.forEach((edge) => {
+                this.graph.refreshItem(edge);
+              });
+
+              // 图渲染完成后，自动显示第一个combo的详情
+              this.initDefaultData();
+              // 等待所有渲染完成后再关闭loading状态
+              this.waitForRenderComplete().then(() => {
+                this.isLoading = false;
+              });
+            }, 100);
+          });
+        } else {
+          this.initGraph(); // 确保 graph 已创建
+          // 等待图表初始化和渲染完成后再关闭loading
+          this.waitForRenderComplete().then(() => {
+            // 图渲染完成后，自动显示第一个combo的详情
+            this.initDefaultData();
+            this.isLoading = false;
+          });
+        }
+      } catch (error) {
+        console.error("设置数据时出错:", error);
+        // 出错时也要隐藏loading
+        this.isLoading = false;
       }
-      // 图渲染完成后，自动显示第一个combo的详情
-      this.showFirstComboDetail();
-      // 数据加载完成后，关闭loading状态
-      this.isLoading = false;
+    },
+    /**
+     * 等待G6渲染完成
+     * @returns {Promise} 渲染完成时resolve的Promise
+     */
+    waitForRenderComplete() {
+      return new Promise((resolve) => {
+        if (!this.graph) {
+          resolve();
+          return;
+        }
+
+        // 检查图表是否已完成渲染
+        const checkRender = () => {
+          try {
+            // 获取所有节点和边
+            const nodes = this.graph.getNodes();
+            const edges = this.graph.getEdges();
+
+            // 检查是否所有节点都已经渲染完成
+            let nodesRendered = true;
+            for (let node of nodes) {
+              if (!node.isVisible()) {
+                nodesRendered = false;
+                break;
+              }
+            }
+
+            // 如果节点和边都存在且图表已就绪，则认为渲染完成
+            if (nodes.length > 0 && edges.length >= 0 && nodesRendered) {
+              // 再等待一小段时间确保动画也完成
+              setTimeout(() => {
+                resolve();
+              }, 300);
+            } else {
+              // 继续等待
+              requestAnimationFrame(checkRender);
+            }
+          } catch (error) {
+            // 出现错误时也resolve，避免无限等待
+            console.warn("检查渲染状态时出错:", error);
+            resolve();
+          }
+        };
+
+        // 开始检查渲染状态
+        requestAnimationFrame(checkRender);
+      });
     },
     /** 组件销毁时触发 */
     destroy() {
@@ -1322,15 +1325,22 @@ export default {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  position: relative;
+
   .loading-container {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #111d30;
+    background-color: rgba(17, 29, 48, 0.8);
     color: #409eff;
+    z-index: 1000;
+    box-sizing: border-box;
 
     .loading-spinner {
       width: 40px;
@@ -1374,7 +1384,7 @@ export default {
 
     // 右侧面板 - 占据 25%
     .right-panel {
-      flex: 0 0 20%; // 不放大不缩小，基础宽度 20%
+      flex: 0 0 21%; // 不放大不缩小，基础宽度 20%
       min-width: 300px; // 设置最小宽度防止过小
       height: calc(100% - 80px);
       background-color: #111d30;
@@ -1409,12 +1419,20 @@ export default {
             font-size: 16px;
             font-weight: bold;
           }
+          .detail-top-title {
+            padding: 10px 0 10px 0;
+            color: #ffff;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(95, 199, 255, 0.8),
+              0 0 10px rgba(95, 199, 255, 0.5);
+          }
         }
       }
 
       .combo-detail-content {
         width: 100%;
-        height: calc(100% - 60px);
+        height: calc(100% - 150px);
         color: #fff;
         box-sizing: border-box;
         overflow-y: auto; // 添加滚动条
@@ -1468,6 +1486,76 @@ export default {
             .success-rate,
             .response-rate,
             .p99-time {
+              color: #fff;
+            }
+          }
+        }
+      }
+      .default-detail-content {
+        width: 100%;
+        height: calc(100% - 150px);
+        color: #fff;
+        box-sizing: border-box;
+        overflow-y: auto; // 添加滚动条
+        padding: 10px;
+
+        // 滚动条样式（可选）
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: #000;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: #10375d;
+          border-radius: 3px;
+        }
+        .detail-item {
+          margin-bottom: 10px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+
+          //   &.active {
+          //     background-color: #10375d;
+          //   }
+
+          .item-name {
+            padding: 5px 0 10px 0;
+            color: #ffff;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(95, 199, 255, 0.8),
+              0 0 10px rgba(95, 199, 255, 0.5);
+          }
+
+          .item-stats {
+            font-size: 12px;
+            background-color: #020c1d;
+            border-radius: 4px;
+            padding: 12px 15px;
+            &:hover {
+              background-color: #10375d;
+            }
+            .stats-grid {
+              display: grid;
+              grid-template-columns: 1fr 1fr; /* 两列布局 */
+              gap: 5px 10px; /* 行间距5px，列间距10px */
+
+              .item-label {
+                color: #ddd;
+              }
+              span {
+                color: #fff;
+                padding: 2px 0;
+              }
+            }
+
+            .success-rate,
+            .response-rate,
+            .p99-time,
+            .status-4 {
               color: #fff;
             }
           }
@@ -1530,44 +1618,32 @@ export default {
             .section-grid {
               display: grid;
               grid-template-columns: 1fr 1fr; /* 严格平均分配两列 */
-              gap: 8px;
+              gap: 5px 10px; /* 行间距5px，列间距10px */
             }
 
             .section-item {
-              display: table;
-              width: 100%;
-              table-layout: fixed; /* 固定表格布局 */
-
+              font-size: 12px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
               .item-label {
-                font-size: 12px;
-                color: #fff;
-                display: table-cell;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                padding-right: 8px;
-                word-break: keep-all;
-                // width: 1%; /* 尽可能小，但让内容决定实际宽度 */
+                color: #ddd;
               }
-
-              .item-value {
-                font-size: 12px;
-                color: #fff;
-                display: table-cell;
-                text-align: right;
-                line-height: 1.3;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                width: auto; /* 占据剩余空间 */
+              // .item-value {
+              //   width: 50%;
+              //   // font-weight: bold;
+              //   white-space: nowrap;
+              //   overflow: hidden;
+              //   text-overflow: ellipsis;
+              // }
+              .stats-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr; /* 两列布局 */
+                gap: 5px 10px; /* 行间距5px，列间距10px */
 
                 span {
-                  font-size: 12px;
-                  line-height: 1.3;
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                  display: block;
+                  color: #fff;
+                  padding: 2px 0;
                 }
               }
             }
@@ -1612,24 +1688,26 @@ export default {
 //           }
 
 .operation-list {
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
-  height: 60px;
+  height: 50px;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .operation-list .detail-title {
   flex: 1;
   text-align: center;
   // padding: 15px 10px;
-  line-height: 60px;
+  line-height: 50px;
   background-color: #020c1d;
   border-radius: 4px;
   margin: 0 10px;
   color: #5fc7ff;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
+  text-shadow: 0 0 5px rgba(95, 199, 255, 0.8), 0 0 10px rgba(95, 199, 255, 0.5),
+    0 0 15px rgba(95, 199, 255, 0.3), 0 0 20px rgba(95, 199, 255, 0.2);
 }
 
 // 全局样式确保提示框不会被其他元素遮挡
