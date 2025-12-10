@@ -64,7 +64,7 @@
 #com-container {
   width: 100%;
   height: 100%;
-  // background-color: #0b1421;
+  background-color: #0b1421;
   // 确保容器可以正确应用变换
   transform-origin: center center;
 }

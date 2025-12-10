@@ -373,7 +373,7 @@ export default {
       const NODE_SPACING = 150;
       const PADDING = 50;
       const LABEL_HEIGHT = 40;
-      const VERTICAL_SPACING = 100;
+      const VERTICAL_SPACING = 200;
       const START_X = this.graph ? this.graph.get("width") / 4 : 100;
       // 动态获取父combo ID，基于combosParent数据
       let parentComboIds = [];
@@ -562,7 +562,7 @@ export default {
           orderedParents.forEach((parent, index) => {
             if (parent) {
               parent.x = -parent.width / 2;
-              parent.y = currentY;
+              parent.y = parent.height / 2 + currentY;
 
               // 更新currentY为当前combo的底部位置
               currentY += parent.height || 400;
@@ -621,6 +621,8 @@ export default {
 
       // 转换节点数据
       const nodes = rawData.nodes.map((node) => {
+        console.log(node,'mm');
+        
         // 查找节点所属的combo
         const combo = rawData.combos.find((c) => c.id === node.combo);
         let isInDisasterCenter = false;
@@ -634,6 +636,7 @@ export default {
           id: node.key,
           label: node.text,
           type: "custom-node",
+          iconType: node.iconType || "default",
           draggable: true,
           status: node.status,
           detail: node.detail,
@@ -977,8 +980,7 @@ export default {
         // 添加节点详情信息
         if (nodeModel.detail && nodeModel.detail.length > 0) {
           nodeModel.detail.forEach((detail) => {
-
-                if (nodeModel.status === "abnormal") {
+            if (nodeModel.status === "abnormal") {
               tooltipContent += `<div class="tooltip-item" style="padding: 5px 0 !important;>
             <span class="item-name">${detail.name}:</span>
             <span class="item-value" style="color: #ff7478 !important;">${detail.value}</span>

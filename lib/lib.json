@@ -218,6 +218,7 @@
 			"text": "33.114.5.53",
 			"status": "abnormal",
 			"combo": "818",
+			"iconType": "oracle",
 			"source": "",
 			"Alerts": "3",
 			"detail": [
@@ -347,6 +348,7 @@
 			"text": "33.114.5.54",
 			"status": "normal",
 			"combo": "818",
+			"iconType": "host",
 			"source": "",
 			"detail": [
 				{
@@ -475,6 +477,7 @@
 			"text": "32.114.72.6",
 			"status": "normal",
 			"combo": "818",
+			"iconType": "backup",
 			"source": "",
 			"detail": [],
 			"systemResourceLayer": {
@@ -673,6 +676,8 @@
 			"text": "172.34.2.177",
 			"status": "normal",
 			"combo": "818",
+						"iconType": "host",
+
 			"source": "",
 			"detail": [],
 			"systemResourceLayer": {
@@ -772,6 +777,8 @@
 			"text": "37.114.2.166",
 			"status": "normal",
 			"combo": "819",
+						"iconType": "host",
+
 			"source": "",
 			"detail": [
 				{
@@ -900,6 +907,8 @@
 			"text": "35.114.1.24",
 			"status": "normal",
 			"combo": "819",
+						"iconType": "host",
+
 			"source": "",
 			"detail": [
 				{
@@ -1225,6 +1234,7 @@
 			"key": "loadBalancer",
 			"text": "负载均衡器",
 			"status": "abnormal",
+			"iconType": "F5",
 			"source": "负载均衡器",
 			"combo": "",
 			"Alerts": "3",
