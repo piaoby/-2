@@ -313,7 +313,7 @@ export default {
       );
       if (loadBalancerNode && this.parentComboPositions) {
         // 获取所有父combo
-        const parentIds = ["mainCenter", "noneCenter", "disasterCenter"];
+        const parentIds = this.tabRawData.combosParent.map(parent => parent.id);
         const validParents = parentIds.filter(
           (id) => this.parentComboPositions[id]
         );
@@ -343,9 +343,10 @@ export default {
 
             if (minY !== Infinity && maxY !== -Infinity) {
               // 放置在整个布局的左侧中间
+              const firstParentPos = this.parentComboPositions[validParents[0]];
               loadBalancerNode.x =
-                validParents[0].x - (validParents[0].width / 3) * 2; // 左侧200px位置
-              loadBalancerNode.y = (minY + maxY) / 2; // 垂直居中
+                firstParentPos.x - (firstParentPos.width / 3) * 2; // 左侧200px位置
+              loadBalancerNode.y =  maxY / 2; // 垂直居中
             }
           }
         }

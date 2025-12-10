@@ -676,8 +676,7 @@
 			"text": "172.34.2.177",
 			"status": "normal",
 			"combo": "818",
-						"iconType": "host",
-
+			"iconType": "host",
 			"source": "",
 			"detail": [],
 			"systemResourceLayer": {
@@ -777,8 +776,7 @@
 			"text": "37.114.2.166",
 			"status": "normal",
 			"combo": "819",
-						"iconType": "host",
-
+			"iconType": "host",
 			"source": "",
 			"detail": [
 				{
@@ -907,8 +905,7 @@
 			"text": "35.114.1.24",
 			"status": "normal",
 			"combo": "819",
-						"iconType": "host",
-
+			"iconType": "host",
 			"source": "",
 			"detail": [
 				{
@@ -1558,6 +1555,12 @@
 				"820",
 				"821"
 			],
+			"status": "normal"
+		},
+		{
+			"name": "",
+			"id": "noneCenter",
+			"children": [],
 			"status": "normal"
 		}
 	]
