@@ -1,254 +1,131 @@
 {
-	"defaultLabel": "内部网络1",
+	"defaultLabel": "BPC信息",
 	"defaultData": [
 		{
-			"label": "防火墙1",
+			"label": "开发环境",
 			"detail": [
 				{
-					"name": "CPU利用率",
-					"value": "11%"
+					"name": "交易总量",
+					"value": "8275"
 				},
 				{
-					"name": "内存利用率",
-					"value": "22%"
+					"name": "平均响应率",
+					"value": "99.5"
 				},
 				{
-					"name": "模拟数据1",
-					"value": "11%"
+					"name": "平均成功率",
+					"value": "99.68"
 				},
 				{
-					"name": "模拟数据12",
-					"value": "22%"
+					"name": "P99响应时间",
+					"value": "189.57ms"
 				}
-			]
+			],
+			"id": "818"
 		},
 		{
-			"label": "防火墙1",
+			"label": "SIT环境",
 			"detail": [
 				{
-					"name": "CPU利用率",
-					"value": "11%"
+					"name": "交易总量",
+					"value": "8275"
 				},
 				{
-					"name": "内存利用率",
-					"value": "22%"
+					"name": "平均响应率",
+					"value": "99.5"
 				},
 				{
-					"name": "模拟数据1",
-					"value": "11%"
+					"name": "平均成功率",
+					"value": "99.68"
 				},
 				{
-					"name": "模拟数据12",
-					"value": "22%"
+					"name": "P99响应时间",
+					"value": "189.57ms"
 				}
-			]
+			],
+			"id": "819"
 		},
 		{
-			"label": "防火墙1",
+			"label": "UAT环境",
 			"detail": [
 				{
-					"name": "CPU利用率",
-					"value": "11%"
+					"name": "交易总量",
+					"value": "8275"
 				},
 				{
-					"name": "内存利用率",
-					"value": "22%"
+					"name": "平均响应率",
+					"value": "99.5"
 				},
 				{
-					"name": "模拟数据1",
-					"value": "11%"
+					"name": "平均成功率",
+					"value": "99.68"
 				},
 				{
-					"name": "模拟数据12",
-					"value": "22%"
+					"name": "P99响应时间",
+					"value": "189.57ms"
 				}
-			]
+			],
+			"id": "820"
 		},
 		{
-			"label": "防火墙1",
+			"label": "准生产环境",
 			"detail": [
 				{
-					"name": "CPU利用率",
-					"value": "11%"
+					"name": "交易总量",
+					"value": "8275"
 				},
 				{
-					"name": "内存利用率",
-					"value": "22%"
+					"name": "平均响应率",
+					"value": "99.5"
 				},
 				{
-					"name": "模拟数据1",
-					"value": "11%"
+					"name": "平均成功率",
+					"value": "99.68"
 				},
 				{
-					"name": "模拟数据12",
-					"value": "22%"
+					"name": "P99响应时间",
+					"value": "189.57ms"
 				}
-			]
-		},
-		{
-			"label": "防火墙1",
-			"detail": [
-				{
-					"name": "CPU利用率",
-					"value": "11%"
-				},
-				{
-					"name": "内存利用率",
-					"value": "22%"
-				},
-				{
-					"name": "模拟数据1",
-					"value": "11%"
-				},
-				{
-					"name": "模拟数据12",
-					"value": "22%"
-				}
-			]
-		},
-		{
-			"label": "防火墙1",
-			"detail": [
-				{
-					"name": "CPU利用率",
-					"value": "11%"
-				},
-				{
-					"name": "内存利用率",
-					"value": "22%"
-				},
-				{
-					"name": "模拟数据1",
-					"value": "11%"
-				},
-				{
-					"name": "模拟数据12",
-					"value": "22%"
-				}
-			]
-		},
-		{
-			"label": "防火墙1",
-			"detail": [
-				{
-					"name": "CPU利用率",
-					"value": "11%"
-				},
-				{
-					"name": "内存利用率",
-					"value": "22%"
-				},
-				{
-					"name": "模拟数据1",
-					"value": "11%"
-				},
-				{
-					"name": "模拟数据12",
-					"value": "22%"
-				}
-			]
-		},
-		{
-			"label": "防火墙1",
-			"detail": [
-				{
-					"name": "CPU利用率",
-					"value": "11%"
-				},
-				{
-					"name": "内存利用率",
-					"value": "22%"
-				},
-				{
-					"name": "模拟数据1",
-					"value": "11%"
-				},
-				{
-					"name": "模拟数据12",
-					"value": "22%"
-				}
-			]
-		},
-		{
-			"label": "防火墙1",
-			"detail": [
-				{
-					"name": "CPU利用率",
-					"value": "11%"
-				},
-				{
-					"name": "内存利用率",
-					"value": "22%"
-				},
-				{
-					"name": "模拟数据1",
-					"value": "11%"
-				},
-				{
-					"name": "模拟数据12",
-					"value": "22%"
-				}
-			]
-		},
-		{
-			"label": "防火墙2",
-			"detail": [
-				{
-					"name": "CPU利用率",
-					"value": "33%"
-				},
-				{
-					"name": "内存利用率",
-					"value": "44%"
-				},
-				{
-					"name": "模拟数据13",
-					"value": "33%"
-				},
-				{
-					"name": "模拟数据14",
-					"value": "44%"
-				}
-			]
+			],
+			"id": "821"
 		}
 	],
 	"nodes": [
 		{
 			"key": "33.114.5.53",
 			"text": "33.114.5.53",
-			"status": "abnormal",
+			"status": "normal",
 			"combo": "818",
-			"iconType": "oracle",
 			"source": "",
-			"Alerts": "3",
+			"iconType": "host",
 			"detail": [
 				{
 					"name": "CPU使用率",
-					"value": 4.03638
+					"value": "16.3%"
 				},
 				{
-					"name": "物理内存已用量)",
-					"value": 49904500736
+					"name": "物理内存已用量",
+					"value": "46.55G"
 				},
 				{
 					"name": "磁盘空间使用率",
-					"value": 18.921063
+					"value": "18.97%"
 				},
 				{
 					"name": "网卡入流量",
-					"value": 413393
+					"value": "1124.68kB/s"
 				},
 				{
 					"name": "网卡出流量",
-					"value": 361025
+					"value": "1029.18kB/s"
 				},
 				{
 					"name": "I/O使用率",
-					"value": 0.00016
+					"value": "1.19%"
 				},
 				{
-					"name": "5分钟平均负载)",
-					"value": 2.02
+					"name": "5分钟平均负载",
+					"value": "3.37"
 				}
 			],
 			"systemResourceLayer": {
@@ -256,31 +133,31 @@
 				"listdetail": [
 					{
 						"name": "CPU使用率",
-						"value": 4.03638
+						"value": "16.3%"
 					},
 					{
-						"name": "物理内存已用量)",
-						"value": 49904500736
+						"name": "物理内存已用量",
+						"value": "46.55G"
 					},
 					{
 						"name": "磁盘空间使用率",
-						"value": 18.921063
+						"value": "18.97%"
 					},
 					{
 						"name": "网卡入流量",
-						"value": 413393
+						"value": "1124.68kB/s"
 					},
 					{
 						"name": "网卡出流量",
-						"value": 361025
+						"value": "1029.18kB/s"
 					},
 					{
 						"name": "I/O使用率",
-						"value": 0.00016
+						"value": "1.19%"
 					},
 					{
-						"name": "5分钟平均负载)",
-						"value": 2.02
+						"name": "5分钟平均负载",
+						"value": "3.37"
 					},
 					{
 						"name": "CPU核心数",
@@ -305,7 +182,7 @@
 				]
 			},
 			"applicationSoftwareLayer": {
-				"name": "业务服务层",
+				"name": "应用软件层",
 				"listdetail": [
 					{
 						"name": "outexception关键字异常",
@@ -313,32 +190,32 @@
 					},
 					{
 						"name": "17356端口状态",
-						"value": 3
+						"value": 5
 					},
 					{
 						"name": "告警数量",
-						"value": 0
+						"value": "0"
 					}
 				]
 			},
 			"businessServiceLayer": {
-				"name": "应用软件层",
+				"name": "业务服务层",
 				"listdetail": [
 					{
-						"name": "请求数",
-						"value": "1500次/分钟"
+						"name": "交易总量",
+						"value": "8275"
 					},
 					{
-						"name": "交易量",
-						"value": "1500次/分钟"
+						"name": "平均响应率",
+						"value": "99.5"
 					},
 					{
-						"name": "失败数",
-						"value": "5笔/分钟"
+						"name": "平均成功率",
+						"value": "99.68"
 					},
 					{
-						"name": "响应时间",
-						"value": "200ms"
+						"name": "P99响应时间",
+						"value": "189.57ms"
 					}
 				]
 			}
@@ -348,36 +225,36 @@
 			"text": "33.114.5.54",
 			"status": "normal",
 			"combo": "818",
-			"iconType": "host",
 			"source": "",
+			"iconType": "host",
 			"detail": [
 				{
 					"name": "CPU使用率",
-					"value": 3.362729
+					"value": "12.0%"
 				},
 				{
-					"name": "物理内存已用量)",
-					"value": 49876430848
+					"name": "物理内存已用量",
+					"value": "44.04G"
 				},
 				{
 					"name": "磁盘空间使用率",
-					"value": 17.779033
+					"value": "17.85%"
 				},
 				{
 					"name": "网卡入流量",
-					"value": 334817
+					"value": "1082.44kB/s"
 				},
 				{
 					"name": "网卡出流量",
-					"value": 295745
+					"value": "6647.06kB/s"
 				},
 				{
 					"name": "I/O使用率",
-					"value": 0.00016
+					"value": "1.02%"
 				},
 				{
-					"name": "5分钟平均负载)",
-					"value": 1.41
+					"name": "5分钟平均负载",
+					"value": "2.36"
 				}
 			],
 			"systemResourceLayer": {
@@ -385,31 +262,31 @@
 				"listdetail": [
 					{
 						"name": "CPU使用率",
-						"value": 4.03638
+						"value": "12.0%"
 					},
 					{
-						"name": "物理内存已用量)",
-						"value": 49904500736
+						"name": "物理内存已用量",
+						"value": "44.04G"
 					},
 					{
 						"name": "磁盘空间使用率",
-						"value": 18.921063
+						"value": "17.85%"
 					},
 					{
 						"name": "网卡入流量",
-						"value": 413393
+						"value": "1082.44kB/s"
 					},
 					{
 						"name": "网卡出流量",
-						"value": 361025
+						"value": "6647.06kB/s"
 					},
 					{
 						"name": "I/O使用率",
-						"value": 0.00016
+						"value": "1.02%"
 					},
 					{
-						"name": "5分钟平均负载)",
-						"value": 2.02
+						"name": "5分钟平均负载",
+						"value": "2.36"
 					},
 					{
 						"name": "CPU核心数",
@@ -434,40 +311,36 @@
 				]
 			},
 			"applicationSoftwareLayer": {
-				"name": "业务服务层",
+				"name": "应用软件层",
 				"listdetail": [
 					{
 						"name": "outexception关键字异常",
 						"value": 1
 					},
 					{
-						"name": "17356端口状态",
-						"value": 3
-					},
-					{
 						"name": "告警数量",
-						"value": 0
+						"value": "0"
 					}
 				]
 			},
 			"businessServiceLayer": {
-				"name": "应用软件层",
+				"name": "业务服务层",
 				"listdetail": [
 					{
-						"name": "请求数",
-						"value": "1500次/分钟"
+						"name": "交易总量",
+						"value": "8275"
 					},
 					{
-						"name": "交易量",
-						"value": "1500次/分钟"
+						"name": "平均响应率",
+						"value": "99.5"
 					},
 					{
-						"name": "失败数",
-						"value": "5笔/分钟"
+						"name": "平均成功率",
+						"value": "99.68"
 					},
 					{
-						"name": "响应时间",
-						"value": "200ms"
+						"name": "P99响应时间",
+						"value": "189.57ms"
 					}
 				]
 			}
@@ -477,97 +350,61 @@
 			"text": "32.114.72.6",
 			"status": "normal",
 			"combo": "818",
-			"iconType": "backup",
 			"source": "",
+			"iconType": "host",
 			"detail": [],
 			"systemResourceLayer": {
 				"name": "系统资源层",
 				"listdetail": [
 					{
-						"name": "CPU使用率",
-						"value": 4.03638
-					},
-					{
-						"name": "物理内存已用量)",
-						"value": 49904500736
-					},
-					{
-						"name": "磁盘空间使用率",
-						"value": 18.921063
-					},
-					{
-						"name": "网卡入流量",
-						"value": 413393
-					},
-					{
-						"name": "网卡出流量",
-						"value": 361025
-					},
-					{
-						"name": "I/O使用率",
-						"value": 0.00016
-					},
-					{
-						"name": "5分钟平均负载)",
-						"value": 2.02
-					},
-					{
 						"name": "CPU核心数",
-						"value": 32
+						"value": null
 					},
 					{
 						"name": "CPU型号",
-						"value": "INTEL(R) XEON(R) GOLD 5520+"
+						"value": ""
 					},
 					{
 						"name": "内存总量",
-						"value": 48023
+						"value": null
 					},
 					{
 						"name": "操作系统",
-						"value": "linux suse"
+						"value": ""
 					},
 					{
 						"name": "磁盘总量",
-						"value": 286
+						"value": null
 					}
 				]
 			},
 			"applicationSoftwareLayer": {
-				"name": "业务服务层",
+				"name": "应用软件层",
 				"listdetail": [
 					{
-						"name": "outexception关键字异常",
-						"value": 1
-					},
-					{
-						"name": "17356端口状态",
-						"value": 3
-					},
-					{
 						"name": "告警数量",
-						"value": 0
+						"value": "0"
 					}
 				]
 			},
 			"businessServiceLayer": {
-				"name": "应用软件层",
+				"name": "业务服务层",
 				"listdetail": [
 					{
-						"name": "请求数",
-						"value": "1500次/分钟"
+						"name": "交易总量",
+						"value": "8275"
 					},
 					{
-						"name": "交易量",
-						"value": "1500次/分钟"
+						"name": "平均响应率",
+						"value": "99.5"
 					},
 					{
-						"name": "失败数",
-						"value": "5笔/分钟"
+						"name": "平均成功率",
+						"value": "99.68"
 					},
 					{
-						"name": "响应时间",
-						"value": "200ms"
+						"name": "P99响应时间",
+						"value": "189.57ms"
 					}
 				]
 			}
@@ -575,98 +412,67 @@
 		{
 			"key": "35.114.2.167",
 			"text": "35.114.2.167",
-			"status": "normal",
+			"status": "abnormal",
 			"combo": "818",
 			"source": "",
+			"iconType": "host",
 			"detail": [],
 			"systemResourceLayer": {
 				"name": "系统资源层",
 				"listdetail": [
 					{
-						"name": "CPU使用率",
-						"value": 4.03638
-					},
-					{
-						"name": "物理内存已用量)",
-						"value": 49904500736
-					},
-					{
-						"name": "磁盘空间使用率",
-						"value": 18.921063
-					},
-					{
-						"name": "网卡入流量",
-						"value": 413393
-					},
-					{
-						"name": "网卡出流量",
-						"value": 361025
-					},
-					{
-						"name": "I/O使用率",
-						"value": 0.00016
-					},
-					{
-						"name": "5分钟平均负载)",
-						"value": 2.02
-					},
-					{
 						"name": "CPU核心数",
-						"value": 32
+						"value": null
 					},
 					{
 						"name": "CPU型号",
-						"value": "INTEL(R) XEON(R) GOLD 5520+"
+						"value": ""
 					},
 					{
 						"name": "内存总量",
-						"value": 48023
+						"value": null
 					},
 					{
 						"name": "操作系统",
-						"value": "linux suse"
+						"value": ""
 					},
 					{
 						"name": "磁盘总量",
-						"value": 286
+						"value": null
 					}
 				]
 			},
 			"applicationSoftwareLayer": {
-				"name": "业务服务层",
+				"name": "应用软件层",
 				"listdetail": [
 					{
 						"name": "outexception关键字异常",
 						"value": 1
 					},
 					{
-						"name": "17356端口状态",
-						"value": 3
-					},
-					{
 						"name": "告警数量",
-						"value": 0
+						"value": "7"
 					}
 				]
 			},
 			"businessServiceLayer": {
-				"name": "应用软件层",
+				"name": "业务服务层",
 				"listdetail": [
 					{
-						"name": "请求数",
-						"value": "1500次/分钟"
+						"name": "交易总量",
+						"value": "8275"
 					},
 					{
-						"name": "交易量",
-						"value": "1500次/分钟"
+						"name": "平均响应率",
+						"value": "99.5"
 					},
 					{
-						"name": "失败数",
-						"value": "5笔/分钟"
+						"name": "平均成功率",
+						"value": "99.68"
 					},
 					{
-						"name": "响应时间",
-						"value": "200ms"
+						"name": "P99响应时间",
+						"value": "189.57ms"
 					}
 				]
 			}
@@ -674,45 +480,143 @@
 		{
 			"key": "172.34.2.177",
 			"text": "172.34.2.177",
-			"status": "normal",
+			"status": "abnormal",
 			"combo": "818",
-			"iconType": "host",
 			"source": "",
+			"iconType": "host",
+			"Alerts":"2",
 			"detail": [],
 			"systemResourceLayer": {
 				"name": "系统资源层",
 				"listdetail": [
 					{
-						"name": "CPU使用率",
-						"value": 4.03638
+						"name": "CPU核心数",
+						"value": null
 					},
 					{
-						"name": "物理内存已用量)",
-						"value": 49904500736
+						"name": "CPU型号",
+						"value": ""
+					},
+					{
+						"name": "内存总量",
+						"value": null
+					},
+					{
+						"name": "操作系统",
+						"value": ""
+					},
+					{
+						"name": "磁盘总量",
+						"value": null
+					}
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "应用软件层",
+				"listdetail": [
+					{
+						"name": "outexception关键字异常",
+						"value": 1
+					},
+					{
+						"name": "告警数量",
+						"value": "1"
+					}
+				]
+			},
+			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": [
+					{
+						"name": "交易总量",
+						"value": "8275"
+					},
+					{
+						"name": "平均响应率",
+						"value": "99.5"
+					},
+					{
+						"name": "平均成功率",
+						"value": "99.68"
+					},
+					{
+						"name": "P99响应时间",
+						"value": "189.57ms"
+					}
+				]
+			}
+		},
+		{
+			"key": "33.114.5.55",
+			"text": "33.114.5.55",
+			"status": "normal",
+			"combo": "818",
+			"source": "",
+			"iconType": "host",
+			"detail": [
+				{
+					"name": "CPU使用率",
+					"value": "3.13%"
+				},
+				{
+					"name": "物理内存已用量",
+					"value": "30.91G"
+				},
+				{
+					"name": "磁盘空间使用率",
+					"value": "38.39%"
+				},
+				{
+					"name": "网卡入流量",
+					"value": "2015.58kB/s"
+				},
+				{
+					"name": "网卡出流量",
+					"value": "2210.42kB/s"
+				},
+				{
+					"name": "I/O使用率",
+					"value": "0.66%"
+				},
+				{
+					"name": "5分钟平均负载",
+					"value": "0.34"
+				}
+			],
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU使用率",
+						"value": "3.13%"
+					},
+					{
+						"name": "物理内存已用量",
+						"value": "30.91G"
 					},
 					{
 						"name": "磁盘空间使用率",
-						"value": 18.921063
+						"value": "38.39%"
 					},
 					{
 						"name": "网卡入流量",
-						"value": 413393
+						"value": "2015.58kB/s"
 					},
 					{
 						"name": "网卡出流量",
-						"value": 361025
+						"value": "2210.42kB/s"
 					},
 					{
 						"name": "I/O使用率",
-						"value": 0.00016
+						"value": "0.66%"
 					},
 					{
-						"name": "5分钟平均负载)",
-						"value": 2.02
+						"name": "5分钟平均负载",
+						"value": "0.34"
 					},
 					{
 						"name": "CPU核心数",
-						"value": 32
+						"value": 16
 					},
 					{
 						"name": "CPU型号",
@@ -720,7 +624,7 @@
 					},
 					{
 						"name": "内存总量",
-						"value": 48023
+						"value": 31895
 					},
 					{
 						"name": "操作系统",
@@ -728,45 +632,37 @@
 					},
 					{
 						"name": "磁盘总量",
-						"value": 286
+						"value": 385
 					}
 				]
 			},
 			"applicationSoftwareLayer": {
-				"name": "业务服务层",
+				"name": "应用软件层",
 				"listdetail": [
 					{
-						"name": "outexception关键字异常",
-						"value": 1
-					},
-					{
-						"name": "17356端口状态",
-						"value": 3
-					},
-					{
 						"name": "告警数量",
-						"value": 0
+						"value": "0"
 					}
 				]
 			},
 			"businessServiceLayer": {
-				"name": "应用软件层",
+				"name": "业务服务层",
 				"listdetail": [
 					{
-						"name": "请求数",
-						"value": "1500次/分钟"
+						"name": "交易总量",
+						"value": "8275"
 					},
 					{
-						"name": "交易量",
-						"value": "1500次/分钟"
+						"name": "平均响应率",
+						"value": "99.5"
 					},
 					{
-						"name": "失败数",
-						"value": "5笔/分钟"
+						"name": "平均成功率",
+						"value": "99.68"
 					},
 					{
-						"name": "响应时间",
-						"value": "200ms"
+						"name": "P99响应时间",
+						"value": "189.57ms"
 					}
 				]
 			}
@@ -776,36 +672,36 @@
 			"text": "37.114.2.166",
 			"status": "normal",
 			"combo": "819",
-			"iconType": "host",
 			"source": "",
+			"iconType": "host",
 			"detail": [
 				{
 					"name": "CPU使用率",
-					"value": 1.069909
+					"value": "2.5%"
 				},
 				{
-					"name": "物理内存已用量)",
-					"value": 46943723520
+					"name": "物理内存已用量",
+					"value": "43.69G"
 				},
 				{
 					"name": "磁盘空间使用率",
-					"value": 13.878085
+					"value": "14.01%"
 				},
 				{
 					"name": "网卡入流量",
-					"value": 173784
+					"value": "183.03kB/s"
 				},
 				{
 					"name": "网卡出流量",
-					"value": 198607
+					"value": "197.3kB/s"
 				},
 				{
 					"name": "I/O使用率",
-					"value": 0.000867
+					"value": "0.02%"
 				},
 				{
-					"name": "5分钟平均负载)",
-					"value": 1.87
+					"name": "5分钟平均负载",
+					"value": "0.51"
 				}
 			],
 			"systemResourceLayer": {
@@ -813,31 +709,31 @@
 				"listdetail": [
 					{
 						"name": "CPU使用率",
-						"value": 4.03638
+						"value": "2.5%"
 					},
 					{
-						"name": "物理内存已用量)",
-						"value": 49904500736
+						"name": "物理内存已用量",
+						"value": "43.69G"
 					},
 					{
 						"name": "磁盘空间使用率",
-						"value": 18.921063
+						"value": "14.01%"
 					},
 					{
 						"name": "网卡入流量",
-						"value": 413393
+						"value": "183.03kB/s"
 					},
 					{
 						"name": "网卡出流量",
-						"value": 361025
+						"value": "197.3kB/s"
 					},
 					{
 						"name": "I/O使用率",
-						"value": 0.00016
+						"value": "0.02%"
 					},
 					{
-						"name": "5分钟平均负载)",
-						"value": 2.02
+						"name": "5分钟平均负载",
+						"value": "0.51"
 					},
 					{
 						"name": "CPU核心数",
@@ -849,7 +745,7 @@
 					},
 					{
 						"name": "内存总量",
-						"value": 48023
+						"value": 48024
 					},
 					{
 						"name": "操作系统",
@@ -862,40 +758,32 @@
 				]
 			},
 			"applicationSoftwareLayer": {
-				"name": "业务服务层",
+				"name": "应用软件层",
 				"listdetail": [
 					{
-						"name": "outexception关键字异常",
-						"value": 1
-					},
-					{
-						"name": "17356端口状态",
-						"value": 3
-					},
-					{
 						"name": "告警数量",
-						"value": 0
+						"value": "0"
 					}
 				]
 			},
 			"businessServiceLayer": {
-				"name": "应用软件层",
+				"name": "业务服务层",
 				"listdetail": [
 					{
-						"name": "请求数",
-						"value": "1500次/分钟"
+						"name": "交易总量",
+						"value": "8275"
 					},
 					{
-						"name": "交易量",
-						"value": "1500次/分钟"
+						"name": "平均响应率",
+						"value": "99.5"
 					},
 					{
-						"name": "失败数",
-						"value": "5笔/分钟"
+						"name": "平均成功率",
+						"value": "99.68"
 					},
 					{
-						"name": "响应时间",
-						"value": "200ms"
+						"name": "P99响应时间",
+						"value": "189.57ms"
 					}
 				]
 			}
@@ -905,36 +793,36 @@
 			"text": "35.114.1.24",
 			"status": "normal",
 			"combo": "819",
-			"iconType": "host",
 			"source": "",
+			"iconType": "host",
 			"detail": [
 				{
 					"name": "CPU使用率",
-					"value": 0.560978
+					"value": "0.68%"
 				},
 				{
-					"name": "物理内存已用量)",
-					"value": 49976049664
+					"name": "物理内存已用量",
+					"value": "44.42G"
 				},
 				{
 					"name": "磁盘空间使用率",
-					"value": 62.933612
+					"value": "56.53%"
 				},
 				{
 					"name": "网卡入流量",
-					"value": 60074
+					"value": "1.86kB/s"
 				},
 				{
 					"name": "网卡出流量",
-					"value": 55426
+					"value": "3.3kB/s"
 				},
 				{
 					"name": "I/O使用率",
-					"value": 0.000367
+					"value": "0.04%"
 				},
 				{
-					"name": "5分钟平均负载)",
-					"value": 0.21
+					"name": "5分钟平均负载",
+					"value": "0.02"
 				}
 			],
 			"systemResourceLayer": {
@@ -942,31 +830,31 @@
 				"listdetail": [
 					{
 						"name": "CPU使用率",
-						"value": 4.03638
+						"value": "0.68%"
 					},
 					{
-						"name": "物理内存已用量)",
-						"value": 49904500736
+						"name": "物理内存已用量",
+						"value": "44.42G"
 					},
 					{
 						"name": "磁盘空间使用率",
-						"value": 18.921063
+						"value": "56.53%"
 					},
 					{
 						"name": "网卡入流量",
-						"value": 413393
+						"value": "1.86kB/s"
 					},
 					{
 						"name": "网卡出流量",
-						"value": 361025
+						"value": "3.3kB/s"
 					},
 					{
 						"name": "I/O使用率",
-						"value": 0.00016
+						"value": "0.04%"
 					},
 					{
-						"name": "5分钟平均负载)",
-						"value": 2.02
+						"name": "5分钟平均负载",
+						"value": "0.02"
 					},
 					{
 						"name": "CPU核心数",
@@ -974,11 +862,11 @@
 					},
 					{
 						"name": "CPU型号",
-						"value": "INTEL(R) XEON(R) GOLD 5520+"
+						"value": "Intel(R) Xeon(R) Gold 5220R CPU @ 2.20GHz"
 					},
 					{
 						"name": "内存总量",
-						"value": 48023
+						"value": 48124
 					},
 					{
 						"name": "操作系统",
@@ -986,45 +874,105 @@
 					},
 					{
 						"name": "磁盘总量",
-						"value": 286
+						"value": 139
 					}
 				]
 			},
 			"applicationSoftwareLayer": {
-				"name": "业务服务层",
+				"name": "应用软件层",
 				"listdetail": [
 					{
 						"name": "outexception关键字异常",
 						"value": 1
 					},
 					{
-						"name": "17356端口状态",
-						"value": 3
-					},
-					{
 						"name": "告警数量",
-						"value": 0
+						"value": "0"
 					}
 				]
 			},
 			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": [
+					{
+						"name": "交易总量",
+						"value": "8275"
+					},
+					{
+						"name": "平均响应率",
+						"value": "99.5"
+					},
+					{
+						"name": "平均成功率",
+						"value": "99.68"
+					},
+					{
+						"name": "P99响应时间",
+						"value": "189.57ms"
+					}
+				]
+			}
+		},
+		{
+			"key": "32.114.71.9",
+			"text": "32.114.71.9",
+			"status": "normal",
+			"combo": "819",
+			"source": "",
+			"iconType": "host",
+			"detail": [],
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU核心数",
+						"value": 16
+					},
+					{
+						"name": "CPU型号",
+						"value": "Intel(R) Xeon(R) Gold 5120 CPU @ 2.20GHz"
+					},
+					{
+						"name": "内存总量",
+						"value": 31984
+					},
+					{
+						"name": "操作系统",
+						"value": "linux suse"
+					},
+					{
+						"name": "磁盘总量",
+						"value": 1029
+					}
+				]
+			},
+			"applicationSoftwareLayer": {
 				"name": "应用软件层",
 				"listdetail": [
 					{
-						"name": "请求数",
-						"value": "1500次/分钟"
+						"name": "告警数量",
+						"value": "0"
+					}
+				]
+			},
+			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": [
+					{
+						"name": "交易总量",
+						"value": "8275"
 					},
 					{
-						"name": "交易量",
-						"value": "1500次/分钟"
+						"name": "平均响应率",
+						"value": "99.5"
 					},
 					{
-						"name": "失败数",
-						"value": "5笔/分钟"
+						"name": "平均成功率",
+						"value": "99.68"
 					},
 					{
-						"name": "响应时间",
-						"value": "200ms"
+						"name": "P99响应时间",
+						"value": "189.57ms"
 					}
 				]
 			}
@@ -1035,49 +983,22 @@
 			"status": "normal",
 			"combo": "820",
 			"source": "",
+			"iconType": "host",
 			"detail": [],
 			"systemResourceLayer": {
 				"name": "系统资源层",
 				"listdetail": [
-					{
-						"name": "CPU使用率",
-						"value": 4.03638
-					},
-					{
-						"name": "物理内存已用量)",
-						"value": 49904500736
-					},
-					{
-						"name": "磁盘空间使用率",
-						"value": 18.921063
-					},
-					{
-						"name": "网卡入流量",
-						"value": 413393
-					},
-					{
-						"name": "网卡出流量",
-						"value": 361025
-					},
-					{
-						"name": "I/O使用率",
-						"value": 0.00016
-					},
-					{
-						"name": "5分钟平均负载)",
-						"value": 2.02
-					},
 					{
 						"name": "CPU核心数",
 						"value": 32
 					},
 					{
 						"name": "CPU型号",
-						"value": "INTEL(R) XEON(R) GOLD 5520+"
+						"value": "Intel(R) Xeon(R) Gold 5220R CPU @ 2.20GHz"
 					},
 					{
 						"name": "内存总量",
-						"value": 48023
+						"value": 48124
 					},
 					{
 						"name": "操作系统",
@@ -1085,45 +1006,162 @@
 					},
 					{
 						"name": "磁盘总量",
-						"value": 286
+						"value": 139
 					}
 				]
 			},
 			"applicationSoftwareLayer": {
-				"name": "业务服务层",
+				"name": "应用软件层",
 				"listdetail": [
 					{
 						"name": "outexception关键字异常",
 						"value": 1
 					},
 					{
-						"name": "17356端口状态",
-						"value": 3
-					},
-					{
 						"name": "告警数量",
-						"value": 0
+						"value": "0"
 					}
 				]
 			},
 			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": [
+					{
+						"name": "交易总量",
+						"value": "8275"
+					},
+					{
+						"name": "平均响应率",
+						"value": "99.5"
+					},
+					{
+						"name": "平均成功率",
+						"value": "99.68"
+					},
+					{
+						"name": "P99响应时间",
+						"value": "189.57ms"
+					}
+				]
+			}
+		},
+		{
+			"key": "32.114.70.9",
+			"text": "32.114.70.9",
+			"status": "normal",
+			"combo": "820",
+			"source": "",
+			"iconType": "host",
+			"detail": [
+				{
+					"name": "CPU使用率",
+					"value": "9.6%"
+				},
+				{
+					"name": "物理内存已用量",
+					"value": "15.25G"
+				},
+				{
+					"name": "磁盘空间使用率",
+					"value": "54.14%"
+				},
+				{
+					"name": "网卡入流量",
+					"value": "115.87kB/s"
+				},
+				{
+					"name": "网卡出流量",
+					"value": "103.25kB/s"
+				},
+				{
+					"name": "I/O使用率",
+					"value": "0.1%"
+				},
+				{
+					"name": "5分钟平均负载",
+					"value": "2.16"
+				}
+			],
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU使用率",
+						"value": "9.6%"
+					},
+					{
+						"name": "物理内存已用量",
+						"value": "15.25G"
+					},
+					{
+						"name": "磁盘空间使用率",
+						"value": "54.14%"
+					},
+					{
+						"name": "网卡入流量",
+						"value": "115.87kB/s"
+					},
+					{
+						"name": "网卡出流量",
+						"value": "103.25kB/s"
+					},
+					{
+						"name": "I/O使用率",
+						"value": "0.1%"
+					},
+					{
+						"name": "5分钟平均负载",
+						"value": "2.16"
+					},
+					{
+						"name": "CPU核心数",
+						"value": 16
+					},
+					{
+						"name": "CPU型号",
+						"value": "Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz"
+					},
+					{
+						"name": "内存总量",
+						"value": 15856
+					},
+					{
+						"name": "操作系统",
+						"value": "linux suse"
+					},
+					{
+						"name": "磁盘总量",
+						"value": 1127
+					}
+				]
+			},
+			"applicationSoftwareLayer": {
 				"name": "应用软件层",
 				"listdetail": [
 					{
-						"name": "请求数",
-						"value": "1500次/分钟"
+						"name": "告警数量",
+						"value": "0"
+					}
+				]
+			},
+			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": [
+					{
+						"name": "交易总量",
+						"value": "8275"
 					},
 					{
-						"name": "交易量",
-						"value": "1500次/分钟"
+						"name": "平均响应率",
+						"value": "99.5"
 					},
 					{
-						"name": "失败数",
-						"value": "5笔/分钟"
+						"name": "平均成功率",
+						"value": "99.68"
 					},
 					{
-						"name": "响应时间",
-						"value": "200ms"
+						"name": "P99响应时间",
+						"value": "189.57ms"
 					}
 				]
 			}
@@ -1134,37 +1172,67 @@
 			"status": "normal",
 			"combo": "821",
 			"source": "",
-			"detail": [],
+			"iconType": "host",
+			"detail": [
+				{
+					"name": "CPU使用率",
+					"value": "1.74%"
+				},
+				{
+					"name": "物理内存已用量",
+					"value": "46.54G"
+				},
+				{
+					"name": "磁盘空间使用率",
+					"value": "40.98%"
+				},
+				{
+					"name": "网卡入流量",
+					"value": "53.83kB/s"
+				},
+				{
+					"name": "网卡出流量",
+					"value": "121.53kB/s"
+				},
+				{
+					"name": "I/O使用率",
+					"value": "0.31%"
+				},
+				{
+					"name": "5分钟平均负载",
+					"value": "0.62"
+				}
+			],
 			"systemResourceLayer": {
 				"name": "系统资源层",
 				"listdetail": [
 					{
 						"name": "CPU使用率",
-						"value": 4.03638
+						"value": "1.74%"
 					},
 					{
-						"name": "物理内存已用量)",
-						"value": 49904500736
+						"name": "物理内存已用量",
+						"value": "46.54G"
 					},
 					{
 						"name": "磁盘空间使用率",
-						"value": 18.921063
+						"value": "40.98%"
 					},
 					{
 						"name": "网卡入流量",
-						"value": 413393
+						"value": "53.83kB/s"
 					},
 					{
 						"name": "网卡出流量",
-						"value": 361025
+						"value": "121.53kB/s"
 					},
 					{
 						"name": "I/O使用率",
-						"value": 0.00016
+						"value": "0.31%"
 					},
 					{
-						"name": "5分钟平均负载)",
-						"value": 2.02
+						"name": "5分钟平均负载",
+						"value": "0.62"
 					},
 					{
 						"name": "CPU核心数",
@@ -1172,11 +1240,11 @@
 					},
 					{
 						"name": "CPU型号",
-						"value": "INTEL(R) XEON(R) GOLD 5520+"
+						"value": "Hygon C86 5390 Processor"
 					},
 					{
 						"name": "内存总量",
-						"value": 48023
+						"value": 48024
 					},
 					{
 						"name": "操作系统",
@@ -1184,57 +1252,364 @@
 					},
 					{
 						"name": "磁盘总量",
-						"value": 286
+						"value": 188
 					}
 				]
 			},
 			"applicationSoftwareLayer": {
-				"name": "业务服务层",
+				"name": "应用软件层",
 				"listdetail": [
 					{
 						"name": "outexception关键字异常",
 						"value": 1
 					},
 					{
-						"name": "17356端口状态",
-						"value": 3
-					},
-					{
 						"name": "告警数量",
-						"value": 0
+						"value": "0"
 					}
 				]
 			},
 			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": [
+					{
+						"name": "交易总量",
+						"value": "8275"
+					},
+					{
+						"name": "平均响应率",
+						"value": "99.5"
+					},
+					{
+						"name": "平均成功率",
+						"value": "99.68"
+					},
+					{
+						"name": "P99响应时间",
+						"value": "189.57ms"
+					}
+				]
+			}
+		},
+		{
+			"key": "172.16.215.29",
+			"text": "172.16.215.29",
+			"status": "normal",
+			"combo": "821",
+			"source": "",
+			"iconType": "host",
+			"detail": [],
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU核心数",
+						"value": 16
+					},
+					{
+						"name": "CPU型号",
+						"value": "Intel(R) Xeon(R) Gold 5120 CPU @ 2.20GHz"
+					},
+					{
+						"name": "内存总量",
+						"value": 32367
+					},
+					{
+						"name": "操作系统",
+						"value": "linux suse"
+					},
+					{
+						"name": "磁盘总量",
+						"value": 90
+					}
+				]
+			},
+			"applicationSoftwareLayer": {
 				"name": "应用软件层",
 				"listdetail": [
 					{
-						"name": "请求数",
-						"value": "1500次/分钟"
+						"name": "告警数量",
+						"value": "0"
 					},
 					{
-						"name": "交易量",
-						"value": "1500次/分钟"
+						"name": "告警数量",
+						"value": "0"
+					}
+				]
+			},
+			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": [
+					{
+						"name": "交易总量",
+						"value": "8275"
 					},
 					{
-						"name": "失败数",
-						"value": "5笔/分钟"
+						"name": "平均响应率",
+						"value": "99.5"
 					},
 					{
-						"name": "响应时间",
-						"value": "200ms"
+						"name": "平均成功率",
+						"value": "99.68"
+					},
+					{
+						"name": "P99响应时间",
+						"value": "189.57ms"
+					}
+				]
+			}
+		},
+		{
+			"key": "34.114.1.205",
+			"text": "34.114.1.205",
+			"status": "normal",
+			"combo": "821",
+			"source": "",
+			"iconType": "host",
+			"detail": [
+				{
+					"name": "CPU使用率",
+					"value": "8.48%"
+				},
+				{
+					"name": "物理内存已用量",
+					"value": "27.73G"
+				},
+				{
+					"name": "磁盘空间使用率",
+					"value": "50.34%"
+				},
+				{
+					"name": "网卡入流量",
+					"value": "210.77kB/s"
+				},
+				{
+					"name": "网卡出流量",
+					"value": "51.51kB/s"
+				},
+				{
+					"name": "I/O使用率",
+					"value": "7.13%"
+				},
+				{
+					"name": "5分钟平均负载",
+					"value": "0.76"
+				}
+			],
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU使用率",
+						"value": "8.48%"
+					},
+					{
+						"name": "物理内存已用量",
+						"value": "27.73G"
+					},
+					{
+						"name": "磁盘空间使用率",
+						"value": "50.34%"
+					},
+					{
+						"name": "网卡入流量",
+						"value": "210.77kB/s"
+					},
+					{
+						"name": "网卡出流量",
+						"value": "51.51kB/s"
+					},
+					{
+						"name": "I/O使用率",
+						"value": "7.13%"
+					},
+					{
+						"name": "5分钟平均负载",
+						"value": "0.76"
+					},
+					{
+						"name": "CPU核心数",
+						"value": 16
+					},
+					{
+						"name": "CPU型号",
+						"value": "Hygon C86 5390 Processor"
+					},
+					{
+						"name": "内存总量",
+						"value": 31896
+					},
+					{
+						"name": "操作系统",
+						"value": "linux suse"
+					},
+					{
+						"name": "磁盘总量",
+						"value": 385
+					}
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "应用软件层",
+				"listdetail": [
+					{
+						"name": "告警数量",
+						"value": "0"
+					},
+					{
+						"name": "告警数量",
+						"value": "0"
+					}
+				]
+			},
+			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": [
+					{
+						"name": "交易总量",
+						"value": "8275"
+					},
+					{
+						"name": "平均响应率",
+						"value": "99.5"
+					},
+					{
+						"name": "平均成功率",
+						"value": "99.68"
+					},
+					{
+						"name": "P99响应时间",
+						"value": "189.57ms"
+					}
+				]
+			}
+		},
+		{
+			"key": "37.114.2.168",
+			"text": "37.114.2.168",
+			"status": "normal",
+			"combo": "821",
+			"source": "",
+			"iconType": "host",
+			"detail": [
+				{
+					"name": "CPU使用率",
+					"value": "1.94%"
+				},
+				{
+					"name": "物理内存已用量",
+					"value": "30.61G"
+				},
+				{
+					"name": "磁盘空间使用率",
+					"value": "43.3%"
+				},
+				{
+					"name": "网卡入流量",
+					"value": "417.61kB/s"
+				},
+				{
+					"name": "网卡出流量",
+					"value": "442.62kB/s"
+				},
+				{
+					"name": "I/O使用率",
+					"value": "0.28%"
+				},
+				{
+					"name": "5分钟平均负载",
+					"value": "0.24"
+				}
+			],
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU使用率",
+						"value": "1.94%"
+					},
+					{
+						"name": "物理内存已用量",
+						"value": "30.61G"
+					},
+					{
+						"name": "磁盘空间使用率",
+						"value": "43.3%"
+					},
+					{
+						"name": "网卡入流量",
+						"value": "417.61kB/s"
+					},
+					{
+						"name": "网卡出流量",
+						"value": "442.62kB/s"
+					},
+					{
+						"name": "I/O使用率",
+						"value": "0.28%"
+					},
+					{
+						"name": "5分钟平均负载",
+						"value": "0.24"
+					},
+					{
+						"name": "CPU核心数",
+						"value": 16
+					},
+					{
+						"name": "CPU型号",
+						"value": "INTEL(R) XEON(R) GOLD 5520+"
+					},
+					{
+						"name": "内存总量",
+						"value": 31896
+					},
+					{
+						"name": "操作系统",
+						"value": "linux suse"
+					},
+					{
+						"name": "磁盘总量",
+						"value": 385
+					}
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "应用软件层",
+				"listdetail": [
+					{
+						"name": "告警数量",
+						"value": "0"
+					}
+				]
+			},
+			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": [
+					{
+						"name": "交易总量",
+						"value": "8275"
+					},
+					{
+						"name": "平均响应率",
+						"value": "99.5"
+					},
+					{
+						"name": "平均成功率",
+						"value": "99.68"
+					},
+					{
+						"name": "P99响应时间",
+						"value": "189.57ms"
 					}
 				]
 			}
 		},
 		{
 			"key": "loadBalancer",
-			"text": "负载均衡器",
-			"status": "abnormal",
-			"iconType": "F5",
-			"source": "负载均衡器",
+			"text": "负载均衡",
+			"status": "normal",
 			"combo": "",
-			"Alerts": "3",
 			"detail": [
 				{
 					"name": "负载均衡利用",
@@ -1245,6 +1620,374 @@
 					"value": "45%"
 				}
 			]
+		},
+		{
+			"key": "32.114.70.9_db",
+			"text": "32.114.70.9_db",
+			"status": "normal",
+			"combo": "UAT环境",
+			"source": [
+				""
+			],
+			"iconType": "oracle",
+			"detail": [
+				{
+					"name": "CPU使用率",
+					"value": "9.6%"
+				},
+				{
+					"name": "物理内存已用量",
+					"value": "15.25G"
+				},
+				{
+					"name": "磁盘空间使用率",
+					"value": "54.14%"
+				},
+				{
+					"name": "网卡入流量",
+					"value": "115.87kB/s"
+				},
+				{
+					"name": "网卡出流量",
+					"value": "103.25kB/s"
+				},
+				{
+					"name": "I/O使用率",
+					"value": "0.1%"
+				},
+				{
+					"name": "5分钟平均负载",
+					"value": "2.16"
+				}
+			],
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU使用率",
+						"value": "9.6%"
+					},
+					{
+						"name": "物理内存已用量",
+						"value": "15.25G"
+					},
+					{
+						"name": "磁盘空间使用率",
+						"value": "54.14%"
+					},
+					{
+						"name": "网卡入流量",
+						"value": "115.87kB/s"
+					},
+					{
+						"name": "网卡出流量",
+						"value": "103.25kB/s"
+					},
+					{
+						"name": "I/O使用率",
+						"value": "0.1%"
+					},
+					{
+						"name": "5分钟平均负载",
+						"value": "2.16"
+					},
+					{
+						"name": "CPU核心数",
+						"value": 16
+					},
+					{
+						"name": "CPU型号",
+						"value": "Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz"
+					},
+					{
+						"name": "内存总量",
+						"value": 15856
+					},
+					{
+						"name": "操作系统",
+						"value": "linux suse"
+					},
+					{
+						"name": "磁盘总量",
+						"value": 1127
+					}
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "应用软件层",
+				"listdetail": [
+					{
+						"name": "告警数量",
+						"value": "0"
+					}
+				]
+			},
+			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": []
+			}
+		},
+	
+		{
+			"key": "32.114.71.9_db",
+			"text": "32.114.71.9_db",
+			"status": "normal",
+			"combo": "SIT环境",
+			"source": [
+				""
+			],
+			"iconType": "oracle",
+			"detail": [],
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU核心数",
+						"value": 16
+					},
+					{
+						"name": "CPU型号",
+						"value": "Intel(R) Xeon(R) Gold 5120 CPU @ 2.20GHz"
+					},
+					{
+						"name": "内存总量",
+						"value": 31984
+					},
+					{
+						"name": "操作系统",
+						"value": "linux suse"
+					},
+					{
+						"name": "磁盘总量",
+						"value": 1029
+					}
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "应用软件层",
+				"listdetail": [
+					{
+						"name": "告警数量",
+						"value": "0"
+					}
+				]
+			},
+			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": []
+			}
+		},
+		{
+			"key": "33.114.5.55_db",
+			"text": "33.114.5.55_db",
+			"status": "normal",
+			"combo": "开发环境",
+			"source": [
+				""
+			],
+			"iconType": "oracle",
+			"detail": [
+				{
+					"name": "CPU使用率",
+					"value": "3.13%"
+				},
+				{
+					"name": "物理内存已用量",
+					"value": "30.91G"
+				},
+				{
+					"name": "磁盘空间使用率",
+					"value": "38.39%"
+				},
+				{
+					"name": "网卡入流量",
+					"value": "2015.58kB/s"
+				},
+				{
+					"name": "网卡出流量",
+					"value": "2210.42kB/s"
+				},
+				{
+					"name": "I/O使用率",
+					"value": "0.66%"
+				},
+				{
+					"name": "5分钟平均负载",
+					"value": "0.34"
+				}
+			],
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU使用率",
+						"value": "3.13%"
+					},
+					{
+						"name": "物理内存已用量",
+						"value": "30.91G"
+					},
+					{
+						"name": "磁盘空间使用率",
+						"value": "38.39%"
+					},
+					{
+						"name": "网卡入流量",
+						"value": "2015.58kB/s"
+					},
+					{
+						"name": "网卡出流量",
+						"value": "2210.42kB/s"
+					},
+					{
+						"name": "I/O使用率",
+						"value": "0.66%"
+					},
+					{
+						"name": "5分钟平均负载",
+						"value": "0.34"
+					},
+					{
+						"name": "CPU核心数",
+						"value": 16
+					},
+					{
+						"name": "CPU型号",
+						"value": "INTEL(R) XEON(R) GOLD 5520+"
+					},
+					{
+						"name": "内存总量",
+						"value": 31895
+					},
+					{
+						"name": "操作系统",
+						"value": "linux suse"
+					},
+					{
+						"name": "磁盘总量",
+						"value": 385
+					}
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "应用软件层",
+				"listdetail": [
+					{
+						"name": "告警数量",
+						"value": "0"
+					}
+				]
+			},
+			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": []
+			}
+		},
+		{
+			"key": "33.114.5.553_db",
+			"text": "33.114.5.553_db",
+			"status": "normal",
+			"combo": "准生产环境",
+			"source": [
+				""
+			],
+			"iconType": "oracle",
+			"detail": [
+				{
+					"name": "CPU使用率",
+					"value": "3.13%"
+				},
+				{
+					"name": "物理内存已用量",
+					"value": "30.91G"
+				},
+				{
+					"name": "磁盘空间使用率",
+					"value": "38.39%"
+				},
+				{
+					"name": "网卡入流量",
+					"value": "2015.58kB/s"
+				},
+				{
+					"name": "网卡出流量",
+					"value": "2210.42kB/s"
+				},
+				{
+					"name": "I/O使用率",
+					"value": "0.66%"
+				},
+				{
+					"name": "5分钟平均负载",
+					"value": "0.34"
+				}
+			],
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU使用率",
+						"value": "3.13%"
+					},
+					{
+						"name": "物理内存已用量",
+						"value": "30.91G"
+					},
+					{
+						"name": "磁盘空间使用率",
+						"value": "38.39%"
+					},
+					{
+						"name": "网卡入流量",
+						"value": "2015.58kB/s"
+					},
+					{
+						"name": "网卡出流量",
+						"value": "2210.42kB/s"
+					},
+					{
+						"name": "I/O使用率",
+						"value": "0.66%"
+					},
+					{
+						"name": "5分钟平均负载",
+						"value": "0.34"
+					},
+					{
+						"name": "CPU核心数",
+						"value": 16
+					},
+					{
+						"name": "CPU型号",
+						"value": "INTEL(R) XEON(R) GOLD 5520+"
+					},
+					{
+						"name": "内存总量",
+						"value": 31895
+					},
+					{
+						"name": "操作系统",
+						"value": "linux suse"
+					},
+					{
+						"name": "磁盘总量",
+						"value": 385
+					}
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "应用软件层",
+				"listdetail": [
+					{
+						"name": "告警数量",
+						"value": "0"
+					}
+				]
+			},
+			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": []
+			}
 		}
 	],
 	"combos": [
@@ -1252,7 +1995,7 @@
 			"id": "818",
 			"name": "开发环境",
 			"parentId": "mainCenter",
-			"status": "normal"
+			"status": "abnormal"
 		},
 		{
 			"id": "819",
@@ -1271,10 +2014,68 @@
 			"name": "准生产环境",
 			"parentId": "mainCenter",
 			"status": "normal"
+		},
+		{
+			"id": "UAT环境",
+			"name": "UAT环境数据库服务",
+			"parentId": "dataCenter",
+			"status": "normal"
+		},
+		{
+			"id": "开发环境",
+			"name": "开发环境数据库服务",
+			"parentId": "dataCenter",
+			"status": "normal"
+		},
+		{
+			"id": "SIT环境",
+			"name": "SIT环境数据库服务",
+			"parentId": "dataCenter",
+			"status": "normal"
+		},
+		{
+			"id": "准生产环境",
+			"name": "准生产环境数据库服务",
+			"parentId": "dataCenter",
+			"status": "normal"
 		}
 	],
 	"edges": [
 		{
+			"source": "loadBalancer",
+			"target": "dataCenter",
+			"status": "normal",
+			"name": "负载均衡器至主中心",
+			"detailValue": [
+				{
+					"name": "带宽使用率",
+					"value": "45%"
+				},
+				{
+					"name": "延迟",
+					"value": "2ms"
+				},
+				{
+					"name": "丢包率",
+					"value": "0%"
+				}
+			],
+			"hoverValue": [
+				{
+					"name": "带宽使用率",
+					"value": "45%"
+				},
+				{
+					"name": "延迟",
+					"value": "2ms"
+				},
+				{
+					"name": "丢包率",
+					"value": "0%"
+				}
+			]
+		},
+			{
 			"source": "loadBalancer",
 			"target": "mainCenter",
 			"status": "normal",
@@ -1313,113 +2114,7 @@
 		{
 			"source": "818",
 			"listdetail": {
-				"name": "33.114.5.53",
-				"Alerts": "0",
-				"status": "normal",
-				"values": [
-					{
-						"name": "交易总量",
-						"value": "8275"
-					},
-					{
-						"name": "平均响应率",
-						"value": "99.5"
-					},
-					{
-						"name": "平均成功率",
-						"value": "99.68"
-					},
-					{
-						"name": "P99响应时间",
-						"value": "189.57ms"
-					}
-				]
-			}
-		},
-		{
-			"source": "818",
-			"listdetail": {
-				"name": "33.114.5.54",
-				"Alerts": "0",
-				"status": "normal",
-				"values": [
-					{
-						"name": "交易总量",
-						"value": "8275"
-					},
-					{
-						"name": "平均响应率",
-						"value": "99.5"
-					},
-					{
-						"name": "平均成功率",
-						"value": "99.68"
-					},
-					{
-						"name": "P99响应时间",
-						"value": "189.57ms"
-					}
-				]
-			}
-		},
-		{
-			"source": "818",
-			"listdetail": {
-				"name": "32.114.72.6",
-				"Alerts": "0",
-				"status": "normal",
-				"values": [
-					{
-						"name": "交易总量",
-						"value": "8275"
-					},
-					{
-						"name": "平均响应率",
-						"value": "99.5"
-					},
-					{
-						"name": "平均成功率",
-						"value": "99.68"
-					},
-					{
-						"name": "P99响应时间",
-						"value": "189.57ms"
-					}
-				]
-			}
-		},
-		{
-			"source": "818",
-			"listdetail": {
-				"name": "35.114.2.167",
-				"Alerts": "0",
-				"status": "normal",
-				"values": [
-					{
-						"name": "交易总量",
-						"value": "8275"
-					},
-					{
-						"name": "平均响应率",
-						"value": "99.5"
-					},
-					{
-						"name": "平均成功率",
-						"value": "99.68"
-					},
-					{
-						"name": "P99响应时间",
-						"value": "189.57ms"
-					}
-				]
-			}
-		},
-		{
-			"source": "818",
-			"listdetail": {
-				"name": "172.34.2.177",
-				"Alerts": "0",
-				"status": "normal",
+				"name": "开发环境",
 				"values": [
 					{
 						"name": "交易总量",
@@ -1443,35 +2138,7 @@
 		{
 			"source": "819",
 			"listdetail": {
-				"name": "37.114.2.166",
-				"Alerts": "0",
-				"status": "normal",
-				"values": [
-					{
-						"name": "交易总量",
-						"value": "8275"
-					},
-					{
-						"name": "平均响应率",
-						"value": "99.5"
-					},
-					{
-						"name": "平均成功率",
-						"value": "99.68"
-					},
-					{
-						"name": "P99响应时间",
-						"value": "189.57ms"
-					}
-				]
-			}
-		},
-		{
-			"source": "819",
-			"listdetail": {
-				"name": "35.114.1.24",
-				"Alerts": "0",
-				"status": "normal",
+				"name": "SIT环境",
 				"values": [
 					{
 						"name": "交易总量",
@@ -1495,9 +2162,7 @@
 		{
 			"source": "820",
 			"listdetail": {
-				"name": "35.114.1.114",
-				"Alerts": "0",
-				"status": "normal",
+				"name": "UAT环境",
 				"values": [
 					{
 						"name": "交易总量",
@@ -1521,9 +2186,7 @@
 		{
 			"source": "821",
 			"listdetail": {
-				"name": "34.114.1.204",
-				"Alerts": "0",
-				"status": "normal",
+				"name": "准生产环境",
 				"values": [
 					{
 						"name": "交易总量",
@@ -1558,9 +2221,14 @@
 			"status": "normal"
 		},
 		{
-			"name": "",
-			"id": "noneCenter",
-			"children": [],
+			"name": "数据中心",
+			"id": "dataCenter",
+			"children": [
+				"UAT环境",
+				"开发环境",
+				"SIT环境",
+				"准生产环境"
+			],
 			"status": "normal"
 		}
 	]

@@ -3,7 +3,7 @@
         {
             "key": "loadBalancer",
             "text": "负载均衡",
-            "status": "normal",
+            "status": "abnormal",
             "combo": "",
             "detail": [
                 {
@@ -32,6 +32,195 @@
                 }
             ]
         },
+        	{
+			"key": "33.114.5.54",
+			"text": "33.114.5.54",
+			"status": "normal",
+			"combo": "818",
+			"source": "",
+			"iconType": "host",
+			"detail": [
+				{
+					"name": "CPU使用率",
+					"value": "12.0%"
+				},
+				{
+					"name": "物理内存已用量",
+					"value": "44.04G"
+				},
+				{
+					"name": "磁盘空间使用率",
+					"value": "17.85%"
+				},
+				{
+					"name": "网卡入流量",
+					"value": "1082.44kB/s"
+				},
+				{
+					"name": "网卡出流量",
+					"value": "6647.06kB/s"
+				},
+				{
+					"name": "I/O使用率",
+					"value": "1.02%"
+				},
+				{
+					"name": "5分钟平均负载",
+					"value": "2.36"
+				}
+			],
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU使用率",
+						"value": "12.0%"
+					},
+					{
+						"name": "物理内存已用量",
+						"value": "44.04G"
+					},
+					{
+						"name": "磁盘空间使用率",
+						"value": "17.85%"
+					},
+					{
+						"name": "网卡入流量",
+						"value": "1082.44kB/s"
+					},
+					{
+						"name": "网卡出流量",
+						"value": "6647.06kB/s"
+					},
+					{
+						"name": "I/O使用率",
+						"value": "1.02%"
+					},
+					{
+						"name": "5分钟平均负载",
+						"value": "2.36"
+					},
+					{
+						"name": "CPU核心数",
+						"value": 32
+					},
+					{
+						"name": "CPU型号",
+						"value": "INTEL(R) XEON(R) GOLD 5520+"
+					},
+					{
+						"name": "内存总量",
+						"value": 48023
+					},
+					{
+						"name": "操作系统",
+						"value": "linux suse"
+					},
+					{
+						"name": "磁盘总量",
+						"value": 286
+					}
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "应用软件层",
+				"listdetail": [
+					{
+						"name": "outexception关键字异常",
+						"value": 1
+					},
+					{
+						"name": "告警数量",
+						"value": "0"
+					}
+				]
+			},
+			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": [
+					{
+						"name": "交易总量",
+						"value": "8275"
+					},
+					{
+						"name": "平均响应率",
+						"value": "99.5"
+					},
+					{
+						"name": "平均成功率",
+						"value": "99.68"
+					},
+					{
+						"name": "P99响应时间",
+						"value": "189.57ms"
+					}
+				]
+			}
+		},
+		{
+			"key": "32.114.72.6",
+			"text": "32.114.72.6",
+			"status": "normal",
+			"combo": "818",
+			"source": "",
+			"iconType": "host",
+			"detail": [],
+			"systemResourceLayer": {
+				"name": "系统资源层",
+				"listdetail": [
+					{
+						"name": "CPU核心数",
+						"value": null
+					},
+					{
+						"name": "CPU型号",
+						"value": ""
+					},
+					{
+						"name": "内存总量",
+						"value": null
+					},
+					{
+						"name": "操作系统",
+						"value": ""
+					},
+					{
+						"name": "磁盘总量",
+						"value": null
+					}
+				]
+			},
+			"applicationSoftwareLayer": {
+				"name": "应用软件层",
+				"listdetail": [
+					{
+						"name": "告警数量",
+						"value": "0"
+					}
+				]
+			},
+			"businessServiceLayer": {
+				"name": "业务服务层",
+				"listdetail": [
+					{
+						"name": "交易总量",
+						"value": "8275"
+					},
+					{
+						"name": "平均响应率",
+						"value": "99.5"
+					},
+					{
+						"name": "平均成功率",
+						"value": "99.68"
+					},
+					{
+						"name": "P99响应时间",
+						"value": "189.57ms"
+					}
+				]
+			}
+		},
         {
             "key": "node0-2",
             "text": "DB集群2",
@@ -48,22 +237,7 @@
                 }
             ]
         },
-        {
-            "key": "node0-3",
-            "text": "DB集群3",
-            "status": "normal",
-            "combo": "G",
-            "detail": [
-                {
-                    "name": "DB集群CPU利用率",
-                    "value": "20%"
-                },
-                {
-                    "name": "DB集群内存利用率",
-                    "value": "45%"
-                }
-            ]
-        },
+      
         {
             "key": "node1",
             "text": "73集群",
@@ -598,7 +772,7 @@
         },
         {
             "source": "loadBalancer",
-            "target": "noneCenter",
+            "target": "dataCenter",
             "status": "normal",
             "name": "负载均衡器至集群",
             "detailValue": [
@@ -773,9 +947,15 @@
         {
             "id": "G",
             "name": "DB集群",
-            "parentId": "noneCenter",
+            "parentId": "dataCenter",
             "status": "normal"
-        }
+        },
+        {
+			"id": "818",
+			"name": "开发环境",
+			"parentId": "dataCenter",
+			"status": "normal"
+		}
     ],
     "comboList": [
         {
@@ -932,9 +1112,9 @@
         },
         {
             "name": "",
-            "id": "noneCenter",
+            "id": "dataCenter",
             "children": [
-                "G"
+                "G","818"
             ],
             "status": "normal"
         },

@@ -313,7 +313,9 @@ export default {
       );
       if (loadBalancerNode && this.parentComboPositions) {
         // 获取所有父combo
-        const parentIds = this.tabRawData.combosParent.map(parent => parent.id);
+        const parentIds = this.tabRawData.combosParent.map(
+          (parent) => parent.id
+        );
         const validParents = parentIds.filter(
           (id) => this.parentComboPositions[id]
         );
@@ -346,7 +348,7 @@ export default {
               const firstParentPos = this.parentComboPositions[validParents[0]];
               loadBalancerNode.x =
                 firstParentPos.x - (firstParentPos.width / 3) * 2; // 左侧200px位置
-              loadBalancerNode.y =  maxY / 2; // 垂直居中
+              loadBalancerNode.y = maxY / 2; // 垂直居中
             }
           }
         }
@@ -368,7 +370,7 @@ export default {
 
       // 提取常量
       const SPACING = 100;
-      const MAX_PER_ROW = 2;
+      const MAX_PER_ROW = 4;
       const TITLE_HEIGHT = 50;
       const NODE_SIZE = 200;
       const NODE_SPACING = 150;
@@ -406,7 +408,8 @@ export default {
           combo &&
           parentComboIds.length > 0 &&
           combo.parentId === parentComboIds[0];
-
+        const isDataCenterChild =
+          combo && parentComboIds.length > 0 && combo.parentId === "dataCenter";
         // 在 layoutCombos 方法中，针对 mainCenter 子 combo 的处理部分
         if (isMainCenterChild) {
           // 对于mainCenter的子combo：每列最多2个节点，从左到右排列
@@ -430,6 +433,17 @@ export default {
 
           child.width = width;
           child.height = height;
+        } else if (isDataCenterChild) {
+          console.log(child, "child");
+          const nodesPerRow = 2;
+          let rows = Math.ceil(childNodes.length / nodesPerRow) || 1;
+          // 计算combo尺寸
+          child.width =
+            nodesPerRow * NODE_SIZE +
+            (nodesPerRow - 1) * NODE_SPACING +
+            2 * PADDING;
+          child.height = NODE_SIZE + LABEL_HEIGHT + 2 * PADDING;
+          console.log(child.height, " child.height ");
         } else {
           // 其他combo使用4列水平布局
           const nodesPerRow = 4;
@@ -511,21 +525,16 @@ export default {
             const child = children[0];
             // 设置父容器尺寸稍大于子combo，确保有足够的边距
             parent.width = (child.width || 250) + 200; // 增加左右各100px的边距
-            parent.height = (child.height || 150) + 200; // 增加上下各100px的边距
+            parent.height = (child.height || 150) + 300; // 增加上下各100px的边距
           } else {
             // 其他父combo保持原有计算方式
             const rows = Math.ceil(children.length / MAX_PER_ROW) || 1;
             const cols = Math.min(children.length, MAX_PER_ROW);
 
             // 计算父容器尺寸
-            const parentWidth =
-              cols * maxWidth + (cols - 1) * SPACING + SPACING * 2;
+            const parentWidth = cols * maxWidth + (cols - 1) * SPACING;
             const parentHeight =
-              TITLE_HEIGHT * 2 +
-              rows * maxHeight +
-              (rows - 1) * SPACING +
-              SPACING * 2 +
-              50; // 上下都增加标题区域高度
+              TITLE_HEIGHT * 2 + rows * maxHeight + (rows + 1) * SPACING; // 上下都增加标题区域高度
 
             parent.width = parentWidth;
             parent.height = parentHeight;
@@ -596,14 +605,13 @@ export default {
         );
         {
           const isSingleChild = children.length === 1;
-
           if (isSingleChild) {
             const child = children[0];
             // 让子combo在父容器中居中显示
             child.x = parent.x + (parent.width - (child.width || 250)) / 2;
             child.y = parent.y + (parent.height - (child.height || 150)) / 2;
           } else {
-            let currentX = parent.x + SPACING;
+            let currentX = parent.x;
             children.forEach((child, index) => {
               const childWidth = child.width || 250;
               child.x = currentX + child.width / 2;
@@ -622,8 +630,6 @@ export default {
 
       // 转换节点数据
       const nodes = rawData.nodes.map((node) => {
-        console.log(node,'mm');
-        
         // 查找节点所属的combo
         const combo = rawData.combos.find((c) => c.id === node.combo);
         let isInDisasterCenter = false;
@@ -670,8 +676,8 @@ export default {
               // 负载均衡到主中心: 负载均衡的下1锚点(索引0)到主中心的上1锚点(索引0)
               "loadBalancer->mainCenter": { sourceAnchor: 2, targetAnchor: 0 },
               // 负载均衡到灾备中心: 负载均衡的下4锚点(索引3)到灾备中心的上2锚点(索引1)
-              "loadBalancer->noneCenter": {
-                sourceAnchor: 1,
+              "loadBalancer->dataCenter": {
+                sourceAnchor: rawData.combosParent.length == "2" ? 3 : 1,
                 targetAnchor: 0,
               },
               // 灾备中心到负载均衡: 灾备中心的上1锚点(索引0)到负载均衡的下3锚点(索引2)
@@ -688,6 +694,8 @@ export default {
               ? "mainCenter"
               : edge.source.includes("disasterCenter")
               ? "disasterCenter"
+              : edge.source.includes("dataCenter")
+              ? "dataCenter"
               : "other";
 
             const targetType = edge.target.includes("loadBalancer")
@@ -696,6 +704,8 @@ export default {
               ? "mainCenter"
               : edge.target.includes("disasterCenter")
               ? "disasterCenter"
+              : edge.target.includes("dataCenter")
+              ? "dataCenter"
               : "other";
 
             const key = `${sourceType}->${targetType}`;
@@ -709,6 +719,7 @@ export default {
               console.warn(`未找到对应锚点配置: ${key}`);
             }
           }
+
           return newEdge;
         });
       }
@@ -747,7 +758,7 @@ export default {
       combos.forEach((combo) => {
         if (
           combo.id === "mainCenter" ||
-          combo.id === "noneCenter" ||
+          combo.id === "dataCenter" ||
           combo.id === "disasterCenter"
         ) {
           return;
@@ -927,7 +938,6 @@ export default {
       // 节点点击事件
       this.graph.on("node:click", (evt) => {
         const node = evt.item;
-        console.log(node, "sss");
         const nodeModel = node.getModel();
 
         if (!node || nodeModel.id === "loadBalancer") return;
@@ -965,8 +975,6 @@ export default {
         this.selectedNodeLabel = comboModel.label || `组合 ${comboId}`;
 
         const detailData = this.convertToComboDetailData(this.tabRawData);
-        console.log(detailData, "detailData");
-
         this.detailItems = detailData[comboId] || [];
         this.showType = "combo";
       });
@@ -1226,8 +1234,6 @@ export default {
 
         this.tabRawData = data;
         let graphData = this.convertToGraphData(data);
-        console.log(graphData, "graphData");
-
         if (this.graph) {
           this.graph.changeData(graphData);
           this.graph.fitView([20, 100, 20, 100]);
