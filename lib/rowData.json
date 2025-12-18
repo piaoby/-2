@@ -686,38 +686,7 @@
                 }
             ]
         },
-        {
-            "key": "node17",
-            "text": "160集群",
-            "status": "idle",
-            "combo": "F",
-            "detail": [
-                {
-                    "name": "CPU利用率",
-                    "value": "22%"
-                },
-                {
-                    "name": "内存利用率",
-                    "value": "45%"
-                }
-            ]
-        },
-        {
-            "key": "node18",
-            "text": "160集群-节点2",
-            "status": "idle",
-            "combo": "F",
-            "detail": [
-                {
-                    "name": "CPU利用率",
-                    "value": "20%"
-                },
-                {
-                    "name": "内存利用率",
-                    "value": "42%"
-                }
-            ]
-        },
+    
         {
             "key": "node19",
             "text": "160集群-节点3",

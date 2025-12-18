@@ -2045,69 +2045,33 @@
 			"source": "loadBalancer",
 			"target": "dataCenter",
 			"status": "normal",
-			"name": "负载均衡器至主中心",
-			"detailValue": [
-				{
-					"name": "带宽使用率",
-					"value": "45%"
-				},
-				{
-					"name": "延迟",
-					"value": "2ms"
-				},
-				{
-					"name": "丢包率",
-					"value": "0%"
-				}
-			],
-			"hoverValue": [
-				{
-					"name": "带宽使用率",
-					"value": "45%"
-				},
-				{
-					"name": "延迟",
-					"value": "2ms"
-				},
-				{
-					"name": "丢包率",
-					"value": "0%"
-				}
-			]
+			"name": "负载均衡器至主中心"
 		},
 			{
 			"source": "loadBalancer",
 			"target": "mainCenter",
 			"status": "normal",
-			"name": "负载均衡器至主中心",
-			"detailValue": [
-				{
-					"name": "带宽使用率",
-					"value": "45%"
-				},
-				{
-					"name": "延迟",
-					"value": "2ms"
-				},
-				{
-					"name": "丢包率",
-					"value": "0%"
-				}
-			],
-			"hoverValue": [
-				{
-					"name": "带宽使用率",
-					"value": "45%"
-				},
-				{
-					"name": "延迟",
-					"value": "2ms"
-				},
-				{
-					"name": "丢包率",
-					"value": "0%"
-				}
-			]
+			"name": "负载均衡器至主中心"
+		},
+		{
+			"source": "818",
+			"target": "准生产环境",
+			"status": "normal",
+			"name": "负载均衡器至数据中心"
+		}
+		,
+		{
+			"source": "819",
+			"target": "SIT环境",
+			"status": "normal",
+			"name": "负载均衡器至数据中心"
+		}
+		,
+		{
+			"source": "37.114.2.168",
+			"target": "33.114.5.53",
+			"status": "normal",
+			"name": "负载均衡器至数据中心"
 		}
 	],
 	"comboList": [

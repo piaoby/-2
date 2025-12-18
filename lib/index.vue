@@ -657,10 +657,24 @@ export default {
         };
       });
 
-      // 转换边数据
+         // 转换边数据
       let edges = [];
       if (rawData.edges && Array.isArray(rawData.edges)) {
-        edges = rawData.edges.map((edge) => {
+        // 先创建一个映射来跟踪每对节点之间的边数量
+        const edgeConnectionCount = {};
+        rawData.edges.forEach((edge) => {
+          // 创建一个标准化的键来表示一对节点（按字母顺序排列以确保一致性）
+          const key = [edge.source, edge.target].sort().join('-');
+          if (!edgeConnectionCount[key]) {
+            edgeConnectionCount[key] = 0;
+          }
+          edgeConnectionCount[key]++;
+        });
+
+        // 创建另一个映射来跟踪每对节点当前的边索引
+        const edgeConnectionIndex = {};
+
+        edges = rawData.edges.map((edge,index) => {
           const newEdge = {
             source: edge.source,
             target: edge.target,
@@ -670,7 +684,33 @@ export default {
             status: edge.status,
             name: edge.name || `${edge.source} → ${edge.target}`, // 添加 name 字段，默认值
           };
-          if (rawData.combosParent.length > 1) {
+          
+          // 计算并添加偏移量以避免重叠
+          const connectionKey = [edge.source, edge.target].sort().join('-');
+          if (!edgeConnectionIndex[connectionKey]) {
+            edgeConnectionIndex[connectionKey] = 0;
+          } else {
+            edgeConnectionIndex[connectionKey]++;
+          }
+          
+          // 如果这对节点之间有多条边，则添加偏移量
+          if (edgeConnectionCount[connectionKey] > 1) {
+            // 计算偏移量，使边均匀分布
+            const totalEdges = edgeConnectionCount[connectionKey];
+            const index = edgeConnectionIndex[connectionKey];
+            // 偏移量范围从 -60 到 +60，步长根据边的数量计算
+            const offset = 0 + (20 * index) 
+            newEdge.style = {
+              offset: offset
+            };
+          } else {
+            // 即使只有一条边，也添加一个小的偏移量，以防与其他连接重叠
+            newEdge.style = {
+              offset: -30 + 20*index
+            };
+          }
+          
+          if (rawData.combosParent && rawData.combosParent.length > 1) {
             // 定义锚点映射关系表（基于实际的锚点索引）
             const anchorMap = {
               // 负载均衡到主中心: 负载均衡的下1锚点(索引0)到主中心的上1锚点(索引0)
