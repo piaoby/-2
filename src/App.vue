@@ -45,6 +45,8 @@
 
             // setTimeout(() => {
             //     // this.com.reverseScale()
+            //     this.tabRawData = require('../lib/liby.json')
+
             //     this.com.setData(this.tabRawData)
             // }, 5000)
         },

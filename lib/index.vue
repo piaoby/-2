@@ -133,9 +133,14 @@ export default {
       // 详情项数据
       detailItems: [],
       parentComboPositions: null,
-      activeTab: "internal", // 默认选中第一个tab
+       /** 提示框元素 */
+        tooltipElement: null,
       // 添加loading状态
       isLoading: true, // 默认为loading状态
+       /** 当前选中的节点ID */
+        selectedNodeId: null,
+        /** 当前选中的组合ID */
+        selectedComboId: null,
     };
   },
   created() {
@@ -411,13 +416,14 @@ export default {
         const isDataCenterChild =
           combo && parentComboIds.length > 0 && combo.parentId === "dataCenter";
         // 在 layoutCombos 方法中，针对 mainCenter 子 combo 的处理部分
-        if (isMainCenterChild) {
+        // if (isMainCenterChild ) {
           // 对于mainCenter的子combo：每列最多2个节点，从左到右排列
           const nodesPerColumn = 2;
 
           // 正确计算实际行数和列数
           const actualRows = 2; // 最多2行，但不超过实际节点数
-          const columns = Math.ceil(childNodes.length / nodesPerColumn) || 1;
+          const columns =
+            Math.ceil(childNodes.length / nodesPerColumn)|| 1;
 
           // 计算实际尺寸 - 只有当有多列或多行时才添加间距
           const width =
@@ -432,50 +438,50 @@ export default {
             LABEL_HEIGHT * 2;
 
           child.width = width;
-          child.height = height;
-        } else if (isDataCenterChild) {
-          console.log(child, "child");
-          const nodesPerRow = 2;
-          let rows = Math.ceil(childNodes.length / nodesPerRow) || 1;
-          // 计算combo尺寸
-          child.width =
-            nodesPerRow * NODE_SIZE +
-            (nodesPerRow - 1) * NODE_SPACING +
-            2 * PADDING;
-          child.height = NODE_SIZE + LABEL_HEIGHT + 2 * PADDING;
-          console.log(child.height, " child.height ");
-        } else {
-          // 其他combo使用4列水平布局
-          const nodesPerRow = 4;
+            child.height = height
+        // } else if (isDataCenterChild) {
+        //   console.log(child, "child");
+        //   const nodesPerRow = 2;
+        //   let rows = Math.ceil(childNodes.length / nodesPerRow) || 1;
+        //   // 计算combo尺寸
+        //   child.width =
+        //     nodesPerRow * NODE_SIZE +
+        //     (nodesPerRow - 1) * NODE_SPACING +
+        //     2 * PADDING;
+        //   child.height = NODE_SIZE + LABEL_HEIGHT + 2 * PADDING;
+        //   console.log(child.height, " child.height ");
+        // } else {
+        //   // 其他combo使用4列水平布局
+        //   const nodesPerRow = 4;
 
-          // 计算实际行列数
-          const rows = Math.ceil(childNodes.length / nodesPerRow) || 1;
-          const cols = Math.min(childNodes.length, nodesPerRow);
+        //   // 计算实际行列数
+        //   const rows = Math.ceil(childNodes.length / nodesPerRow) || 1;
+        //   const cols = Math.min(childNodes.length, nodesPerRow);
 
-          // 特别处理只有一个节点的情况
-          if (childNodes.length === 1) {
-            // 单个节点时，combo只需要容纳一个节点的空间
-            const width = NODE_SIZE + 2 * PADDING;
-            const height = NODE_SIZE + LABEL_HEIGHT + 2 * PADDING;
-            child.width = width;
-            child.height = height;
-          } else {
-            // 计算实际尺寸
-            const width =
-              cols * NODE_SIZE +
-              (cols > 1 ? (cols - 1) * NODE_SPACING : 0) +
-              2 * PADDING;
+        //   // 特别处理只有一个节点的情况
+        //   if (childNodes.length === 1) {
+        //     // 单个节点时，combo只需要容纳一个节点的空间
+        //     const width = NODE_SIZE + 2 * PADDING;
+        //     const height = NODE_SIZE + LABEL_HEIGHT + 2 * PADDING;
+        //     child.width = width;
+        //     child.height = height;
+        //   } else {
+        //     // 计算实际尺寸
+        //     const width =
+        //       cols * NODE_SIZE +
+        //       (cols > 1 ? (cols - 1) * NODE_SPACING : 0) +
+        //       2 * PADDING;
 
-            const height =
-              rows * NODE_SIZE +
-              (rows > 1 ? (rows - 1) * NODE_SPACING : 0) +
-              2 * PADDING +
-              LABEL_HEIGHT;
+        //     const height =
+        //       rows * NODE_SIZE +
+        //       (rows > 1 ? (rows - 1) * NODE_SPACING : 0) +
+        //       2 * PADDING +
+        //       LABEL_HEIGHT;
 
-            child.width = width;
-            child.height = height;
-          }
-        }
+        //     child.width = width;
+        //     child.height = height;
+        //   }
+        // }
       });
 
       // 为每个父 combo 计算实际需要的尺寸
@@ -657,14 +663,14 @@ export default {
         };
       });
 
-         // 转换边数据
+      // 转换边数据
       let edges = [];
       if (rawData.edges && Array.isArray(rawData.edges)) {
         // 先创建一个映射来跟踪每对节点之间的边数量
         const edgeConnectionCount = {};
         rawData.edges.forEach((edge) => {
           // 创建一个标准化的键来表示一对节点（按字母顺序排列以确保一致性）
-          const key = [edge.source, edge.target].sort().join('-');
+          const key = [edge.source, edge.target].sort().join("-");
           if (!edgeConnectionCount[key]) {
             edgeConnectionCount[key] = 0;
           }
@@ -674,7 +680,7 @@ export default {
         // 创建另一个映射来跟踪每对节点当前的边索引
         const edgeConnectionIndex = {};
 
-        edges = rawData.edges.map((edge,index) => {
+        edges = rawData.edges.map((edge, index) => {
           const newEdge = {
             source: edge.source,
             target: edge.target,
@@ -684,32 +690,32 @@ export default {
             status: edge.status,
             name: edge.name || `${edge.source} → ${edge.target}`, // 添加 name 字段，默认值
           };
-          
+
           // 计算并添加偏移量以避免重叠
-          const connectionKey = [edge.source, edge.target].sort().join('-');
+          const connectionKey = [edge.source, edge.target].sort().join("-");
           if (!edgeConnectionIndex[connectionKey]) {
             edgeConnectionIndex[connectionKey] = 0;
           } else {
             edgeConnectionIndex[connectionKey]++;
           }
-          
+
           // 如果这对节点之间有多条边，则添加偏移量
           if (edgeConnectionCount[connectionKey] > 1) {
             // 计算偏移量，使边均匀分布
             const totalEdges = edgeConnectionCount[connectionKey];
             const index = edgeConnectionIndex[connectionKey];
             // 偏移量范围从 -60 到 +60，步长根据边的数量计算
-            const offset = 0 + (20 * index) 
+            const offset = 0 + 20 * index;
             newEdge.style = {
-              offset: offset
+              offset: offset,
             };
           } else {
             // 即使只有一条边，也添加一个小的偏移量，以防与其他连接重叠
             newEdge.style = {
-              offset: -30 + 20*index
+              offset: -30 + 20 * index,
             };
           }
-          
+
           if (rawData.combosParent && rawData.combosParent.length > 1) {
             // 定义锚点映射关系表（基于实际的锚点索引）
             const anchorMap = {
@@ -995,7 +1001,8 @@ export default {
 
         // 设置选中的节点标签
         this.selectedNodeLabel = nodeModel.label || `节点 ${nodeId}`;
-
+  // 保存当前选中的节点ID
+        this.selectedNodeId = nodeId;
         // 设置详情数据
         this.detailItems = nodeDetail;
         this.showType = "node";
@@ -1013,7 +1020,8 @@ export default {
 
         const comboModel = combo.getModel();
         this.selectedNodeLabel = comboModel.label || `组合 ${comboId}`;
-
+// 保存当前选中的组合ID
+        this.selectedComboId = comboId;
         const detailData = this.convertToComboDetailData(this.tabRawData);
         this.detailItems = detailData[comboId] || [];
         this.showType = "combo";
@@ -1214,6 +1222,51 @@ export default {
         this.showType = "default";
       }
     },
+     /**
+     * 根据当前showType刷新详情视图
+     */
+    refreshCurrentDetailView() {
+      switch (this.showType) {
+        case "node":
+          // 重新获取当前节点的详情数据
+          this.refreshCurrentNodeDetail();
+          break;
+        case "combo":
+          // 重新获取当前组合的详情数据
+          this.refreshCurrentComboDetail();
+          break;
+        default:
+          // 默认情况下显示默认数据
+          this.initDefaultData();
+      }
+    },
+      /**
+     * 刷新当前节点详情数据
+     */
+    refreshCurrentNodeDetail() {
+      if (this.selectedNodeId && this.tabRawData) {
+        const detailData = this.convertToNodeDetailData(this.tabRawData);
+        const nodeDetail = detailData[this.selectedNodeId];
+        
+        if (nodeDetail && nodeDetail.length > 0) {
+          this.detailItems = nodeDetail;
+        }
+      }
+    },
+
+    /**
+     * 刷新当前组合详情数据
+     */
+    refreshCurrentComboDetail() {
+      if (this.selectedComboId && this.tabRawData) {
+        const detailData = this.convertToComboDetailData(this.tabRawData);
+        const comboDetail = detailData[this.selectedComboId];
+        
+        if (comboDetail) {
+          this.detailItems = comboDetail;
+        }
+      }
+    },
     /**
      * 根据指标值获取数值颜色
      * @param {String} type - 指标类型
@@ -1285,8 +1338,8 @@ export default {
                 this.graph.refreshItem(edge);
               });
 
-              // 图渲染完成后，自动显示第一个combo的详情
-              this.initDefaultData();
+              
+              this.refreshCurrentDetailView();
               // 等待所有渲染完成后再关闭loading状态
               this.waitForRenderComplete().then(() => {
                 this.isLoading = false;
@@ -1298,7 +1351,7 @@ export default {
           // 等待图表初始化和渲染完成后再关闭loading
           this.waitForRenderComplete().then(() => {
             // 图渲染完成后，自动显示第一个combo的详情
-            this.initDefaultData();
+            this.refreshCurrentDetailView();
             this.isLoading = false;
           });
         }
